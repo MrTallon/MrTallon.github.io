@@ -25,7 +25,7 @@
 <li>认证服务器（Authorization server）： 即服务提供商专门用来处理认证的服务器，简单点说就是登录功能（验证用户的账号密码是否正确以及分配相应的权限）</li>
 <li>资源服务器（Resource server）： 即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。简单点说就是资源的访问入口，比如上节中提到的“云笔记服务”和“云相册服务”都可以称之为资源服务器。</li>
 </ul>
-<h2 id="交互过程"><a href="#交互过程" class="headerlink" title="交互过程"></a>交互过程</h2><p>oAuth 在 “客户端” 与 “服务提供商” 之间，设置了一个授权层（authorization layer）。”客户端” 不能直接登录 “服务提供商”，只能登录授权层，以此将用户与客户端区分开来。”客户端” 登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。”客户端” 登录授权层以后，”服务提供商” 根据令牌的权限范围和有效期，向 “客户端” 开放用户储存的资料。<br><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/%E6%8E%88%E6%9D%83%E4%BA%A4%E4%BA%92%E5%9B%BE.jpg?raw=true" alt="交互图"></p>
+<h2 id="交互过程"><a href="#交互过程" class="headerlink" title="交互过程"></a>交互过程</h2><p>oAuth 在 “客户端” 与 “服务提供商” 之间，设置了一个授权层（authorization layer）。”客户端” 不能直接登录 “服务提供商”，只能登录授权层，以此将用户与客户端区分开来。”客户端” 登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。”客户端” 登录授权层以后，”服务提供商” 根据令牌的权限范围和有效期，向 “客户端” 开放用户储存的资料。<br><img src="https://mrtallon.gitee.io/img/oauth1.jpg" alt="交互图"></p>
 <h2 id="基于内存存储令牌"><a href="#基于内存存储令牌" class="headerlink" title="基于内存存储令牌"></a>基于内存存储令牌</h2><blockquote>
 <p>由于好奇安装了 jdk13 ，在启动服务时会少 JAXB API 的包，需要手动添加依赖</p>
 </blockquote>
@@ -123,7 +123,7 @@
 <li>well defined,easy to use threading model</li>
 </ul>
 <p>Netty4 的封装基于JNI，更加优雅的调用底层接口和跨平台服务。<br>想要试用基于Linux的Native传输层，保持代码基本不变的情况下只修改两个类名即可。</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/nettyModel.jpg?raw=true" alt="nettyModel"></p>
+<p><img src="https://mrtallon.gitee.io/img/netty1.jpg" alt="nettyModel"></p>
 <p>Netty中有一个Channel的概念，Channel是对Socket的抽象。<br>当写数据时,数据会走socket，然后调用write系统操作来把数据发送出去。</p>
 <h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><h3 id="通用流程"><a href="#通用流程" class="headerlink" title="通用流程"></a>通用流程</h3><ol>
 <li>定义好父子线程组</li>
@@ -189,10 +189,7 @@
   <entry>
     <title>程序往事</title>
     <url>/2019/03/10/Diary/</url>
-    <content><![CDATA[<blockquote>
-<p>有 份额</p>
-</blockquote>
-<p>参考《时间之外的往事》，记录自己当程序员的那些年。<br>记录那些慢慢过去的，慢慢迎来的，或感怀，或心得，往复更替。<br>预计更新五年。</p>
+    <content><![CDATA[<p><img src="https://mrtallon.gitee.io/img/diary1.jpg" alt="diary1"><br>记录那些慢慢过去的，慢慢迎来的，或感怀，或心得，往复更替。<br>预计更新五年。</p>
 <a id="more"></a>
 
 <h2 id="第一更：轻装上阵，梦想起航"><a href="#第一更：轻装上阵，梦想起航" class="headerlink" title="第一更：轻装上阵，梦想起航"></a>第一更：轻装上阵，梦想起航</h2><div style="text-align: right"> 2019.03.17 </div>
@@ -712,7 +709,7 @@
 <li>执行器生成这个操作的binlog并写入磁盘。</li>
 <li>执行器调用引擎的提交事物接口，redo log改成提交（commit）状态，更新完成</li>
 </ol>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/mysql03.png?raw=true" alt="image-20181211133910036"></p>
+<p><img src="https://mrtallon.gitee.io/img/mysql03.png" alt="image-20181211133910036"></p>
 <h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p>redo log的写入拆成了两个步骤：prepare 和commit，<br>是为了让两份日志之间的逻辑一致。<br>两阶段提交是跨系统维持数据逻辑一致性时常用的方案。</p>
 <h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><p>简单说,事务就是保证一组数据库操作,要么全成功,要么全失败。<br>MySQL的事物支持是在引擎层实现的。<br>MySQL是一个支持多引擎的系统,原生MyISAM不支持事物。</p>
 <h3 id="隔离性与隔离级别"><a href="#隔离性与隔离级别" class="headerlink" title="隔离性与隔离级别"></a>隔离性与隔离级别</h3><p>ACID（Atomicity,Consistency,lsolation,Durability）</p>
@@ -732,7 +729,7 @@
 
 <h3 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h3><p>在MySQL中，每条记录在更新的时候都会同时记录一条回滚操作。<br>记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</p>
 <p>假设一个值从1按顺序修改成2，3，4.<br>在回滚日志里就会有如下记录</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/mysql02.png?raw=true" alt="image-20181214160942410"></p>
+<p><img src="https://mrtallon.gitee.io/img/mysql02.png" alt="image-20181214160942410"></p>
 <p>当前值是4，不同时刻启动事务就会有不同的read-view。<br>在视图A、B、C里面，记录的值分别是1、2、4，<br>同一条记录在系统中可能存在多个版本，即数据库的多版本并发控制（MVCC）。<br>对于read-view A，要得到1，必须将当前的值依次执行途中所有回滚操作得到。<br>同时，当有另一个事物将4改为5，这个事物与之前的视图也不会冲突。</p>
 <p><strong>那么，回滚日志什么时候删除？</strong><br>在不需要的时候删除，系统会判断，当没有事物需要这些回滚日志时就被删除。</p>
 <p><strong>什么时候才算真正的不需要？</strong><br>当系统里没有比这个回滚日志更早的read-view的时候。</p>
@@ -801,7 +798,7 @@
 <li>协同开发时方便将代码分发给团队成员</li>
 <li>记录每次修改代码的内容、时间、原因等信息</li>
 <li>能够创建 Branch (分支)，可以根据不同的场景进行开发</li>
-<li>能够创建 Tag (标签)，建立项目里程碑<br><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git02.jpg?raw=true" alt="git02"></li>
+<li>能够创建 Tag (标签)，建立项目里程碑<br><img src="https://mrtallon.gitee.io/img/git02.jpg" alt="git02"></li>
 </ul>
 <p><strong>Git 应运而生</strong></p>
 <h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><ol>
@@ -878,15 +875,15 @@
 </ul>
 <h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p><strong>所有工作流是作为方案指导而不是条例规定</strong></p>
 <h3 id="中央集中式"><a href="#中央集中式" class="headerlink" title="中央集中式"></a>中央集中式</h3><p>所有人向一个公共仓库扔代码，较原始，不利于版本迭代。</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git003.png?raw=true" alt="git003"></p>
+<p><img src="https://mrtallon.gitee.io/img/git003.png" alt="git003"></p>
 <h3 id="GitFlow"><a href="#GitFlow" class="headerlink" title="GitFlow"></a>GitFlow</h3><p>通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。<br>严格的分支模型也为大型项目提供了一些非常必要的结构。<br>在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git006.png?raw=true" alt="git006"></p>
+<p><img src="https://mrtallon.gitee.io/img/git006.png" alt="git006"></p>
 <h4 id="历史分支"><a href="#历史分支" class="headerlink" title="历史分支"></a>历史分支</h4><p>相对使用仅有的一个 master 分支，GitFlow 工作流使用2个分支来记录项目的历史。master 分支存储了正式发布的历史，而 develop 分支作为功能的集成分支。这样也方便 master 分支上的所有提交分配一个版本号。</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git007.png?raw=true" alt="git007"></p>
+<p><img src="https://mrtallon.gitee.io/img/git007.png" alt="git007"></p>
 <h4 id="功能分支"><a href="#功能分支" class="headerlink" title="功能分支"></a>功能分支</h4><p>每个新功能位于一个自己的分支，这样可以 push 到中央仓库以备份和协作。但功能分支不是从 master 分支上拉出新分支，而是使用 develop 分支作为父分支。当新功能完成时，合并回 develop 分支。新功能提交应该从不直接与 master 分支交互。</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git008.png?raw=true" alt="git008"></p>
-<h4 id="发布分支"><a href="#发布分支" class="headerlink" title="发布分支"></a>发布分支</h4><p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git009.png?raw=true" alt="git009"></p>
-<h4 id="维护分支"><a href="#维护分支" class="headerlink" title="维护分支"></a>维护分支</h4><p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git010.png?raw=true" alt="git010"></p>
+<p><img src="https://mrtallon.gitee.io/img/git008.png" alt="git008"></p>
+<h4 id="发布分支"><a href="#发布分支" class="headerlink" title="发布分支"></a>发布分支</h4><p><img src="https://mrtallon.gitee.io/img/git009.png" alt="git009"></p>
+<h4 id="维护分支"><a href="#维护分支" class="headerlink" title="维护分支"></a>维护分支</h4><p><img src="https://mrtallon.gitee.io/img/git010.png" alt="git010"></p>
 <h4 id="版本号说明"><a href="#版本号说明" class="headerlink" title="版本号说明"></a>版本号说明</h4><p>v1.0.0-&gt;v1.0.1：    热修复<br>v1.0.0-&gt;v1.1.0：    新增功能</p>
 <h4 id="演示事例"><a href="#演示事例" class="headerlink" title="演示事例"></a>演示事例</h4><p><strong>小红</strong><br>基于 master 拉取项目<br>创建 develop 开发分支<br>切换开发分支并推送远程（模块组长）<br>新建文件并上传 develop 分支</p>
 <blockquote>
@@ -902,7 +899,7 @@
 <h3 id="Forking"><a href="#Forking" class="headerlink" title="Forking"></a>Forking</h3><p>特大型项目会用到，暂时不写了</p>
 <p>到了这里，但愿你对集中式工作流、功能分支工作流和 GitFlow 工作流已经感觉很舒适了。你应该也牢固的掌握了本地仓库的潜能，push/pull 模式和 Git 健壮的分支和合并模型。</p>
 <p>记住，这里演示的工作流只是可能用法的例子，而不是在实际工作中使用 Git 不可违逆的条例。所以不要畏惧按自己需要对工作流的用法做取舍。不变的目标就是让 Git 为你所用。</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git005.png?raw=true" alt="git005"></p>
+<p><img src="https://mrtallon.gitee.io/img/git005.png" alt="git005"></p>
 <h2 id="个人-Tips"><a href="#个人-Tips" class="headerlink" title="个人 Tips"></a>个人 Tips</h2><p>在写提交日志时，也许只是多加一个<a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">emoji</a>，就能表达很多（前提是大家统一符合规范）</p>
 ]]></content>
       <categories>

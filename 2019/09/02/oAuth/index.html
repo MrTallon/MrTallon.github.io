@@ -59,10 +59,10 @@
 <meta property="og:site_name" content="Tallon">
 <meta property="og:description" content="原文是关于 SSO 的单点登录总结，现更改为 oAuth2 协议技术">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;%E6%8E%88%E6%9D%83%E4%BA%A4%E4%BA%92%E5%9B%BE.jpg?raw=true">
-<meta property="og:updated_time" content="2019-11-14T02:29:11.323Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;oauth1.jpg">
+<meta property="og:updated_time" content="2019-11-14T06:22:59.190Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;%E6%8E%88%E6%9D%83%E4%BA%A4%E4%BA%92%E5%9B%BE.jpg?raw=true">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;oauth1.jpg">
 
 <link rel="canonical" href="https://tallon.ink/2019/09/02/oAuth/">
 
@@ -243,7 +243,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-14 10:29:11" itemprop="dateModified" datetime="2019-11-14T10:29:11+08:00">2019-11-14</time>
+                <time title="修改时间：2019-11-14 14:22:59" itemprop="dateModified" datetime="2019-11-14T14:22:59+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +290,7 @@
 <li>认证服务器（Authorization server）： 即服务提供商专门用来处理认证的服务器，简单点说就是登录功能（验证用户的账号密码是否正确以及分配相应的权限）</li>
 <li>资源服务器（Resource server）： 即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。简单点说就是资源的访问入口，比如上节中提到的“云笔记服务”和“云相册服务”都可以称之为资源服务器。</li>
 </ul>
-<h2 id="交互过程"><a href="#交互过程" class="headerlink" title="交互过程"></a>交互过程</h2><p>oAuth 在 “客户端” 与 “服务提供商” 之间，设置了一个授权层（authorization layer）。”客户端” 不能直接登录 “服务提供商”，只能登录授权层，以此将用户与客户端区分开来。”客户端” 登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。”客户端” 登录授权层以后，”服务提供商” 根据令牌的权限范围和有效期，向 “客户端” 开放用户储存的资料。<br><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/%E6%8E%88%E6%9D%83%E4%BA%A4%E4%BA%92%E5%9B%BE.jpg?raw=true" alt="交互图"></p>
+<h2 id="交互过程"><a href="#交互过程" class="headerlink" title="交互过程"></a>交互过程</h2><p>oAuth 在 “客户端” 与 “服务提供商” 之间，设置了一个授权层（authorization layer）。”客户端” 不能直接登录 “服务提供商”，只能登录授权层，以此将用户与客户端区分开来。”客户端” 登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。”客户端” 登录授权层以后，”服务提供商” 根据令牌的权限范围和有效期，向 “客户端” 开放用户储存的资料。<br><img src="https://mrtallon.gitee.io/img/oauth1.jpg" alt="交互图"></p>
 <h2 id="基于内存存储令牌"><a href="#基于内存存储令牌" class="headerlink" title="基于内存存储令牌"></a>基于内存存储令牌</h2><blockquote>
 <p>由于好奇安装了 jdk13 ，在启动服务时会少 JAXB API 的包，需要手动添加依赖</p>
 </blockquote>

@@ -60,9 +60,9 @@
 <meta property="og:description" content="MySQL都更新到8.0了，系统的、完整的学习数据库。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;static001.geekbang.org&#x2F;resource&#x2F;image&#x2F;0d&#x2F;d9&#x2F;0d2070e8f84c4801adbfa03bda1f98d9.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;mysql03.png?raw=true">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;mysql02.png?raw=true">
-<meta property="og:updated_time" content="2019-11-14T02:29:19.521Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;mysql03.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;mysql02.png">
+<meta property="og:updated_time" content="2019-11-14T06:21:21.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;static001.geekbang.org&#x2F;resource&#x2F;image&#x2F;0d&#x2F;d9&#x2F;0d2070e8f84c4801adbfa03bda1f98d9.png">
 
@@ -245,7 +245,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-14 10:29:19" itemprop="dateModified" datetime="2019-11-14T10:29:19+08:00">2019-11-14</time>
+                <time title="修改时间：2019-11-14 14:21:21" itemprop="dateModified" datetime="2019-11-14T14:21:21+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -345,7 +345,7 @@
 <li>执行器生成这个操作的binlog并写入磁盘。</li>
 <li>执行器调用引擎的提交事物接口，redo log改成提交（commit）状态，更新完成</li>
 </ol>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/mysql03.png?raw=true" alt="image-20181211133910036"></p>
+<p><img src="https://mrtallon.gitee.io/img/mysql03.png" alt="image-20181211133910036"></p>
 <h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p>redo log的写入拆成了两个步骤：prepare 和commit，<br>是为了让两份日志之间的逻辑一致。<br>两阶段提交是跨系统维持数据逻辑一致性时常用的方案。</p>
 <h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><p>简单说,事务就是保证一组数据库操作,要么全成功,要么全失败。<br>MySQL的事物支持是在引擎层实现的。<br>MySQL是一个支持多引擎的系统,原生MyISAM不支持事物。</p>
 <h3 id="隔离性与隔离级别"><a href="#隔离性与隔离级别" class="headerlink" title="隔离性与隔离级别"></a>隔离性与隔离级别</h3><p>ACID（Atomicity,Consistency,lsolation,Durability）</p>
@@ -365,7 +365,7 @@
 
 <h3 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h3><p>在MySQL中，每条记录在更新的时候都会同时记录一条回滚操作。<br>记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</p>
 <p>假设一个值从1按顺序修改成2，3，4.<br>在回滚日志里就会有如下记录</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/mysql02.png?raw=true" alt="image-20181214160942410"></p>
+<p><img src="https://mrtallon.gitee.io/img/mysql02.png" alt="image-20181214160942410"></p>
 <p>当前值是4，不同时刻启动事务就会有不同的read-view。<br>在视图A、B、C里面，记录的值分别是1、2、4，<br>同一条记录在系统中可能存在多个版本，即数据库的多版本并发控制（MVCC）。<br>对于read-view A，要得到1，必须将当前的值依次执行途中所有回滚操作得到。<br>同时，当有另一个事物将4改为5，这个事物与之前的视图也不会冲突。</p>
 <p><strong>那么，回滚日志什么时候删除？</strong><br>在不需要的时候删除，系统会判断，当没有事物需要这些回滚日志时就被删除。</p>
 <p><strong>什么时候才算真正的不需要？</strong><br>当系统里没有比这个回滚日志更早的read-view的时候。</p>
