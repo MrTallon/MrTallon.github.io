@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Tallon" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="十八般武艺，浑身解数。持续集成，持续交付，减少压力。">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从 Git 到 CI&#x2F;CD">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;2018&#x2F;11&#x2F;16&#x2F;Git&#x2F;index.html">
+<meta property="og:site_name" content="Tallon">
+<meta property="og:description" content="十八般武艺，浑身解数。持续集成，持续交付，减少压力。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git02.jpg?raw=true">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git003.png?raw=true">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git006.png?raw=true">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git007.png?raw=true">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git008.png?raw=true">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git009.png?raw=true">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git010.png?raw=true">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git005.png?raw=true">
+<meta property="og:updated_time" content="2019-09-28T15:35:28.080Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;git02.jpg?raw=true">
+
+<link rel="canonical" href="https://tallon.ink/2018/11/16/Git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>从 Git 到 CI/CD | Tallon</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tallon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Hello World</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/2018/11/16/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/test.png">
+      <meta itemprop="name" content="Tallon">
+      <meta itemprop="description" content="知易行难">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tallon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从 Git 到 CI/CD
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-16 09:45:44" itemprop="dateCreated datePublished" datetime="2018-11-16T09:45:44+08:00">2018-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-28 23:35:28" itemprop="dateModified" datetime="2019-09-28T23:35:28+08:00">2019-09-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/" itemprop="url" rel="index">
+                    <span itemprop="name">基本功</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>十八般武艺，浑身解数。<br>持续集成，持续交付，减少压力。</p>
+<a id="more"></a>
+
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p>在软件开发过程，每天都会产生新的代码，代码合并的过程中可能会出现如下问题：</p>
+<ul>
+<li>代码被覆盖或丢失</li>
+<li>代码写的不理想希望还原之前的版本</li>
+<li>希望知道与之前版本的差别</li>
+<li>是谁修改了代码以及为什么修改</li>
+<li>发版时希望分成不同的版本(测试版、发行版等)</li>
+</ul>
+<p>因此，我们希望有一种机制（版本控制系统），能够帮助我们：</p>
+<ul>
+<li>可以随时回滚到之前的版本</li>
+<li>协同开发时不会覆盖别人的代码</li>
+<li>留下修改记录，以便随时查看</li>
+<li>发版时可以方便的管理不同的版本</li>
+</ul>
+<p>一个标准的版本控制系统 Version Control System (VCS)，通常需要有以下功能：</p>
+<ul>
+<li>能够创建 Repository (仓库)，用来保存代码</li>
+<li>协同开发时方便将代码分发给团队成员</li>
+<li>记录每次修改代码的内容、时间、原因等信息</li>
+<li>能够创建 Branch (分支)，可以根据不同的场景进行开发</li>
+<li>能够创建 Tag (标签)，建立项目里程碑<br><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git02.jpg?raw=true" alt="git02"></li>
+</ul>
+<p><strong>Git 应运而生</strong></p>
+<h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><ol>
+<li>只下载GitHub上某个文件夹<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add -f origin https://github.com/funtl/MyShopPlus.git</span><br><span class="line">https://github.com/funtl/MyShopPlus/tree/master/docs/sql</span><br><span class="line">echo docs &gt;&gt; .git/info/sparse-checkout</span><br></pre></td></tr></table></figure></li>
+<li>下载后的文件放弃修改，回滚资源库最新代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p><strong>目的</strong>：借助 GitHub 托管代码</p>
+<h3 id="常用单词概念："><a href="#常用单词概念：" class="headerlink" title="常用单词概念："></a>常用单词概念：</h3><p><strong>仓库（Repository）</strong><br>基本就是一个项目一个仓库</p>
+<p><strong>收藏（Star）</strong><br>我感觉有点像朋友圈点赞的意思，<br>一个项目能有100个star感觉就很强。<br>你可以在自己的收藏列表查看已收藏的项目。</p>
+<p><strong>复制克隆项目（Fork）</strong><br>就是你想把别人的项目拿了学习或使用，<br>直接从别人的仓库复制了一份到自己仓库，<br>可以随便修改。<br>（本质上相当于你在原作者项目拉下来一个分支，不会影响原项目的代码与结构）</p>
+<p><strong>发起请求（Pull Request）</strong><br>基于Fork，你修改完感觉不错，<br>可以使用这个功能将自己代码发给原作者，<br>如果作者也觉着不错并且测试完没问题，就会提交到主分支，<br>你也算是为开源项目做贡献了。</p>
+<p><strong>关注（Watch）</strong><br>关注之后如果这个项目有任何更新你会第一时间收到通知提醒。</p>
+<p><strong>事物卡片（Issue）</strong><br>🐂人在网上发了一个项目，<br>但是你觉着代码写的有些小问题，比如有小bug或功能不不合理，<br>你可以给原作者提Issue，他看到之后就会修改bug并关闭Issue</p>
+<h3 id="静态站点生成器"><a href="#静态站点生成器" class="headerlink" title="静态站点生成器"></a>静态站点生成器</h3><p>为仓库设置静态页面：<a href="https://pages.github.com/" target="_blank" rel="noopener">官网</a></p>
+<h3 id="搭建个人主页"><a href="#搭建个人主页" class="headerlink" title="搭建个人主页"></a>搭建个人主页</h3><p>基于GitHub和hexo搭建的个人博客：<a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">教程</a></p>
+<h2 id="GitLab"><a href="#GitLab" class="headerlink" title="GitLab"></a>GitLab</h2><p>GitLab 是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的 Git 项目仓库，可通过 Web 界面进行访问公开的或者私人项目。它拥有与 Github 类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序 (Wall) 进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。</p>
+<p>基于 <a href="https://tallon.ink/2018/07/23/Docker/">Docker</a> Compose 安装 GitLab</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">    <span class="attr">web:</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">'twang2218/gitlab-ce-zh:10.5'</span></span><br><span class="line">      <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">      <span class="attr">hostname:</span> <span class="string">'192.168.75.145'</span></span><br><span class="line">      <span class="attr">environment:</span></span><br><span class="line">        <span class="attr">TZ:</span> <span class="string">'Asia/Shanghai'</span></span><br><span class="line">        <span class="attr">GITLAB_OMNIBUS_CONFIG:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">external_url</span> <span class="string">'http://192.168.75.145'</span></span><br><span class="line">          <span class="string">gitlab_rails['gitlab_shell_ssh_port']</span> <span class="string">=</span> <span class="number">2222</span></span><br><span class="line">          <span class="string">unicorn['port']</span> <span class="string">=</span> <span class="number">8888</span></span><br><span class="line">          <span class="string">nginx['listen_port']</span> <span class="string">=</span> <span class="number">8083</span></span><br><span class="line">      <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">'8083:8083'</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">'8443:443'</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">'2222:22'</span></span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">/usr/local/docker/gitlab/config:/etc/gitlab</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">/usr/local/docker/gitlab/data:/var/opt/gitlab</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">/usr/local/docker/gitlab/logs:/var/log/gitlab</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="MI-MD"><a href="#MI-MD" class="headerlink" title="MI/MD"></a>MI/MD</h2><p>manual integration &amp;&amp; manual deployment<br>手动集成，手动构建，手动部署</p>
+<blockquote>
+<p>需安装镜像仓库<a href="https://tallon.ink/2018/07/23/Docker/#more">harbor</a></p>
+</blockquote>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li>server01 上传项目压缩包</li>
+<li>编写 Dockerfile<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">FROM tomcat</span><br><span class="line"></span><br><span class="line">RUN rm -fr /usr/local/tomcat/webapps/ROOT/*</span><br><span class="line">COPY myshop-web-admin.zip /usr/local/tomcat/webapps/ROOT</span><br><span class="line"></span><br><span class="line">WORKDIR /usr/local/tomcat/webapps/ROOT</span><br><span class="line">RUN unzip myshop-web-admin.zip \</span><br><span class="line">    &amp;&amp; rm -fr myshop-web-admin.zip</span><br><span class="line"></span><br><span class="line">WORKDIR /usr/local/tomcat</span><br><span class="line"></span><br><span class="line">EXPOSE 8080</span><br></pre></td></tr></table></figure></li>
+<li>构建镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t myshop-admin .</span><br></pre></td></tr></table></figure></li>
+<li>编写 docker-compose 测试运行镜像<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">myshop-admin:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">myshop-admin</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">myshop-admin</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8088</span><span class="string">:8080</span></span><br></pre></td></tr></table></figure></li>
+<li>标记镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag myshop-admin 42.56.89.59/myshop/admin</span><br></pre></td></tr></table></figure></li>
+<li>上传镜像至 harbor<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">如未登陆请先登录harbor</span></span><br><span class="line">docker login 42.56.89.59 -u admin -p Harbor12345</span><br><span class="line">docker push 42.56.89.59/myshop/admin:latest</span><br></pre></td></tr></table></figure></li>
+<li>server02 拉取镜像</li>
+<li>编写 docker-compose 运行镜像<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">myshop-admin:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="number">42.56</span><span class="number">.89</span><span class="number">.59</span><span class="string">/myshop/admin</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">myshop-admin</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8088</span><span class="string">:8080</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h2><p>互联网软件的开发和发布，已经形成了一套标准流程。</p>
+<h3 id="持续集成-Continuous-integration"><a href="#持续集成-Continuous-integration" class="headerlink" title="持续集成(Continuous integration)"></a>持续集成(Continuous integration)</h3><p>频繁地（一天多次）将代码集成到主干。它的好处主要有两个：</p>
+<ul>
+<li>快速发现错误。每完成一点更新，就集成到主干，可以快速发现错误，定位错误也比较容易。</li>
+<li>防止分支大幅偏离主干。如果不是经常集成，主干又在不断更新，会导致以后集成的难度变大，甚至难以集成。</li>
+</ul>
+<h3 id="持续交付（Continuous-delivery）"><a href="#持续交付（Continuous-delivery）" class="headerlink" title="持续交付（Continuous delivery）"></a>持续交付（Continuous delivery）</h3><p>频繁地将软件的新版本，交付给质量团队或者用户，以供评审。如果评审通过，代码就进入生产阶段。<br>持续交付可以看作持续集成的下一步。它强调的是，不管怎么更新，软件是随时随地可以交付的。</p>
+<h3 id="持续部署（continuous-deployment）"><a href="#持续部署（continuous-deployment）" class="headerlink" title="持续部署（continuous deployment）"></a>持续部署（continuous deployment）</h3><p>持续交付的下一步。代码通过评审以后，自动部署到生产环境。<br>持续部署的目标是，代码在任何时刻都是可部署的，可以进入生产阶段。<br>持续部署的前提是能自动化完成测试、构建、部署等步骤。</p>
+<h3 id="环境支持"><a href="#环境支持" class="headerlink" title="环境支持"></a>环境支持</h3><h4 id="Maven私服管理：Nexus"><a href="#Maven私服管理：Nexus" class="headerlink" title="Maven私服管理：Nexus"></a>Maven私服管理：<a href="https://tallon.ink/2018/09/24/Nexus">Nexus</a></h4><h4 id="Docker镜像私服：Harbor"><a href="#Docker镜像私服：Harbor" class="headerlink" title="Docker镜像私服：Harbor"></a>Docker镜像私服：<a href="https://tallon.ink/2018/07/23/Docker">Harbor</a></h4><h4 id="代码构建工具：Gitlab-Runner"><a href="#代码构建工具：Gitlab-Runner" class="headerlink" title="代码构建工具：Gitlab Runner"></a>代码构建工具：Gitlab Runner</h4><p>环境准备</p>
+<ol>
+<li>创建工作目录 /usr/local/docker/runner</li>
+<li>创建构建目录 /usr/local/docker/runner/environment</li>
+<li>下载 jdk 和 maven 并配置全局环境变量</li>
+<li>vim /usr/local/docker/runner/environment/daemon.json<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"registry-mirrors"</span>: [</span><br><span class="line">    <span class="string">"https://registry.docker-cn.com"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"insecure-registries"</span>: [</span><br><span class="line">    <span class="string">"42.56.89.59:5000"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>vim /usr/local/docker/runner/environment/Dockerfile<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">FROM gitlab/gitlab-runner</span><br><span class="line">MAINTAINER Tallon &lt;talloner@qq.com&gt;</span><br><span class="line"></span><br><span class="line"># 修改软件源</span><br><span class="line">RUN echo &apos;deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse&apos; &gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    echo &apos;deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse&apos; &gt;&gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    echo &apos;deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse&apos; &gt;&gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    echo &apos;deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse&apos; &gt;&gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    apt-get update -y &amp;&amp; \</span><br><span class="line">    apt-get clean</span><br><span class="line"></span><br><span class="line"># 安装 Docker</span><br><span class="line">RUN apt-get -y install apt-transport-https ca-certificates curl software-properties-common &amp;&amp; \</span><br><span class="line">    curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | apt-key add - &amp;&amp; \</span><br><span class="line">    add-apt-repository &quot;deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot; &amp;&amp; \</span><br><span class="line">    apt-get update -y &amp;&amp; \</span><br><span class="line">    apt-get install -y docker-ce</span><br><span class="line">COPY daemon.json /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line"># 安装 Docker Compose</span><br><span class="line">WORKDIR /usr/local/bin</span><br><span class="line">RUN wget https://raw.githubusercontent.com/topsale/resources/master/docker/docker-compose</span><br><span class="line">RUN chmod +x docker-compose</span><br><span class="line"></span><br><span class="line">WORKDIR /</span><br></pre></td></tr></table></figure></li>
+<li>vim /usr/local/docker/runner/docker-compose.yml<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">gitlab-runner:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">environment</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">gitlab-runner</span></span><br><span class="line">    <span class="attr">privileged:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/etc/gitlab-runner</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br></pre></td></tr></table></figure></li>
+<li>注册 Runner</li>
+</ol>
+<p>未完待续</p>
+<h4 id="集成工具：Jenkins"><a href="#集成工具：Jenkins" class="headerlink" title="集成工具：Jenkins"></a>集成工具：Jenkins</h4><p>待集成 Jenkins 文章</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkinsci/jenkins</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">jenkins</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="comment"># 发布端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8080</span><span class="string">:8080</span></span><br><span class="line">      <span class="comment"># 基于 JNLP 的 Jenkins 代理通过 TCP 端口 50000 与 Jenkins master 进行通信</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">50000</span><span class="string">:50000</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/jenkins_home</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R 1000 /usr/local/docker/jenkins/data</span><br></pre></td></tr></table></figure>
+
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h4 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h4><p>一次 Pipeline 其实相当于一次构建任务，里面可以包含多个流程，如安装依赖、运行测试、编译、部署测试服务器、部署生产服务器等流程。</p>
+<h4 id="Stages"><a href="#Stages" class="headerlink" title="Stages"></a>Stages</h4><p>Stages 表示构建阶段，说白了就是上面提到的流程。我们可以在一次 Pipeline 中定义多个 Stages，这些 Stages 会有以下特点：</p>
+<ul>
+<li>所有 Stages 会按照顺序运行，即当一个 Stage 完成后，下一个 Stage 才会开始</li>
+<li>只有当所有 Stages 完成后，该构建任务 (Pipeline) 才会成功</li>
+<li>如果任何一个 Stage 失败，那么后面的 Stages 不会执行，该构建任务 (Pipeline) 失败</li>
+</ul>
+<h4 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h4><p>Jobs 表示构建工作，表示某个 Stage 里面执行的工作。我们可以在 Stages 里面定义多个 Jobs，这些 Jobs 会有以下特点：</p>
+<ul>
+<li>相同 Stage 中的 Jobs 会并行执行</li>
+<li>相同 Stage 中的 Jobs 都执行成功时，该 Stage 才会成功</li>
+<li>如果任何一个 Job 失败，那么该 Stage 失败，即该构建任务 (Pipeline) 失败</li>
+</ul>
+<h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p><strong>所有工作流是作为方案指导而不是条例规定</strong></p>
+<h3 id="中央集中式"><a href="#中央集中式" class="headerlink" title="中央集中式"></a>中央集中式</h3><p>所有人向一个公共仓库扔代码，较原始，不利于版本迭代。</p>
+<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git003.png?raw=true" alt="git003"></p>
+<h3 id="GitFlow"><a href="#GitFlow" class="headerlink" title="GitFlow"></a>GitFlow</h3><p>通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。<br>严格的分支模型也为大型项目提供了一些非常必要的结构。<br>在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。</p>
+<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git006.png?raw=true" alt="git006"></p>
+<h4 id="历史分支"><a href="#历史分支" class="headerlink" title="历史分支"></a>历史分支</h4><p>相对使用仅有的一个 master 分支，GitFlow 工作流使用2个分支来记录项目的历史。master 分支存储了正式发布的历史，而 develop 分支作为功能的集成分支。这样也方便 master 分支上的所有提交分配一个版本号。</p>
+<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git007.png?raw=true" alt="git007"></p>
+<h4 id="功能分支"><a href="#功能分支" class="headerlink" title="功能分支"></a>功能分支</h4><p>每个新功能位于一个自己的分支，这样可以 push 到中央仓库以备份和协作。但功能分支不是从 master 分支上拉出新分支，而是使用 develop 分支作为父分支。当新功能完成时，合并回 develop 分支。新功能提交应该从不直接与 master 分支交互。</p>
+<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git008.png?raw=true" alt="git008"></p>
+<h4 id="发布分支"><a href="#发布分支" class="headerlink" title="发布分支"></a>发布分支</h4><p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git009.png?raw=true" alt="git009"></p>
+<h4 id="维护分支"><a href="#维护分支" class="headerlink" title="维护分支"></a>维护分支</h4><p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git010.png?raw=true" alt="git010"></p>
+<h4 id="版本号说明"><a href="#版本号说明" class="headerlink" title="版本号说明"></a>版本号说明</h4><p>v1.0.0-&gt;v1.0.1：    热修复<br>v1.0.0-&gt;v1.1.0：    新增功能</p>
+<h4 id="演示事例"><a href="#演示事例" class="headerlink" title="演示事例"></a>演示事例</h4><p><strong>小红</strong><br>基于 master 拉取项目<br>创建 develop 开发分支<br>切换开发分支并推送远程（模块组长）<br>新建文件并上传 develop 分支</p>
+<blockquote>
+<p>你的开发项目应该是在 feature+模块名的分支，如果人少，实在没必要了，我直接默认每个人都在 develop 开发</p>
+</blockquote>
+<p><strong>小明</strong><br>拉取 master，切换 develop，查看新文件，并新增功能然后上传</p>
+<p>开发的一定阶段，合并 master<br>做法就是再开发一个分支，基于 dep，命名 release-1.0.0<br>切换 release，测试走一遍，无任何 bug 再推送 master<br>只有预发售版才能合并 master。</p>
+<p>本地回到 master 分支，拉取完整项目，创建标签，<br>1.0.0-RELEASE，推送仓库（包括标签）<br>查看一下标签，完美。</p>
+<p><strong>问题</strong>：1.0.0 的 bug 出来了</p>
+<p>解决：<br>new issue 提bug<br>使用 hotfix（补丁分支）来修复<br>通过标签检出，会发现自动创建新分支，<br>因为<strong>标签就是不可再修改了</strong></p>
+<p>新分支：hotfix_0004（序号）<br>新建文件表示修复（提交到 hotfix 分支）<br>之后 hotfix 直接合并到 master。<br>最后切换分支到 master 拉取最新，<br>发现 master 分支已修复，</p>
+<p>发布新版本，创建标签，<br>1.0.1-RELEASE<br>推送到服务器（包括标签）<br>最后，删除 dep 和 master 的其余分支</p>
+<h3 id="Forking"><a href="#Forking" class="headerlink" title="Forking"></a>Forking</h3><p>特大型项目会用到，暂时不写了</p>
+<p>到了这里，但愿你对集中式工作流、功能分支工作流和 GitFlow 工作流已经感觉很舒适了。你应该也牢固的掌握了本地仓库的潜能，push/pull 模式和 Git 健壮的分支和合并模型。</p>
+<p>记住，这里演示的工作流只是可能用法的例子，而不是在实际工作中使用 Git 不可违逆的条例。所以不要畏惧按自己需要对工作流的用法做取舍。不变的目标就是让 Git 为你所用。</p>
+<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/git005.png?raw=true" alt="git005"></p>
+<h2 id="个人-Tips"><a href="#个人-Tips" class="headerlink" title="个人 Tips"></a>个人 Tips</h2><p>在写提交日志时，也许只是多加一个<a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">emoji</a>，就能表达很多（前提是大家统一符合规范）</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag">**** Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2018/09/24/Nexus/" rel="next" title="Nexus">
+                  <i class="fa fa-chevron-left"></i> Nexus
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2018/12/17/MySQL/" rel="prev" title="MySQL 深度历险">
+                  MySQL 深度历险 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">1.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#笔记"><span class="nav-number">1.1.</span> <span class="nav-text">笔记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub"><span class="nav-number">2.</span> <span class="nav-text">GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用单词概念："><span class="nav-number">2.1.</span> <span class="nav-text">常用单词概念：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态站点生成器"><span class="nav-number">2.2.</span> <span class="nav-text">静态站点生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建个人主页"><span class="nav-number">2.3.</span> <span class="nav-text">搭建个人主页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab"><span class="nav-number">3.</span> <span class="nav-text">GitLab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MI-MD"><span class="nav-number">4.</span> <span class="nav-text">MI/MD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">4.1.</span> <span class="nav-text">流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CI-CD"><span class="nav-number">5.</span> <span class="nav-text">CI/CD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#持续集成-Continuous-integration"><span class="nav-number">5.1.</span> <span class="nav-text">持续集成(Continuous integration)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续交付（Continuous-delivery）"><span class="nav-number">5.2.</span> <span class="nav-text">持续交付（Continuous delivery）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续部署（continuous-deployment）"><span class="nav-number">5.3.</span> <span class="nav-text">持续部署（continuous deployment）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境支持"><span class="nav-number">5.4.</span> <span class="nav-text">环境支持</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven私服管理：Nexus"><span class="nav-number">5.4.1.</span> <span class="nav-text">Maven私服管理：Nexus</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker镜像私服：Harbor"><span class="nav-number">5.4.2.</span> <span class="nav-text">Docker镜像私服：Harbor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码构建工具：Gitlab-Runner"><span class="nav-number">5.4.3.</span> <span class="nav-text">代码构建工具：Gitlab Runner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集成工具：Jenkins"><span class="nav-number">5.4.4.</span> <span class="nav-text">集成工具：Jenkins</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">5.5.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pipeline"><span class="nav-number">5.5.1.</span> <span class="nav-text">Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stages"><span class="nav-number">5.5.2.</span> <span class="nav-text">Stages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Jobs"><span class="nav-number">5.5.3.</span> <span class="nav-text">Jobs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作流"><span class="nav-number">6.</span> <span class="nav-text">工作流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中央集中式"><span class="nav-number">6.1.</span> <span class="nav-text">中央集中式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitFlow"><span class="nav-number">6.2.</span> <span class="nav-text">GitFlow</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#历史分支"><span class="nav-number">6.2.1.</span> <span class="nav-text">历史分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能分支"><span class="nav-number">6.2.2.</span> <span class="nav-text">功能分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布分支"><span class="nav-number">6.2.3.</span> <span class="nav-text">发布分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#维护分支"><span class="nav-number">6.2.4.</span> <span class="nav-text">维护分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#版本号说明"><span class="nav-number">6.2.5.</span> <span class="nav-text">版本号说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#演示事例"><span class="nav-number">6.2.6.</span> <span class="nav-text">演示事例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forking"><span class="nav-number">6.3.</span> <span class="nav-text">Forking</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人-Tips"><span class="nav-number">7.</span> <span class="nav-text">个人 Tips</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tallon"
+      src="https://mrtallon.gitee.io/test.png">
+  <p class="site-author-name" itemprop="name">Tallon</p>
+  <div class="site-description" itemprop="description">知易行难</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MrTallon" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;MrTallon" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailto:mrtallon@qq.com" title="E-Mail &amp;rarr; mailto:mrtallon@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      作品链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tallon.ink/MyShop/" title="https:&#x2F;&#x2F;tallon.ink&#x2F;MyShop&#x2F;">Spring Alibaba</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tallon</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <!-- 动态背景 -->
+<!-- <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+</body>
+</html>

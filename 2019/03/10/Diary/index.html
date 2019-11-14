@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Tallon" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="参考《时间之外的往事》，记录自己当程序员的那些年。记录那些慢慢过去的，慢慢迎来的，或感怀，或心得，往复更替。预计更新五年。">
+<meta name="keywords" content="废话杂谈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程序往事">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;2019&#x2F;03&#x2F;10&#x2F;Diary&#x2F;index.html">
+<meta property="og:site_name" content="Tallon">
+<meta property="og:description" content="参考《时间之外的往事》，记录自己当程序员的那些年。记录那些慢慢过去的，慢慢迎来的，或感怀，或心得，往复更替。预计更新五年。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;architectures.jpg?raw=true">
+<meta property="og:updated_time" content="2019-11-14T02:53:07.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;architectures.jpg?raw=true">
+
+<link rel="canonical" href="https://tallon.ink/2019/03/10/Diary/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>程序往事 | Tallon</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tallon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Hello World</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/2019/03/10/Diary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/test.png">
+      <meta itemprop="name" content="Tallon">
+      <meta itemprop="description" content="知易行难">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tallon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          程序往事
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-10 04:02:38" itemprop="dateCreated datePublished" datetime="2019-03-10T04:02:38+08:00">2019-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-14 10:53:07" itemprop="dateModified" datetime="2019-11-14T10:53:07+08:00">2019-11-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%80%E4%BA%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">往事</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>参考《时间之外的往事》，记录自己当程序员的那些年。<br>记录那些慢慢过去的，慢慢迎来的，或感怀，或心得，往复更替。<br>预计更新五年。</p>
+<a id="more"></a>
+
+<h2 id="第一更：轻装上阵，梦想起航"><a href="#第一更：轻装上阵，梦想起航" class="headerlink" title="第一更：轻装上阵，梦想起航"></a>第一更：轻装上阵，梦想起航</h2><div style="text-align: right"> 2019.03.17 </div>
+
+<p>偶然间看到了 Lusifer 课堂视频，获益匪浅，见识了资深程序员的开发思想，并定制自己的学习路线。</p>
+<p>有道无术，术尚可求；有术无道，止于术。</p>
+<div style="text-align: center"> ———— 《道德经》 </div>
+
+<p>2018年还很少听到企业采用微服务框架，如今的企业开发，微服务已大行其道。</p>
+<p>我认为，当下的 Java 程序员，入门的标准，不再是曾经的 SSM，起码有微服务的编程思想。<br>思考问题要有一定的高度，当拥有降维打击的能力时，那就无坚不摧了。</p>
+<blockquote>
+<p>微服务这个概念是2012年出现的，作为加快 Web 和移动应用程序开发进程的一种方法。2014年开始受到各方的关注，同年为微服务的元年。</p>
+</blockquote>
+<p>2019重点学习计划一：<strong>微服务</strong></p>
+<p><strong>为何抛弃单体应用</strong></p>
+<ol>
+<li>单体应用随着时间的推移会越来越臃肿，十分不利于分析代码的结构和逻辑关系</li>
+<li>庞大的项目对于开发新功能和修复 Bug 十分耗时（焦油坑）</li>
+<li>复杂的单体应用本身就是持续部署的障碍，启动时间过长并且容易影响其他模块</li>
+<li>不同模块存在资源需求冲突时，单体应用难以扩展</li>
+<li>单体应用所有应用处于同一进程中，任何模块的问题都将拖垮所有模块</li>
+<li>单体应用使得采用新框架和语言将非常困难</li>
+</ol>
+<p><strong>何为微服务</strong>（撸帝独创水疗大法）<br>微服务架构好比一家水疗会所，<br>技师是<strong>服务提供者</strong>，你是<strong>服务消费者</strong>，水疗会所是<strong>注册中心</strong>。<br>你去水疗会所找技师，技师来提供各种服务。<br>一个技师如果不在还能换下一个技师，这就是<strong>高可用</strong>。<br>只要记住了号牌，下次还能叫这个技师，这就是<strong>缓存</strong>。<br>如果技师离职了，你所记住的号牌也就作废，这就是<strong>缓存穿透</strong>。<br>后来你没有号牌了，经理带你安排技师，这就是<strong>缓存击穿</strong>。<br>同一时间你有认识的技师都离职了，这就是<strong>缓存雪崩</strong>。<br>因为要额外安排技师，所以速度会慢一些。</p>
+<p><strong>精髓</strong>：熔断机制（服务挂了之后返回固定的结果）<br>水疗会所只有足疗，谁问都一样，因为，<strong>警察来了</strong>。</p>
+<p>如今常用的微服务框架解决方案有 Spring Cloud 和 Dubbo，出自 Spring 和阿里之手。<br>不过广义的来讲它俩一个是编程模型，一个是RPC通信框架，没什么相通点。<br>技术没有好坏，只有是否合适。<br>应该根据业务来组合式的使用各种框架，没有必要去钻牛角尖的分析他们的利弊优劣。<br>比如需要做的一个<strong>对内RPC，对外REST的</strong>开发框架：<a href="https://github.com/MrTallon/SCAD-HTD" target="_blank" rel="noopener">Spring Cloud Alibaba Dubbo</a></p>
+<p>所有微服务的开发，都在思考四个问题：</p>
+<ol>
+<li>多服务之间客户端如何访问</li>
+<li>多服务之间服务端如何通信</li>
+<li>多服务之间如何管理</li>
+<li>多服务之间如何解决服务宕机</li>
+</ol>
+<p>其实，如今的微服务还没有全球统一的标准，不过很有可能是未来的ServiceMesh（服务网格化）。</p>
+<p>程序员也好，一家互联网企业也好，他应有<strong>四个阶段</strong>的发展过程：</p>
+<ol>
+<li>入门期：主要就是微服务架构的基础建设来实现项目交付</li>
+<li>发展期：以大数据为依据进行精准营销</li>
+<li>成熟期：大数据+人工智能的部分实现</li>
+<li>未来规划：人工智能+区块链，全球计算机共同实现的超级计算机</li>
+</ol>
+<p>我现在处于第一阶段，准备向第二阶段进发。<br>如今BAT等已经在第四阶段深耕多时，然而很多企业还没有步入第一阶段，大厂不愧为大厂啊。</p>
+<hr>
+<h2 id="第二更：技术变革，思想先行"><a href="#第二更：技术变革，思想先行" class="headerlink" title="第二更：技术变革，思想先行"></a>第二更：技术变革，思想先行</h2><div style="text-align: right"> 2019.07.16 </div>
+
+<p>记录最近学习微服务的一些心得。</p>
+<p>天地无极，万法归一：<a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">康威定理</a></p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>解决了复杂问题，在原系统功能数量不变的情况下，使个体服务更快的被开发，并更容易理解和维护</li>
+<li>每个服务的独立开发，使得当前技术的重写旧服务变得可行</li>
+<li>微服务架构模式可以实现每个服务独立部署，使持续部署成为可能</li>
+<li>微服务架构模式使得每个服务可以独立扩展，可以仅部署每个满足服务的容量和可用性约束的实例条目</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>目前微服务边界不够明确</li>
+<li>分布式系统使得整体变得复杂，模块间的互相调用都需要做相应的故障处理</li>
+<li>分区数据库架构是一项挑战，不仅是<strong>CAP定理</strong>的限制，并且不支持如今高度扩展的NoSQL数据库和消息代理（分布式事务）</li>
+<li>测试、配置、部署、扩展、监控都会很繁琐</li>
+</ul>
+<h3 id="CAP-定理与-BASE-理论"><a href="#CAP-定理与-BASE-理论" class="headerlink" title="CAP 定理与 BASE 理论"></a>CAP 定理与 BASE 理论</h3><h4 id="CAP-定理"><a href="#CAP-定理" class="headerlink" title="CAP 定理"></a>CAP 定理</h4><p>一个分布式系统，最多只能同时满足一致性、可用性和分区容错性这三项中的两项。</p>
+<ul>
+<li>一致性（Consistency）:更新操作成功并返回客户端后，所有节点在同一时间的数据完全一致</li>
+<li>可用性（Availability）:服务在正常响应时间内一直可用</li>
+<li>分区容错性（Partition tolerance）:分布式系统在遇到某节点或网络分区故障时仍能对外提供满足一致性和可用性的服务</li>
+</ul>
+<h4 id="CAP-权衡"><a href="#CAP-权衡" class="headerlink" title="CAP 权衡"></a>CAP 权衡</h4><p>CP系统：金融级系统<br>AP系统：和钱无关的系统</p>
+<h4 id="BASE-理论"><a href="#BASE-理论" class="headerlink" title="BASE 理论"></a>BASE 理论</h4><p>即使无法做到强一致性（Strong Consistency），但应用可以采用适合方式达到最终一致性（Eventual Consistency）</p>
+<ul>
+<li>基本可用（Basically Available）：分布式系统出现故障时允许损失部分可用性，即保证核心业务可用</li>
+<li>软状态（Soft State）：允许系统存在中间状态，该中间状态不会影响系统整体可用性。分布式存储一般一份数据至少会有三个副本，允许不同副本同步的延时就是软状态的体现（同比MySQL中 Replication 的异步复制）</li>
+<li>最终一致性（Eventual Consistency）：系统中所有数据副本经过一段时间后最终达到一致状态。弱一致性和强一致性相反，最终一致性是弱一致性的一种特殊情况</li>
+</ul>
+<h4 id="ACID-和-BASE-的区别和联系"><a href="#ACID-和-BASE-的区别和联系" class="headerlink" title="ACID 和 BASE 的区别和联系"></a>ACID 和 BASE 的区别和联系</h4><p>ACID 是传统数据库常用的设计理念，追求强一致性模型。<br>BASE 支持的是大型分布式系统，提出牺牲强一致性获得高可用性。<br>在分布式系统中，系统组件对于一致性的要求是不同的，ACID 和 BASE 会结合使用。</p>
+<h3 id="如何应对高并发"><a href="#如何应对高并发" class="headerlink" title="如何应对高并发"></a>如何应对高并发</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>高并发（High Concurrency）是互联网分布式系统架构设计中必须考虑的因素之一。通常是指：通过设计保证系统能够同时并行处理很多请求。</p>
+<ul>
+<li>响应时间（Response Time）：系统对请求作出响应的时间。</li>
+<li>吞吐量（Throughput）：单位时间内处理请求的数量</li>
+<li>QPS（Query Per Second）：每秒响应请求数</li>
+<li>并发用户数：同时承载正常使用系统功能的用户数量</li>
+</ul>
+<h4 id="提升策略"><a href="#提升策略" class="headerlink" title="提升策略"></a>提升策略</h4><h5 id="垂直扩展"><a href="#垂直扩展" class="headerlink" title="垂直扩展"></a>垂直扩展</h5><ul>
+<li>增强单机硬件性能。如CPU增核，硬盘扩容等</li>
+<li>提升单机架构性能。如使用 cache 减少 IO 次数，使用异步增强吞吐量，使用无锁数据结构来减少响应时间等</li>
+</ul>
+<h5 id="水平扩展（主要方法）"><a href="#水平扩展（主要方法）" class="headerlink" title="水平扩展（主要方法）"></a>水平扩展（主要方法）</h5><p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/architectures.jpg?raw=true" alt="architecture"></p>
+<ul>
+<li>服务层：多机器负载均衡</li>
+<li>数据库：分库、分表、表分区</li>
+</ul>
+<hr>
+<h2 id="第三更：蓦然回首，寂寂寥寥"><a href="#第三更：蓦然回首，寂寂寥寥" class="headerlink" title="第三更：蓦然回首，寂寂寥寥"></a>第三更：蓦然回首，寂寂寥寥</h2><div style="text-align: right"> 2019.09.27 </div>
+
+<p>正值青年，回首再读鲁迅的《从百草园到三味书屋》和朱自清的《背影》，又多了不一样的感触。<br>其实我想说的是，中学的少年时代，读这些触目感怀的文章，是很难理解作者的心情的。<br>唯有离家远去，或求学，或工作，那些与家人长期分别的日子里，才能隐约体会到作者那惆怅的心境。<br>古往今来，从不缺悲戚感怀的诗人，他们应该都大抵如此罢。</p>
+<p>不，那些优秀的散文、杂记，是可以让每个人都读到不一样的东西的。<br>少年有少年的烦恼，青年有青年的惆怅，到了中年和老年，再翻出这经典的文章，<br>怕是又能增加不少与作者共鸣的感伤了。</p>
+<p>辗转六年，从求学，到工作，一路奔波。<br>有看文章说，三十岁前，莫回头，不要怕，尽管先前冲，去试错，去见天地；<br>三十岁后，要自省，要谨慎，去见自己。<br>按说不应该在这个朝气蓬勃的年纪去庸人自扰，但是闲来时总想无病呻吟几句。</p>
+<p>前几天跟母亲打电话，得知母上已经五十有余，顿时感到时间确实过得快了，<br>不由想到了子欲养而亲不待，一阵后怕。<br>父亲的身体早已远不如前，去年的一场急病也甚是后怕，<br>和他们相处的时间，可能远比我想的要少了。<br>今年国庆节，本不打算回去的，可是念及于此，还是买了回家的火车票，想着能双方都有时间的假期真是不多了。<br>本打算假期一起驱车去登泰山，趁他们现在脚力尚好。<br>可是看到往年国庆假期泰山的人流和六小时的舟车颠簸，想想还是搁置了。</p>
+<p>今年姐姐终于也是顺利毕业并有了一份稳定的工作，十分欣喜。<br>昨日在与姐姐的通话中，得知她的我的关心甚至超过对自己，十分感动。<br>不过姐姐由于多年的生活习惯和刚工作的缘故，和我有一些不同：<br>她过于看重钱的数量，忽略了钱之外的种种事情，比如能力，比如开心等，从而让我们的对话有时不那么投机。<br>其实没什么好坏之分，每个人本就不同，至于哪种生活更好，见仁见智。</p>
+<p>其实我们都是多虑了，大家应该都比看上去的样子要懂的更多，想的更远。</p>
+<hr>
+<h2 id="第四更：闻窗外事，读圣贤书"><a href="#第四更：闻窗外事，读圣贤书" class="headerlink" title="第四更：闻窗外事，读圣贤书"></a>第四更：闻窗外事，读圣贤书</h2><div style="text-align: right"> 2019.10.20 </div>
+
+<p>前几天无意间读到了《蜗居》的<a href="https://www.zhihu.com/question/27593812/answer/850190389?utm_source=wechat_session&utm_medium=social&utm_oi=582459045881843712" target="_blank" rel="noopener">影评</a>,触目感怀。</p>
+<p>用富养的方式，将高贵的性格和忠诚的价值观，给予下一代。<br>不只是所拥有钱的数量，而是要对于子女成长投入更多的关注。</p>
+<p>其实，刺激我写下文字的原因，是影评的后半部分。</p>
+<p>当虚伪的宋思明用作为公仆为人民服务的的特权来引诱年轻女孩寻欢作乐时，面目可憎。金钱和权利的影响，在剧中无孔不入，无法回避。最完美的角色，反而是美国人马克，绅士、宽容、无私的帮助女性朋友，没有企图。</p>
+<p>月前的新加坡之行，正如许多去过的人所说，那里的基础建设，商业贸易，游戏娱乐等，是不如我国一线城市的，历史文化更是远不如中国。我的第一感受也是如此。不过，新加坡作为20多年发达国家，他的生产力水平，经济运行机制，国民的文化和国际化水平，我想还是高出中国不少的，这些软实力是需要在吃饱肚子的前提下耕耘多年才能培养出的意志。诚然，我国用一代人的时间完成了其他国家几代人的建设，但是为此也付出了代价，此处不便细表。我热爱我的祖国，在享受完发展带来的福利我也愿意去承担那不可避免的代价，但是我们还有很远的路要走，除了超一线和一线，我们还有更多不那么发达的城市，国民的收入水平可能要比我想象的要低，还有很多人是得不到足够的关注。希望我们的国家，能尽早培养出大量马克这样的人。我知道这是转型过程中的痛苦，我希望它快点过去。</p>
+<p>面对剧中的腐败，不禁想到了前些天韩国艺人崔雪莉的非自然死亡。</p>
+<p><strong>权力导致腐败，绝对的权力绝对地导致腐败。</strong><br>把权力关进笼子的最好的方法，就是表面看起来像民主和自由的样子，<br>一方阶级处于绝对的优势地位，但其他各方相对弱小的势力结合起来也可以威胁到它，这时权力就不敢作恶太过分，而大部分时间去实现它应尽的义务：管理国家，建设国家。<br>当有某一方势力强大到成为绝对势力，就会诞生崔雪莉这样的“离奇事件”。</p>
+<p>富贵不能淫，贫贱不能移。这里的“淫”讲的是“过度”。<br>欲望无度，永远不能被满足的时候，那就是变态。<br>富人如果不加强自身的文化素质和精神建设，就极易产生变态的欲望。<br>至于依靠那微乎其微的道德操守和品德修养，更是不靠谱。</p>
+<p>达则兼济天下，穷则独善其身。<br>毋以善小而不为，勿以恶小而为之。<br>这些从小背熟的圣贤书，往往真的能指导我们过好一生。</p>
+<p>在这不清不楚的环境下，我只想做个好人，做一个善良的人，尽我所能的去关心身边的人，以后为子女的成长投入更多关爱，减少为他人的负担，正直的走下去。</p>
+<hr>
+<h2 id="第五更：乘风破浪，勇立潮头"><a href="#第五更：乘风破浪，勇立潮头" class="headerlink" title="第五更：乘风破浪，勇立潮头"></a>第五更：乘风破浪，勇立潮头</h2><div style="text-align: right"> 2019.10.27 </div>
+
+<p>最近，区块链又火了。</p>
+<p>习近平在中央政治局第十八次集体学习时强调 把<strong>区块链</strong>作为核心技术自主创新重要突破口 加快推动区块链技术和产业创新发展。</p>
+<p>意味着我国在互联网这块又要来一波开放性政策了。</p>
+<p>作为一名应用级开发工程师（纯调API），我真应该时刻学习，掌握架构知识了，要不然即将开始“函数即服务”，我可就没饭吃了。</p>
+<h3 id="区块链如何解决最核心的信任问题"><a href="#区块链如何解决最核心的信任问题" class="headerlink" title="区块链如何解决最核心的信任问题"></a>区块链如何解决最核心的信任问题</h3><ol>
+<li>去中心化</li>
+<li>基于数学和密码学</li>
+<li>公开透明，可追溯，不可回滚</li>
+</ol>
+<h3 id="区块链演化："><a href="#区块链演化：" class="headerlink" title="区块链演化："></a>区块链演化：</h3><p>1.0 数字货币（比特币）<br>2.0 智能合约（以太坊）<br>3.0 价值互联网</p>
+<p>以程序的角度去看待这个问题，单点故障就是中心化，高可用就是去中心化。<br>它像是一个没有管理员，每个节点都拥有全部数据的分布式存储系统。</p>
+<p>多地存储会出现数据一致性的问题，区块链上叫做分叉</p>
+<ul>
+<li>软分叉<br>  临时分叉，当系统更新后版本差异导致分叉，版本统一后则分叉消除</li>
+<li>硬分叉<br>  由某人或组织非法拉取的的永久分支，并号召大家认可自己的分支，如“以太坊”</li>
+</ul>
+<h3 id="六层模型"><a href="#六层模型" class="headerlink" title="六层模型"></a>六层模型</h3><p><img src="" alt="模型"></p>
+<p>如今区块链在实际生活中有多大的应用场景呢？感觉也不多，就是一些去中心化的储存。<br>从技术的角度出发，这是一门什么有的玩的方向，听说能开发区块链底层技术的工程师全球不超过2000人。我不奢求能学会开发，只求懂得使用。<br>把以太坊作为区块链的底层系统，实现<strong>EVM+API</strong>，称之为<strong>DAPP</strong>，即分布式应用程序，现在多加EAAS（区块链即服务）。<br>至此，微服务架构已是基础中的基础，扎实微服务思想后迈向区块链。<br>但是如今这蛮荒期，如果有人拉你去投资区块链，那基本可以拉黑处理了，近期肯定会有不少拿热点做传销的皮包公司会出来圈一波钱走人。</p>
+<p>总之，跟党走，有肉吃。</p>
+<hr>
+<h2 id="第六更：仰望星空，脚踏实地"><a href="#第六更：仰望星空，脚踏实地" class="headerlink" title="第六更：仰望星空，脚踏实地"></a>第六更：仰望星空，脚踏实地</h2><div style="text-align: right"> 2019.11.11 </div>
+
+<p>光明磊落，乐于分享，目光远大</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BA%9F%E8%AF%9D%E6%9D%82%E8%B0%88/" rel="tag">**** 废话杂谈</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/02/16/Jenkins/" rel="next" title="Jenkins">
+                  <i class="fa fa-chevron-left"></i> Jenkins
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/04/04/Nginx/" rel="prev" title="Nginx">
+                  Nginx <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一更：轻装上阵，梦想起航"><span class="nav-number">1.</span> <span class="nav-text">第一更：轻装上阵，梦想起航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二更：技术变革，思想先行"><span class="nav-number">2.</span> <span class="nav-text">第二更：技术变革，思想先行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">2.2.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAP-定理与-BASE-理论"><span class="nav-number">2.3.</span> <span class="nav-text">CAP 定理与 BASE 理论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CAP-定理"><span class="nav-number">2.3.1.</span> <span class="nav-text">CAP 定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CAP-权衡"><span class="nav-number">2.3.2.</span> <span class="nav-text">CAP 权衡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BASE-理论"><span class="nav-number">2.3.3.</span> <span class="nav-text">BASE 理论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ACID-和-BASE-的区别和联系"><span class="nav-number">2.3.4.</span> <span class="nav-text">ACID 和 BASE 的区别和联系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何应对高并发"><span class="nav-number">2.4.</span> <span class="nav-text">如何应对高并发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">2.4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提升策略"><span class="nav-number">2.4.2.</span> <span class="nav-text">提升策略</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#垂直扩展"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">垂直扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#水平扩展（主要方法）"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">水平扩展（主要方法）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三更：蓦然回首，寂寂寥寥"><span class="nav-number">3.</span> <span class="nav-text">第三更：蓦然回首，寂寂寥寥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四更：闻窗外事，读圣贤书"><span class="nav-number">4.</span> <span class="nav-text">第四更：闻窗外事，读圣贤书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五更：乘风破浪，勇立潮头"><span class="nav-number">5.</span> <span class="nav-text">第五更：乘风破浪，勇立潮头</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链如何解决最核心的信任问题"><span class="nav-number">5.1.</span> <span class="nav-text">区块链如何解决最核心的信任问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链演化："><span class="nav-number">5.2.</span> <span class="nav-text">区块链演化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六层模型"><span class="nav-number">5.3.</span> <span class="nav-text">六层模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六更：仰望星空，脚踏实地"><span class="nav-number">6.</span> <span class="nav-text">第六更：仰望星空，脚踏实地</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tallon"
+      src="https://mrtallon.gitee.io/test.png">
+  <p class="site-author-name" itemprop="name">Tallon</p>
+  <div class="site-description" itemprop="description">知易行难</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MrTallon" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;MrTallon" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailto:mrtallon@qq.com" title="E-Mail &amp;rarr; mailto:mrtallon@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      作品链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tallon.ink/MyShop/" title="https:&#x2F;&#x2F;tallon.ink&#x2F;MyShop&#x2F;">Spring Alibaba</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tallon</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <!-- 动态背景 -->
+<!-- <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+</body>
+</html>
