@@ -223,31 +223,6 @@
   </entry>
   
   <entry>
-    <title>[浅浅浅谈] 模拟退火</title>
-    <link href="https://tallon.ink/2018/11/10/test/"/>
-    <id>https://tallon.ink/2018/11/10/test/</id>
-    <published>2018-11-10T07:46:42.000Z</published>
-    <updated>2019-11-14T07:17:03.849Z</updated>
-    
-    <content type="html"><![CDATA[<div class="note default">            <p>嗯，Day1 先 GG 了，前两题暴力，最后一题骗分流氓打法，明天肯定更加恶心，今天先来总结一个玄学算法——模拟退火</p>          </div><a id="more"></a><h3 id="模拟退火简介"><a href="#模拟退火简介" class="headerlink" title="模拟退火简介"></a>模拟退火简介</h3><p>不多说，就一个热力学公式：</p><script type="math/tex; mode=display">\operatorname{P}(dE) = \exp(\frac{dE}{kT})</script><p>其中 $k$ 是一个常数，$\exp$ 表示自然指数，且 $dE&lt;0$。这条公式说白了就是：温度越高，出现一次能量差为 $dE$ 的降温的概率就越大；温度越低，则出现降温的概率就越小。又由于 $dE$ 总是小于 $0$（否则就不叫退火了），因此 $\frac{dE}{kT} &lt; 0$ ，所以 $\operatorname{P}(dE)$ 的函数取值范围是 $(0,1)$ 。<br>随着温度 $T$ 的降低，$\operatorname{P}(dE)$会逐渐降低。<br>我们将一次向较差解的移动看做一次温度跳变过程，我们以概率 $\operatorname{P}(dE)$ 来接受这样的移动。</p><p>所以模拟退火中对答案的更新就是：</p><ol><li>如果新解更优，接受</li><li>否则以一定概率接受</li></ol><p>那么， 退火呢？？</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;note default&quot;&gt;
-            &lt;p&gt;嗯，Day1 先 GG 了，前两题暴力，最后一题骗分流氓打法，明天肯定更加恶心，今天先来总结一个玄学算法——模拟退火&lt;/p&gt;
-          &lt;/div&gt;
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://tallon.ink/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="玄学" scheme="https://tallon.ink/tags/%E7%8E%84%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Nexus</title>
     <link href="https://tallon.ink/2018/09/24/Nexus/"/>
     <id>https://tallon.ink/2018/09/24/Nexus/</id>
