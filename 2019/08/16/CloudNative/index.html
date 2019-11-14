@@ -59,13 +59,13 @@
 <meta property="og:site_name" content="Tallon">
 <meta property="og:description" content="接触公司新开的云原生项目三月有余，如今对于云原生的理解依旧不甚了了。翻出《阿里巴巴云原生实践15讲》，系统学习">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;cloudNative.jpg?raw=true">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;cloudstructs.jpg?raw=true">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;cloudk8s.jpg?raw=true">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;cloudci.jpg?raw=true">
-<meta property="og:updated_time" content="2019-11-14T02:29:15.164Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative1.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative2.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative3.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative4.jpg">
+<meta property="og:updated_time" content="2019-11-14T05:57:23.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;MrTallon&#x2F;Mind-Palace&#x2F;blob&#x2F;master&#x2F;img&#x2F;cloudNative.jpg?raw=true">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative1.jpg">
 
 <link rel="canonical" href="https://tallon.ink/2019/08/16/CloudNative/">
 
@@ -219,7 +219,7 @@
     <link itemprop="mainEntityOfPage" href="https://tallon.ink/2019/08/16/CloudNative/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://mrtallon.gitee.io/test.png">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
       <meta itemprop="name" content="Tallon">
       <meta itemprop="description" content="知易行难">
     </span>
@@ -246,7 +246,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-14 10:29:15" itemprop="dateModified" datetime="2019-11-14T10:29:15+08:00">2019-11-14</time>
+                <time title="修改时间：2019-11-14 13:57:23" itemprop="dateModified" datetime="2019-11-14T13:57:23+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,16 +276,16 @@
 
 <div style="text-align: center"> 技术变革，思想先行 </div>
 
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/cloudNative.jpg?raw=true" alt="cloudNative"></p>
+<p><img src="https://mrtallon.gitee.io/img/cloudNative1.jpg" alt="cloudNative"></p>
 <p>即使到现在，云原生尚且没有确切的定义，一直处于变化之中，解释权不归某个人或组织所有。</p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>云原生是一种构建和运行应用程序的方法，是一套技术体系和方法论。</strong><br>云原生（CloudNative）是一个组合词，Cloud+Native。Cloud 表示应用程序位于云中，而不是传统的数据中心；Native 表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上以最佳姿势运行，充分利用和发挥云平台的弹性+分布式优势。<br>2013年首次提出云原生（CloudNative）的概念；<br>2015年Matt Stine 在《迁移到云原生架构》一书中定义了符合云原生架构的几个特征：12因素、微服务、自敏捷架构、基于 API 协作、扛脆弱性；<br>到了2017年，Matt Stine 改了口风，将云原生架构归纳为模块化、可观察、可部署、可测试、可替换、可处理6特质；<br>而 Pivotal 最新官网对云原生概括为4个要点：DevOps+持续交付+微服务+容器。</p>
-<p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/cloudstructs.jpg?raw=true" alt="cloudstructs"></p>
+<p><img src="https://mrtallon.gitee.io/img/cloudNative2.jpg" alt="cloudstructs"></p>
 <p>不同的人和组织对云原生有不同的定义，相同的人和组织在不同时间点对云原生也有不同的定义，简单来说：DevOps + 持续交付 + 微服务 + 容器。</p>
 <p>总而言之，符合云原生架构的应用程序应该是：采用开源堆栈（K8S + Docker）进行容器化，基于微服务架构提高灵活性和可维护性，借助敏捷方法、DevOps支持持续迭代和运维自动化，利用云平台设施实现弹性伸缩、动态调度、优化资源利用率。<br>云原生构建应用简便快捷，部署应用轻松自如、运行应用按需伸缩。优点不一而足，缺点微乎其微，秒杀传统 Web 框架，吊打祖传 IT 模式，实在是保命或评优晋级的不可多得的终极绝密武器。</p>
 <h2 id="四要素"><a href="#四要素" class="headerlink" title="四要素"></a>四要素</h2><h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><p>微服务理论基础：<a href="https://www.cnblogs.com/gudi/p/6685474.html" target="_blank" rel="noopener">康威定律</a></p>
-<h3 id="容器化"><a href="#容器化" class="headerlink" title="容器化"></a>容器化</h3><p><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/cloudk8s.jpg?raw=true" alt="cloudk8s"><br>Docker 是应用最为广泛的容器引擎(目前创始人已经离开团队)<br>K8S 是容器编排系统，用于容器管理，容器间的负载均衡</p>
+<h3 id="容器化"><a href="#容器化" class="headerlink" title="容器化"></a>容器化</h3><p><img src="https://mrtallon.gitee.io/img/cloudNative3.jpg" alt="cloudk8s"><br>Docker 是应用最为广泛的容器引擎(目前创始人已经离开团队)<br>K8S 是容器编排系统，用于容器管理，容器间的负载均衡</p>
 <h3 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h3><p>Dev + Ops，就是开发、运维和测试的合体，<br>DevOps 是一个敏捷思维，是一个沟通文化，也是组织形式，为云原生提供持续交付能力。</p>
-<h3 id="持续交付"><a href="#持续交付" class="headerlink" title="持续交付"></a>持续交付</h3><p>敏捷开发，小步快跑，快速迭代，持续交付<br><img src="https://github.com/MrTallon/Mind-Palace/blob/master/img/cloudci.jpg?raw=true" alt="cloudci"></p>
+<h3 id="持续交付"><a href="#持续交付" class="headerlink" title="持续交付"></a>持续交付</h3><p>敏捷开发，小步快跑，快速迭代，持续交付<br><img src="https://mrtallon.gitee.io/img/cloudNative4.jpg" alt="cloudci"></p>
 <h2 id="实操经验"><a href="#实操经验" class="headerlink" title="实操经验"></a>实操经验</h2><h2 id="茁壮成长"><a href="#茁壮成长" class="headerlink" title="茁壮成长"></a>茁壮成长</h2><p>云原生借了云计算的东风，没有云计算，自然没有云原生，云计算是云原生的基础。<br>随着虚拟化技术的成熟和分布式框架的普及，在容器技术、可持续交付、编排系统等开源社区的推动下，以及微服务等开发理念的带动下，应用上云已经是不可逆转的趋势。<br>云计算的3层划分，即基础设施即服务(IaaS)、平台即服务(PaaS)、软件即服务(SaaS)为云原生提供了技术基础和方向指引，真正的云化不仅仅是基础设施和平台的变化，应用也需要做出改变，摈弃传统的土方法，在架构设计、开发方式、部署维护等各个阶段和方面都基于云的特点，重新设计，从而建设全新的云化的应用，即云原生应用。</p>
 <h2 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a>未完待续……</h2><blockquote>
 <p>参考文献：<br><a href="https://mp.weixin.qq.com/s/7-jf3cv0j164igzZDx15Jw" target="_blank" rel="noopener">阿里技术：云原生</a><br><a href="">阿里巴巴云原生实践15讲</a></p>
@@ -299,7 +299,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Cloud/" rel="tag">**** Cloud</a>
+              <a href="/tags/Cloud/" rel="tag"><i class="fa fa-tag"></i> Cloud</a>
           </div>
 
         
@@ -362,7 +362,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Tallon"
-      src="https://mrtallon.gitee.io/test.png">
+      src="https://mrtallon.gitee.io/img/avatar.png">
   <p class="site-author-name" itemprop="name">Tallon</p>
   <div class="site-description" itemprop="description">知易行难</div>
 </div>
@@ -382,8 +382,10 @@
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">标签</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
