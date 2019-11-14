@@ -272,9 +272,7 @@
       
         <p>MySQL都更新到8.0了，系统的、完整的学习数据库。</p>
 <a id="more"></a>
-
 <h2 id="基础架构：查询语句的执行过程"><a href="#基础架构：查询语句的执行过程" class="headerlink" title="基础架构：查询语句的执行过程"></a>基础架构：查询语句的执行过程</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'1'</span></span><br></pre></td></tr></table></figure>
-
 <p><img src="https://static001.geekbang.org/resource/image/0d/d9/0d2070e8f84c4801adbfa03bda1f98d9.png" alt="查询"></p>
 <p>如上图所示，MySQL大体分为Server层和存储引擎层。</p>
 <p>5.5.5版本后默认使用InnoDB引擎，也可手动选择存储引擎。</p>
@@ -283,7 +281,6 @@
 </blockquote>
 <h3 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h3><p>负责跟客户端建立连接、获取权限、维持和管理连接,<br>当用户建立连接后，即使被管理员修改了权限，<br>也不会影响已存在权限，重连才会生效。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">processlist</span></span><br></pre></td></tr></table></figure>
-
 <p>查看当前所有的连接及状态</p>
 <p>当客户端建立连接后如果太长时间没动静，连接器会自动断开。</p>
 <p>wait_timeout 控制，默认空闲时间为8小时。</p>
@@ -295,9 +292,7 @@
 <li>MySQL5.7之后，可以在比较大的查询之后，执行mysql_reset_connection来初始化资源</li>
 </ol>
 <h3 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h3><p>建立连接后开始正式执行select语句<br>MySQL会先去缓存里查找近期是否有相同执行语句。</p>
-<p>效率虽高，但大部分情况却是弊大于利：<br>当表更新时，查询缓存即失效，<br>除非是一张基本不动的静态表，如系统配置，<br>否则使用查询缓存的命中率非常低。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">query_cache_type=DEMAND</span><br></pre></td></tr></table></figure>
-<p>按需查找，不使用查询缓存。</p>
+<p>效率虽高，但大部分情况却是弊大于利：<br>当表更新时，查询缓存即失效，<br>除非是一张基本不动的静态表，如系统配置，<br>否则使用查询缓存的命中率非常低。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">query_cache_type=DEMAND</span><br></pre></td></tr></table></figure><br>按需查找，不使用查询缓存。</p>
 <p><strong>注：MySQL8.0之后直接将查询缓存模块删除了</strong></p>
 <h3 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h3><ol>
 <li>词法分析：识别出语句中的字符串分别代表什么</li>
@@ -305,10 +300,13 @@
 </ol>
 <h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><p>表里存在多个索引的时，判断使用哪个索引，<br>或者多表关联时决定各个表的连接顺序。</p>
 <h3 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h3><p>先判断是否有该表的查询权限，没有的话返回：ERROR 1142(42000)···</p>
-<p>执行流程：<br>​1. 调用InnoDB引擎接口取到表的id行，判断是否符合条件，符合条件放入结果集<br>2. 调用引擎接口取“下一行”，重复操作<br>3. 将符合条件的结果集返回客户端</p>
+<p>执行流程：<br>​1. 调用InnoDB引擎接口取到表的id行，判断是否符合条件，符合条件放入结果集</p>
+<ol>
+<li>调用引擎接口取“下一行”，重复操作</li>
+<li>将符合条件的结果集返回客户端</li>
+</ol>
 <p>数据库慢查询日志中 rows_examined 字段，表示语句执行扫描了多少行。</p>
 <h2 id="日志系统：更新语句是如何执行的"><a href="#日志系统：更新语句是如何执行的" class="headerlink" title="日志系统：更新语句是如何执行的"></a>日志系统：更新语句是如何执行的</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> age=age+<span class="number">1</span> <span class="keyword">where</span> <span class="keyword">ID</span>=<span class="number">2</span></span><br></pre></td></tr></table></figure>
-
 <p>更新语句同查询一样，也会走一遍顶部图片的流程。<br>与查询流程不一样的是，更新操作涉及两个重要的日志模块：<br>redo log（重做日志）和binlog（归档日志）。</p>
 <h3 id="redo-log："><a href="#redo-log：" class="headerlink" title="redo log："></a>redo log：</h3><p>如果每次更新操作都需要写进磁盘，磁盘寻找记录，随后更新，<br>那么整个IO成本、查找成本都很高。</p>
 <p><strong>WAL：Write-Ahead Logging</strong>（先写日志，再写磁盘）</p>
@@ -318,26 +316,30 @@
 </blockquote>
 <h3 id="binlog："><a href="#binlog：" class="headerlink" title="binlog："></a>binlog：</h3><p>Server层的日志，不具备crash-safe功能。</p>
 <p>binlog有两种模式：<br>statement格式的话是记录sql语句，<br>row格式会记录行内容（两条），更新前和后</p>
-<h3 id="两种日志的区别"><a href="#两种日志的区别" class="headerlink" title="两种日志的区别"></a>两种日志的区别</h3><table>
+<h3 id="两种日志的区别"><a href="#两种日志的区别" class="headerlink" title="两种日志的区别"></a>两种日志的区别</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>redo log</th>
 <th>binlog</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>InndoDB引擎特有</td>
 <td>在MySQL的Server层实现，所有引擎都可用</td>
 </tr>
 <tr>
 <td>物理日志，记录“在某个数据页上做了什么修改”</td>
-<td>逻辑日志，记录这个语句的原始逻辑</td>
+<td>逻辑日志，记录这个语句的原始逻辑 </td>
 </tr>
 <tr>
 <td>循环写的，空间固定</td>
 <td>可以追加写入</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="更新操作内部执行流程"><a href="#更新操作内部执行流程" class="headerlink" title="更新操作内部执行流程"></a>更新操作内部执行流程</h3><ol>
 <li>执行器先找引擎取 ID=2。ID是主键，引擎直接用树搜索这一行。</li>
 <li>执行器拿到行数据，重新赋值，调用引擎接口将新行数据写入。</li>
@@ -362,7 +364,6 @@
 <p><strong>Oracle数据库默认隔离级别是”读已提交“</strong></p>
 <p>当Oracle迁移MySQL时为保证隔离级别一致，故修改为读已提交</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like 'transaction_isolation';</span><br><span class="line"></span><br><span class="line">+<span class="comment">-----------------------+----------------+</span></span><br><span class="line"></span><br><span class="line">| Variable_name | Value |</span><br><span class="line"></span><br><span class="line">+<span class="comment">-----------------------+----------------+</span></span><br><span class="line"></span><br><span class="line">| transaction_isolation | READ-COMMITTED |</span><br><span class="line"></span><br><span class="line">+<span class="comment">-----------------------+----------------+</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h3><p>在MySQL中，每条记录在更新的时候都会同时记录一条回滚操作。<br>记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</p>
 <p>假设一个值从1按顺序修改成2，3，4.<br>在回滚日志里就会有如下记录</p>
 <p><img src="https://mrtallon.gitee.io/img/mysql02.png" alt="image-20181214160942410"></p>
@@ -382,7 +383,6 @@
 <p>在autocommit为1的情况下，用begin显示启动的事务，如果执行commit则提交事务。<br>如果执行commit work and chain，则是提交事务并自动启动下一个事务，省去了再次执行begin语句的开销。<br>同时带来的好处是从程序开发的角度明确的知道每个语句是否在事务中。</p>
 <p><strong>用于查询持续时间超过60秒的事务</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_schema.innodb_trx <span class="keyword">where</span> TIME_TO_SEC(<span class="keyword">timediff</span>(<span class="keyword">now</span>(),trx_started))&gt;<span class="number">60</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引是数据库最重要的概念之一。<br>他的出现就是为提高查询效率，类似书的目录。</p>
 <h3 id="索引的常见模型"><a href="#索引的常见模型" class="headerlink" title="索引的常见模型"></a>索引的常见模型</h3><p>索引的实现方式有多种，引入索引模型的概念。<br>用于提高读写效率的数据结构很多，包括哈希表，有序数组和搜索树等。</p>
 <p>哈希表是一种以键-值（key-value）存储的数据结构，<br>哈希的思路很简单，把值放入数组，用一个哈希函数把key换算成一个确定位置，然后value放入数组的这个位置。</p>
@@ -480,20 +480,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -602,6 +602,8 @@
 
 
 
+
+  
 
   
 

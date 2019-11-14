@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="Tallon">
 <meta property="og:description" content="这个 Jenkins 的技术，一套部署下来的确是蛮抽象的啊但是没办法，我毕竟是要当架构师的，必须得学精通啊。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-14T02:29:21.980Z">
+<meta property="og:updated_time" content="2019-11-14T07:31:32.343Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://tallon.ink/2019/02/16/Jenkins/">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-14 10:29:21" itemprop="dateModified" datetime="2019-11-14T10:29:21+08:00">2019-11-14</time>
+                <time title="修改时间：2019-11-14 15:31:32" itemprop="dateModified" datetime="2019-11-14T15:31:32+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,26 +268,15 @@
       
         <p>这个 Jenkins 的技术，一套部署下来的确是蛮抽象的啊<br>但是没办法，我毕竟是要当架构师的，必须得学精通啊。</p>
 <a id="more"></a>
-
 <blockquote>
 <p>这绝对不是一个从零开始的部署教程，只是我自己搭建下来的心得笔记，以供日后复习使用。<br>如果从未接触过 Jenkins ，建议去看更优秀的博文———<a href="http://www.funtl.com/zh/apache-dubbo-ci/%E4%BB%80%E4%B9%88%E6%98%AF-Jenkins.html" target="_blank" rel="noopener">Lusifer</a></p>
 </blockquote>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Jenkins 是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。</p>
 <h2 id="服务器环境配置"><a href="#服务器环境配置" class="headerlink" title="服务器环境配置"></a>服务器环境配置</h2><p>Ubutu-server 16.04-64bit</p>
-<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>docker-compose启动Jenkins</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkins:2.60.3</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">jenkins</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="comment"># 发布端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8080</span><span class="string">:8080</span></span><br><span class="line">      <span class="comment"># 基于 JNLP 的 Jenkins 代理通过 TCP 端口 50000 与 Jenkins master 进行通信</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">50000</span><span class="string">:50000</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/jenkins_home</span></span><br></pre></td></tr></table></figure>
-
-<p>解决权限问题</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R 1000 /usr/local/docker/jenkins/data</span><br></pre></td></tr></table></figure>
-<p>查看日志文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f jenkins</span><br></pre></td></tr></table></figure>
-
-<p>进入容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it jenkins /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>配置SSH</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "352420160@qq.com"</span><br><span class="line"></span><br><span class="line">cat .ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
-
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>docker-compose启动Jenkins<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkins:2.60.3</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">jenkins</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="comment"># 发布端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8080</span><span class="string">:8080</span></span><br><span class="line">      <span class="comment"># 基于 JNLP 的 Jenkins 代理通过 TCP 端口 50000 与 Jenkins master 进行通信</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">50000</span><span class="string">:50000</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/jenkins_home</span></span><br></pre></td></tr></table></figure></p>
+<p>解决权限问题<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R 1000 /usr/local/docker/jenkins/data</span><br></pre></td></tr></table></figure><br>查看日志文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f jenkins</span><br></pre></td></tr></table></figure></p>
+<p>进入容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it jenkins /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>配置SSH<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "352420160@qq.com"</span><br><span class="line"></span><br><span class="line">cat .ssh/id_rsa.pub</span><br></pre></td></tr></table></figure></p>
 <p>配置密钥</p>
 <h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><p>上传 Maven 至 /usr/local/docker/jenkins/data</p>
 <h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p>上传 JDK 至 /usr/local/docker/jenkins/data</p>
@@ -396,20 +385,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -518,6 +507,8 @@
 
 
 
+
+  
 
   
 
