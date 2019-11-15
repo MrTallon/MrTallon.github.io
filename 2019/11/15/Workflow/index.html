@@ -51,18 +51,25 @@
   };
 </script>
 
-  <meta name="description" content="这个 Jenkins 的技术，一套部署下来的确是蛮抽象的啊但是没办法，我毕竟是要当架构师的，必须得学精通啊。">
-<meta name="keywords" content="Java">
+  <meta name="description" content="工作流有各式各样的用法，但也正因此使得在实际工作中如何上手使用增加了难度。分析最常用的几种 Git 工作流让大家可以上手使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jenkins">
-<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;2019&#x2F;02&#x2F;16&#x2F;Jenkins&#x2F;index.html">
+<meta property="og:title" content="Workflow">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;2019&#x2F;11&#x2F;15&#x2F;Workflow&#x2F;index.html">
 <meta property="og:site_name" content="Tallon">
-<meta property="og:description" content="这个 Jenkins 的技术，一套部署下来的确是蛮抽象的啊但是没办法，我毕竟是要当架构师的，必须得学精通啊。">
+<meta property="og:description" content="工作流有各式各样的用法，但也正因此使得在实际工作中如何上手使用增加了难度。分析最常用的几种 Git 工作流让大家可以上手使用。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-14T07:53:40.265Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git003.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git006.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git007.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git008.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git009.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git010.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git005.png">
+<meta property="og:updated_time" content="2019-11-15T02:39:05.521Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git003.png">
 
-<link rel="canonical" href="https://tallon.ink/2019/02/16/Jenkins/">
+<link rel="canonical" href="https://tallon.ink/2019/11/15/Workflow/">
 
 
 <script id="page-configurations">
@@ -76,7 +83,7 @@
   };
 </script>
 
-  <title>Jenkins | Tallon</title>
+  <title>Workflow | Tallon</title>
   
 
 
@@ -211,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tallon.ink/2019/02/16/Jenkins/">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/2019/11/15/Workflow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
@@ -224,7 +231,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Jenkins
+          Workflow
         </h1>
 
         <div class="post-meta">
@@ -233,26 +240,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-02-16 11:00:30" itemprop="dateCreated datePublished" datetime="2019-02-16T11:00:30+08:00">2019-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-14 15:53:40" itemprop="dateModified" datetime="2019-11-14T15:53:40+08:00">2019-11-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
-                  </a>
-                </span>
+              <time title="创建时间：2019-11-15 10:34:27 / 修改时间：10:39:05" itemprop="dateCreated datePublished" datetime="2019-11-15T10:34:27+08:00">2019-11-15</time>
             </span>
 
           
@@ -267,46 +257,42 @@
 
       
         <div class="note default">
-            <p>这个 Jenkins 的技术，一套部署下来的确是蛮抽象的啊<br>但是没办法，我毕竟是要当架构师的，必须得学精通啊。</p>
+            <p>工作流有各式各样的用法，但也正因此使得在实际工作中如何上手使用增加了难度。分析最常用的几种 Git 工作流让大家可以上手使用。</p>
           </div>
 <a id="more"></a>
 <blockquote>
-<p>这绝对不是一个从零开始的部署教程，只是我自己搭建下来的心得笔记，以供日后复习使用。<br>如果从未接触过 Jenkins ，建议去看更优秀的博文———<a href="http://www.funtl.com/zh/apache-dubbo-ci/%E4%BB%80%E4%B9%88%E6%98%AF-Jenkins.html" target="_blank" rel="noopener">Lusifer</a></p>
+<p>工作流（Workflow），指“业务过程的部分或整体在计算机应用环境下的自动化”。是对工作流程及其各操作步骤之间业务规则的抽象、概括描述。在计算机中，工作流属于计算机支持的协同工作（CSCW）的一部分。后者是普遍地研究一个群体如何在计算机的帮助下实现协同工作的。<br>工作流主要解决的主要问题是：为了实现某个业务目标，利用计算机在多个参与者之间按某种预定规则自动传递文档、信息或者任务。</p>
 </blockquote>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Jenkins 是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。</p>
-<h2 id="服务器环境配置"><a href="#服务器环境配置" class="headerlink" title="服务器环境配置"></a>服务器环境配置</h2><p>Ubutu-server 16.04-64bit</p>
-<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>docker-compose启动Jenkins<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkins:2.60.3</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">jenkins</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="comment"># 发布端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8080</span><span class="string">:8080</span></span><br><span class="line">      <span class="comment"># 基于 JNLP 的 Jenkins 代理通过 TCP 端口 50000 与 Jenkins master 进行通信</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">50000</span><span class="string">:50000</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/jenkins_home</span></span><br></pre></td></tr></table></figure></p>
-<p>解决权限问题<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R 1000 /usr/local/docker/jenkins/data</span><br></pre></td></tr></table></figure><br>查看日志文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f jenkins</span><br></pre></td></tr></table></figure></p>
-<p>进入容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it jenkins /bin/bash</span><br></pre></td></tr></table></figure></p>
-<p>配置SSH<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "352420160@qq.com"</span><br><span class="line"></span><br><span class="line">cat .ssh/id_rsa.pub</span><br></pre></td></tr></table></figure></p>
-<p>配置密钥</p>
-<h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><p>上传 Maven 至 /usr/local/docker/jenkins/data</p>
-<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p>上传 JDK 至 /usr/local/docker/jenkins/data</p>
-<h2 id="Jenkins-配置"><a href="#Jenkins-配置" class="headerlink" title="Jenkins 配置"></a>Jenkins 配置</h2><h3 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h3><p>除推荐配置外，外加一部分必用插件</p>
-<ol>
-<li><p>Publish Over SSH</p>
-</li>
-<li><p>Dashboard View</p>
-</li>
-<li><p>Locale（中文界面：zh_CN）</p>
-</li>
-<li><p>Extended Choice Parameter (动态参数，秒级回滚)</p>
-</li>
-</ol>
+<p><strong>所有工作流是作为方案指导而不是条例规定</strong></p>
+<h3 id="中央集中式"><a href="#中央集中式" class="headerlink" title="中央集中式"></a>中央集中式</h3><p>所有人向一个公共仓库扔代码，较原始，不利于版本迭代。</p>
+<p><img src="https://mrtallon.gitee.io/img/git003.png" alt="git003"></p>
+<h3 id="GitFlow"><a href="#GitFlow" class="headerlink" title="GitFlow"></a>GitFlow</h3><p>通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。<br>严格的分支模型也为大型项目提供了一些非常必要的结构。<br>在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。</p>
+<p><img src="https://mrtallon.gitee.io/img/git006.png" alt="git006"></p>
+<h4 id="历史分支"><a href="#历史分支" class="headerlink" title="历史分支"></a>历史分支</h4><p>相对使用仅有的一个 master 分支，GitFlow 工作流使用2个分支来记录项目的历史。master 分支存储了正式发布的历史，而 develop 分支作为功能的集成分支。这样也方便 master 分支上的所有提交分配一个版本号。</p>
+<p><img src="https://mrtallon.gitee.io/img/git007.png" alt="git007"></p>
+<h4 id="功能分支"><a href="#功能分支" class="headerlink" title="功能分支"></a>功能分支</h4><p>每个新功能位于一个自己的分支，这样可以 push 到中央仓库以备份和协作。但功能分支不是从 master 分支上拉出新分支，而是使用 develop 分支作为父分支。当新功能完成时，合并回 develop 分支。新功能提交应该从不直接与 master 分支交互。</p>
+<p><img src="https://mrtallon.gitee.io/img/git008.png" alt="git008"></p>
+<h4 id="发布分支"><a href="#发布分支" class="headerlink" title="发布分支"></a>发布分支</h4><p><img src="https://mrtallon.gitee.io/img/git009.png" alt="git009"></p>
+<h4 id="维护分支"><a href="#维护分支" class="headerlink" title="维护分支"></a>维护分支</h4><p><img src="https://mrtallon.gitee.io/img/git010.png" alt="git010"></p>
+<h4 id="版本号说明"><a href="#版本号说明" class="headerlink" title="版本号说明"></a>版本号说明</h4><p>v1.0.0-&gt;v1.0.1：    热修复<br>v1.0.0-&gt;v1.1.0：    新增功能</p>
+<h4 id="演示事例"><a href="#演示事例" class="headerlink" title="演示事例"></a>演示事例</h4><p><strong>小红</strong><br>基于 master 拉取项目<br>创建 develop 开发分支<br>切换开发分支并推送远程（模块组长）<br>新建文件并上传 develop 分支</p>
 <blockquote>
-<p>所有插件重启生效</p>
+<p>你的开发项目应该是在 feature+模块名的分支，如果人少，实在没必要了，我直接默认每个人都在 develop 开发</p>
 </blockquote>
-<h3 id="Maven-和-JDK"><a href="#Maven-和-JDK" class="headerlink" title="Maven 和 JDK"></a>Maven 和 JDK</h3><p>系统管理 -》 全局工具配置</p>
-<p>JDK 安装</p>
-<p>目录：/var/jenkins_home/jdk1.8.0.152</p>
-<p>Maven</p>
-<p>/var/jenkins_home/apache-maven-3.5.3</p>
-<h3 id="此服务器上的-Jenkins-将应用部署到其他服务器"><a href="#此服务器上的-Jenkins-将应用部署到其他服务器" class="headerlink" title="此服务器上的 Jenkins 将应用部署到其他服务器"></a>此服务器上的 Jenkins 将应用部署到其他服务器</h3><p>系统管理 -》 系统设置</p>
-<p>Publish over SSH</p>
-<p>配置远端服务器信息及操作目录</p>
-<p><strong>至此，所有环境部分搭建完毕</strong></p>
+<p><strong>小明</strong><br>拉取 master，切换 develop，查看新文件，并新增功能然后上传</p>
+<p>开发的一定阶段，合并 master<br>做法就是再开发一个分支，基于 dep，命名 release-1.0.0<br>切换 release，测试走一遍，无任何 bug 再推送 master<br>只有预发售版才能合并 master。</p>
+<p>本地回到 master 分支，拉取完整项目，创建标签，<br>1.0.0-RELEASE，推送仓库（包括标签）<br>查看一下标签，完美。</p>
+<p><strong>问题</strong>：1.0.0 的 bug 出来了</p>
+<p>解决：<br>new issue 提bug<br>使用 hotfix（补丁分支）来修复<br>通过标签检出，会发现自动创建新分支，<br>因为<strong>标签就是不可再修改了</strong></p>
+<p>新分支：hotfix_0004（序号）<br>新建文件表示修复（提交到 hotfix 分支）<br>之后 hotfix 直接合并到 master。<br>最后切换分支到 master 拉取最新，<br>发现 master 分支已修复，</p>
+<p>发布新版本，创建标签，<br>1.0.1-RELEASE<br>推送到服务器（包括标签）<br>最后，删除 dep 和 master 的其余分支</p>
+<h3 id="Forking"><a href="#Forking" class="headerlink" title="Forking"></a>Forking</h3><p>特大型项目会用到，暂时不写了</p>
+<p>到了这里，但愿你对集中式工作流、功能分支工作流和 GitFlow 工作流已经感觉很舒适了。你应该也牢固的掌握了本地仓库的潜能，push/pull 模式和 Git 健壮的分支和合并模型。</p>
+<p>记住，这里演示的工作流只是可能用法的例子，而不是在实际工作中使用 Git 不可违逆的条例。所以不要畏惧按自己需要对工作流的用法做取舍。不变的目标就是让 Git 为你所用。</p>
+<p><img src="https://mrtallon.gitee.io/img/git005.png" alt="git005"></p>
+<h2 id="个人-Tips"><a href="#个人-Tips" class="headerlink" title="个人 Tips"></a>个人 Tips</h2><p>在写提交日志时，也许只是多加一个<a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">emoji</a>，就能表达很多（前提是大家统一符合规范）</p>
 <hr>
-<h2 id="GitLab-部署项目"><a href="#GitLab-部署项目" class="headerlink" title="GitLab 部署项目"></a>GitLab 部署项目</h2><h2 id="GitHub-部署项目"><a href="#GitHub-部署项目" class="headerlink" title="GitHub 部署项目"></a>GitHub 部署项目</h2>
+
     </div>
 
     
@@ -314,25 +300,19 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/02/14/Spring-Cloud-Alibaba/" rel="next" title="Spring Cloud Alibaba">
-                  <i class="fa fa-chevron-left"></i> Spring Cloud Alibaba
+                <a href="/2019/09/02/oAuth/" rel="next" title="oAuth2 认证">
+                  <i class="fa fa-chevron-left"></i> oAuth2 认证
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/03/10/Diary/" rel="prev" title="程序往事">
-                  程序往事 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -371,7 +351,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器环境配置"><span class="nav-number">2.</span> <span class="nav-text">服务器环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">2.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven"><span class="nav-number">2.2.</span> <span class="nav-text">Maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">2.3.</span> <span class="nav-text">Java</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins-配置"><span class="nav-number">3.</span> <span class="nav-text">Jenkins 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件推荐"><span class="nav-number">3.1.</span> <span class="nav-text">插件推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven-和-JDK"><span class="nav-number">3.2.</span> <span class="nav-text">Maven 和 JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#此服务器上的-Jenkins-将应用部署到其他服务器"><span class="nav-number">3.3.</span> <span class="nav-text">此服务器上的 Jenkins 将应用部署到其他服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-部署项目"><span class="nav-number">4.</span> <span class="nav-text">GitLab 部署项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub-部署项目"><span class="nav-number">5.</span> <span class="nav-text">GitHub 部署项目</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中央集中式"><span class="nav-number">1.</span> <span class="nav-text">中央集中式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitFlow"><span class="nav-number">2.</span> <span class="nav-text">GitFlow</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#历史分支"><span class="nav-number">2.1.</span> <span class="nav-text">历史分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能分支"><span class="nav-number">2.2.</span> <span class="nav-text">功能分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布分支"><span class="nav-number">2.3.</span> <span class="nav-text">发布分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#维护分支"><span class="nav-number">2.4.</span> <span class="nav-text">维护分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#版本号说明"><span class="nav-number">2.5.</span> <span class="nav-text">版本号说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#演示事例"><span class="nav-number">2.6.</span> <span class="nav-text">演示事例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forking"><span class="nav-number">3.</span> <span class="nav-text">Forking</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人-Tips"><span class="nav-number"></span> <span class="nav-text">个人 Tips</span></a></div>
       </div>
       <!--/noindex-->
 

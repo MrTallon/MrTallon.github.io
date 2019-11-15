@@ -51,18 +51,18 @@
   };
 </script>
 
-  <meta name="description" content="MySQL都更新到8.0了，系统的、完整的学习数据库。">
+  <meta name="description" content="MySQL 都更新到 8.0 了，系统的、完整的学习数据库。">
 <meta name="keywords" content="Database">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 深度历险">
 <meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;2018&#x2F;12&#x2F;17&#x2F;MySQL&#x2F;index.html">
 <meta property="og:site_name" content="Tallon">
-<meta property="og:description" content="MySQL都更新到8.0了，系统的、完整的学习数据库。">
+<meta property="og:description" content="MySQL 都更新到 8.0 了，系统的、完整的学习数据库。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;static001.geekbang.org&#x2F;resource&#x2F;image&#x2F;0d&#x2F;d9&#x2F;0d2070e8f84c4801adbfa03bda1f98d9.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;mysql03.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;mysql02.png">
-<meta property="og:updated_time" content="2019-11-14T07:53:52.277Z">
+<meta property="og:updated_time" content="2019-11-15T02:29:19.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;static001.geekbang.org&#x2F;resource&#x2F;image&#x2F;0d&#x2F;d9&#x2F;0d2070e8f84c4801adbfa03bda1f98d9.png">
 
@@ -245,7 +245,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-14 15:53:52" itemprop="dateModified" datetime="2019-11-14T15:53:52+08:00">2019-11-14</time>
+                <time title="修改时间：2019-11-15 10:29:19" itemprop="dateModified" datetime="2019-11-15T10:29:19+08:00">2019-11-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,13 +271,13 @@
 
       
         <div class="note default">
-            <p>MySQL都更新到8.0了，系统的、完整的学习数据库。</p>
+            <p>MySQL 都更新到 8.0 了，系统的、完整的学习数据库。</p>
           </div>
 <a id="more"></a>
 <h2 id="基础架构：查询语句的执行过程"><a href="#基础架构：查询语句的执行过程" class="headerlink" title="基础架构：查询语句的执行过程"></a>基础架构：查询语句的执行过程</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'1'</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://static001.geekbang.org/resource/image/0d/d9/0d2070e8f84c4801adbfa03bda1f98d9.png" alt="查询"></p>
 <p>如上图所示，MySQL大体分为Server层和存储引擎层。</p>
-<p>5.5.5版本后默认使用InnoDB引擎，也可手动选择存储引擎。</p>
+<p>5.5.5 版本后默认使用 InnoDB 引擎，也可手动选择存储引擎。</p>
 <blockquote>
 <p>目前已不存在查询缓存。</p>
 </blockquote>
@@ -287,22 +287,22 @@
 <p>当客户端建立连接后如果太长时间没动静，连接器会自动断开。</p>
 <p>wait_timeout 控制，默认空闲时间为8小时。</p>
 <p>长连接：连接成功后，用户的持续请求一直使用这一个连接。<br>短连接：每次执行完很少的请求就断开，下次查询重新创建。</p>
-<p>全部使用长连接的话，有时占用内存增长特别快，因为MySQL在执行过程中使用的内存是管理在连接对象里面，这些资源在连接断开才会释放。<br>所以过多的长连接导致内存占用太大，被系统强行杀掉（OOM），也就是MySQL异常重启。</p>
+<p>全部使用长连接的话，有时占用内存增长特别快，因为MySQL在执行过程中使用的内存是管理在连接对象里面，这些资源在连接断开才会释放。<br>所以过多的长连接导致内存占用太大，被系统强行杀掉（OOM），也就是 MySQL 异常重启。</p>
 <p><strong>解决方案：</strong></p>
 <ol>
 <li>定期断开长连接，或者判断执行一个占用内存大的查询后断开</li>
-<li>MySQL5.7之后，可以在比较大的查询之后，执行mysql_reset_connection来初始化资源</li>
+<li>MySQL5.7 之后，可以在比较大的查询之后，执行 mysql_reset_connection 来初始化资源</li>
 </ol>
-<h3 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h3><p>建立连接后开始正式执行select语句<br>MySQL会先去缓存里查找近期是否有相同执行语句。</p>
+<h3 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h3><p>建立连接后开始正式执行 select 语句<br>MySQL 会先去缓存里查找近期是否有相同执行语句。</p>
 <p>效率虽高，但大部分情况却是弊大于利：<br>当表更新时，查询缓存即失效，<br>除非是一张基本不动的静态表，如系统配置，<br>否则使用查询缓存的命中率非常低。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">query_cache_type=DEMAND</span><br></pre></td></tr></table></figure><br>按需查找，不使用查询缓存。</p>
 <p><strong>注：MySQL8.0之后直接将查询缓存模块删除了</strong></p>
 <h3 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h3><ol>
 <li>词法分析：识别出语句中的字符串分别代表什么</li>
-<li>语法分析：判断上面分析出的关键词是否符合MySQL语法</li>
+<li>语法分析：判断上面分析出的关键词是否符合 MySQL 语法</li>
 </ol>
 <h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><p>表里存在多个索引的时，判断使用哪个索引，<br>或者多表关联时决定各个表的连接顺序。</p>
 <h3 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h3><p>先判断是否有该表的查询权限，没有的话返回：ERROR 1142(42000)···</p>
-<p>执行流程：<br>​1. 调用InnoDB引擎接口取到表的id行，判断是否符合条件，符合条件放入结果集</p>
+<p>执行流程：<br>​1. 调用 InnoDB 引擎接口取到表的id行，判断是否符合条件，符合条件放入结果集</p>
 <ol>
 <li>调用引擎接口取“下一行”，重复操作</li>
 <li>将符合条件的结果集返回客户端</li>
@@ -316,8 +316,8 @@
 <blockquote>
 <p>redo log 不是记录数据页“更新之后的状态”，而是记录这个页“做了什么改动”</p>
 </blockquote>
-<h3 id="binlog："><a href="#binlog：" class="headerlink" title="binlog："></a>binlog：</h3><p>Server层的日志，不具备crash-safe功能。</p>
-<p>binlog有两种模式：<br>statement格式的话是记录sql语句，<br>row格式会记录行内容（两条），更新前和后</p>
+<h3 id="binlog："><a href="#binlog：" class="headerlink" title="binlog："></a>binlog：</h3><p>Server 层的日志，不具备 crash-safe 功能。</p>
+<p>binlog 有两种模式：<br>statement 格式的话是记录sql语句，<br>row 格式会记录行内容（两条），更新前和后</p>
 <h3 id="两种日志的区别"><a href="#两种日志的区别" class="headerlink" title="两种日志的区别"></a>两种日志的区别</h3><div class="table-container">
 <table>
 <thead>
@@ -329,7 +329,7 @@
 <tbody>
 <tr>
 <td>InndoDB引擎特有</td>
-<td>在MySQL的Server层实现，所有引擎都可用</td>
+<td>在 MySQL 的 Server 层实现，所有引擎都可用</td>
 </tr>
 <tr>
 <td>物理日志，记录“在某个数据页上做了什么修改”</td>
@@ -345,13 +345,13 @@
 <h3 id="更新操作内部执行流程"><a href="#更新操作内部执行流程" class="headerlink" title="更新操作内部执行流程"></a>更新操作内部执行流程</h3><ol>
 <li>执行器先找引擎取 ID=2。ID是主键，引擎直接用树搜索这一行。</li>
 <li>执行器拿到行数据，重新赋值，调用引擎接口将新行数据写入。</li>
-<li>引擎将新行数据更新到内存中，同时记录redo log。<br>​    此时redo log 处于prepare状态，然后告知执行器执行完成，随后提交事物。</li>
+<li>引擎将新行数据更新到内存中，同时记录redo log。<br>​    此时 redo log 处于 prepare 状态，然后告知执行器执行完成，随后提交事物。</li>
 <li>执行器生成这个操作的binlog并写入磁盘。</li>
 <li>执行器调用引擎的提交事物接口，redo log改成提交（commit）状态，更新完成</li>
 </ol>
 <p><img src="https://mrtallon.gitee.io/img/mysql03.png" alt="image-20181211133910036"></p>
-<h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p>redo log的写入拆成了两个步骤：prepare 和commit，<br>是为了让两份日志之间的逻辑一致。<br>两阶段提交是跨系统维持数据逻辑一致性时常用的方案。</p>
-<h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><p>简单说,事务就是保证一组数据库操作,要么全成功,要么全失败。<br>MySQL的事物支持是在引擎层实现的。<br>MySQL是一个支持多引擎的系统,原生MyISAM不支持事物。</p>
+<h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p>redo log 的写入拆成了两个步骤：prepare 和commit，<br>是为了让两份日志之间的逻辑一致。<br>两阶段提交是跨系统维持数据逻辑一致性时常用的方案。</p>
+<h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><p>简单说,事务就是保证一组数据库操作,要么全成功,要么全失败。<br>MySQL 的事物支持是在引擎层实现的。<br>MySQL 是一个支持多引擎的系统,原生 MyISAM 不支持事物。</p>
 <h3 id="隔离性与隔离级别"><a href="#隔离性与隔离级别" class="headerlink" title="隔离性与隔离级别"></a>隔离性与隔离级别</h3><p>ACID（Atomicity,Consistency,lsolation,Durability）</p>
 <p>当数据库多个事物同时执行的时候，<br>可能会出现脏读，不可重复读，幻读的问题，<br>由此产生“隔离级别”的概念。</p>
 <p>正常情况下，隔离级别越高，效率越低。</p>
@@ -363,10 +363,10 @@
 <li>串行化（serializable）：对于同一行记录，读写都会加锁，当出现读写锁冲突的时候，后访问的事物必须等前一个事物执行完成才会继续执行。</li>
 </ul>
 <p>在实现上，数据库会创建一个视图，访问的时候以视图结果为准。<br>可重复读时，视图是在事物启动时创建的，整个事物存在期间都用这个视图。<br>读已提交时，视图是在每个SQL语句开始执行的时候创建的。<br>读未提交时直接返回记录上的最新值，没有视图概念。<br>串行化时直接用加锁的方式来避免并行访问。</p>
-<p><strong>Oracle数据库默认隔离级别是”读已提交“</strong></p>
-<p>当Oracle迁移MySQL时为保证隔离级别一致，故修改为读已提交</p>
+<p><strong>Oracle 数据库默认隔离级别是”读已提交“</strong></p>
+<p>当 Oracle 迁移 MySQL 时为保证隔离级别一致，故修改为读已提交</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like 'transaction_isolation';</span><br><span class="line"></span><br><span class="line">+<span class="comment">-----------------------+----------------+</span></span><br><span class="line"></span><br><span class="line">| Variable_name | Value |</span><br><span class="line"></span><br><span class="line">+<span class="comment">-----------------------+----------------+</span></span><br><span class="line"></span><br><span class="line">| transaction_isolation | READ-COMMITTED |</span><br><span class="line"></span><br><span class="line">+<span class="comment">-----------------------+----------------+</span></span><br></pre></td></tr></table></figure>
-<h3 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h3><p>在MySQL中，每条记录在更新的时候都会同时记录一条回滚操作。<br>记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</p>
+<h3 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h3><p>在 MySQL 中，每条记录在更新的时候都会同时记录一条回滚操作。<br>记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</p>
 <p>假设一个值从1按顺序修改成2，3，4.<br>在回滚日志里就会有如下记录</p>
 <p><img src="https://mrtallon.gitee.io/img/mysql02.png" alt="image-20181214160942410"></p>
 <p>当前值是4，不同时刻启动事务就会有不同的read-view。<br>在视图A、B、C里面，记录的值分别是1、2、4，<br>同一条记录在系统中可能存在多个版本，即数据库的多版本并发控制（MVCC）。<br>对于read-view A，要得到1，必须将当前的值依次执行途中所有回滚操作得到。<br>同时，当有另一个事物将4改为5，这个事物与之前的视图也不会冲突。</p>
@@ -377,23 +377,23 @@
 <p>长事物：长时间未提交的事物<br>在MySQL5.5及以前的版本，回滚日志是跟数据字典一起放在ibadata文件里，<br>即使长事物最终提交，回滚段被清理，文件也不会变小。<br>除了对回滚段的影响，长事物还占用锁资源，也可能拖垮整个库</p>
 </blockquote>
 <h3 id="事务启动方式"><a href="#事务启动方式" class="headerlink" title="事务启动方式"></a>事务启动方式</h3><ol>
-<li>显式启动事务语句，begin或start transaction。提交语句commit，回滚语句rollback。</li>
+<li>显式启动事务语句，begin或 start transaction。提交语句 commit，回滚语句 rollback。</li>
 <li>set autocommit=0，这个命令会将当前线程自动提交关闭。意味着如果执行一个select语句，这个事务就启动了，而且不会自动提交。这个事物持续存在直到你主动执行commit或rollback，或断开连接。</li>
 </ol>
 <p>有些客户端连接框架会默认连接成功后先执行一个set autocommit=0。<br>导致接下来的查询都在事物中，如果是长连接，就会导致意外的长事务。</p>
 <p>因此，建议总是使用set autocommit=1来显式语句启动事务。</p>
-<p>在autocommit为1的情况下，用begin显示启动的事务，如果执行commit则提交事务。<br>如果执行commit work and chain，则是提交事务并自动启动下一个事务，省去了再次执行begin语句的开销。<br>同时带来的好处是从程序开发的角度明确的知道每个语句是否在事务中。</p>
+<p>在 autocommit 为1的情况下，用 begin 显示启动的事务，如果执行 commit 则提交事务。<br>如果执行commit work and chain，则是提交事务并自动启动下一个事务，省去了再次执行begin语句的开销。<br>同时带来的好处是从程序开发的角度明确的知道每个语句是否在事务中。</p>
 <p><strong>用于查询持续时间超过60秒的事务</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_schema.innodb_trx <span class="keyword">where</span> TIME_TO_SEC(<span class="keyword">timediff</span>(<span class="keyword">now</span>(),trx_started))&gt;<span class="number">60</span></span><br></pre></td></tr></table></figure>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引是数据库最重要的概念之一。<br>他的出现就是为提高查询效率，类似书的目录。</p>
 <h3 id="索引的常见模型"><a href="#索引的常见模型" class="headerlink" title="索引的常见模型"></a>索引的常见模型</h3><p>索引的实现方式有多种，引入索引模型的概念。<br>用于提高读写效率的数据结构很多，包括哈希表，有序数组和搜索树等。</p>
 <p>哈希表是一种以键-值（key-value）存储的数据结构，<br>哈希的思路很简单，把值放入数组，用一个哈希函数把key换算成一个确定位置，然后value放入数组的这个位置。</p>
 <p>当多个key值经过哈希换算，会出现同一个值的情况（哈希碰撞），<br>处理这种情况的一种方法就是拉出一个链表。</p>
-<p><strong>哈希表这种数据结构适用于只有等值查询的场景</strong>，比如Memcached及其他NoSQL引擎。</p>
+<p><strong>哈希表这种数据结构适用于只有等值查询的场景</strong>，比如 Memcached 及其他 NoSQL 引擎。</p>
 <p>有序数组在等值查询和范围查询场景中性能更优秀。<br>它的查询效率高，但是更新的话需要挪动后面所有数据，成本太高。</p>
 <p><strong>有序数组只适用于静态存储引擎</strong></p>
 <p>二叉搜索树的特点：每个节点的左儿子小于父节点，父节点又小于右儿子。<br>二叉树是搜索效率最高的，但实际上大多数数据库存储并不使用二叉树。<br>因为索引不止存在内存中，还要写到磁盘上。<br>为了使查询尽量少的读磁盘，就必须让查询尽量少的访问数据块。<br>因此不应该使用二叉树，而用“N叉树”，“N”取决于数据块的大小。</p>
-<p>以InnoDB的一个整数字段索引为例，这个N差不多是1200。<br>当树高是4的时候，可以存储1200的3次方个值，17亿。<br>考虑到树根数据块总是在内存中，一个十亿行的表上的整数索引最多只需要访问3次磁盘。</p>
+<p>以 InnoDB 的一个整数字段索引为例，这个N差不多是1200。<br>当树高是4的时候，可以存储1200的3次方个值，17亿。<br>考虑到树根数据块总是在内存中，一个十亿行的表上的整数索引最多只需要访问3次磁盘。</p>
 <p>其实，树的第二层也有很大概率在内存中，那么访问磁盘的次数就更少了。</p>
 <p>N叉树由于读写上性能的优点以及适配磁盘的访问模式，被广泛应用在数据库引擎中。</p>
 <p>数据库底层存储的核心就是基于数据模型的。<br>当遇到新数据库时需要先关注它的数据模型，才能从理论上分析它的适用场景。</p>
@@ -482,7 +482,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
