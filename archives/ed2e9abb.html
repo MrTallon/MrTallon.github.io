@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Tallon" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="敏捷开发（Agile）是一种以人为核心、迭代、循序渐进的开发方法。">
+<meta name="keywords" content="敏捷开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="敏捷开发">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;archives&#x2F;ed2e9abb.html">
+<meta property="og:site_name" content="Tallon">
+<meta property="og:description" content="敏捷开发（Agile）是一种以人为核心、迭代、循序渐进的开发方法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.funtl.com&#x2F;assets&#x2F;23bbf940df9a190a229362809d735018.jpeg">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.funtl.com&#x2F;assets&#x2F;20150924172800834">
+<meta property="og:updated_time" content="2019-11-17T11:01:32.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.funtl.com&#x2F;assets&#x2F;23bbf940df9a190a229362809d735018.jpeg">
+
+<link rel="canonical" href="https://tallon.ink/archives/ed2e9abb.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>敏捷开发 | Tallon</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tallon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Hello World</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/archives/ed2e9abb.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
+      <meta itemprop="name" content="Tallon">
+      <meta itemprop="description" content="知易行难">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tallon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          敏捷开发
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-25 23:06:45" itemprop="dateCreated datePublished" datetime="2018-07-25T23:06:45+08:00">2018-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-17 19:01:32" itemprop="dateModified" datetime="2019-11-17T19:01:32+08:00">2019-11-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Agile/" itemprop="url" rel="index">
+                    <span itemprop="name">Agile</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="note default">
+            <p>敏捷开发（Agile）是一种以人为核心、迭代、循序渐进的开发方法。</p>
+          </div>
+<a id="more"></a>
+<p>在敏捷开发中，软件项目的构建被切分成多个子项目，各个子项目的成果都经过测试，具备集成和可运行的特征。<br>简单地来说，敏捷开发并不追求前期完美的设计、完美编码，而是力求在很短的周期内开发出产品的核心功能，尽早发布出可用的版本。然后在后续的生产周期内，按照新需求不断迭代升级，完善产品。</p>
+<h2 id="敏捷开发宣言"><a href="#敏捷开发宣言" class="headerlink" title="敏捷开发宣言"></a>敏捷开发宣言</h2><p><strong>个体和互动</strong>高于流程和工具<br><strong>工作的软件</strong>高于详尽的文档<br><strong>客户合作</strong>高于合同谈判<br><strong>响应变化</strong>高于遵循计划</p>
+<h2 id="敏捷软件的十二条原则"><a href="#敏捷软件的十二条原则" class="headerlink" title="敏捷软件的十二条原则"></a>敏捷软件的十二条原则</h2><ul>
+<li>我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意。</li>
+<li>欣然面对需求变化，即使在开发后期也一样。为了客户的竞争优势，敏捷过程掌控变化。</li>
+<li>经常地交付可工作的软件，相隔几星期或一两个月，倾向于采取较短的周期。</li>
+<li>业务人员和开发人员必须相互合作，项目中的每一天都不例外。</li>
+<li>激发个体的斗志，以他们为核心搭建项目。提供所需的环境和支援，辅以信任，从而达成目标。</li>
+<li>不论团队内外，传递信息效果最好效率也最高的方式是面对面的交谈。</li>
+<li>可工作的软件是进度的首要度量标准。</li>
+<li>敏捷过程倡导可持续开发。责任人、开发人员和用户要能够共同维持其步调稳定延续。</li>
+<li>坚持不懈地追求技术卓越和良好设计，敏捷能力由此增强。</li>
+<li>以简洁为本，它是极力减少不必要工作量的艺术。</li>
+<li>最好的架构、需求和设计出自组织团队。</li>
+<li>团队定期地反思如何能提高成效，并依此调整自身的举止表现。</li>
+</ul>
+<h2 id="敏捷开发模式的分类"><a href="#敏捷开发模式的分类" class="headerlink" title="敏捷开发模式的分类"></a>敏捷开发模式的分类</h2><p>敏捷开发的实现主要包括 SCRUM、XP（极限编程）、Crystal Methods、FDD（特性驱动开发）等等。其中 SCRUM 与 XP 最为流行。<br>同样是敏捷开发，XP 极限编程 更侧重于实践，并力求把实践做到极限。这一实践可以是测试先行，也可以是结对编程等，关键要看具体的应用场景。<br>SCRUM 则是一种开发流程框架，也可以说是一种套路。</p>
+<h2 id="SCRUM-的工作流程"><a href="#SCRUM-的工作流程" class="headerlink" title="SCRUM 的工作流程"></a>SCRUM 的工作流程</h2><p><strong>基本术语：</strong></p>
+<ul>
+<li>Sprint：冲刺周期，通俗的讲就是实现一个“小目标”的周期。一般需要 2-6 周时间。</li>
+<li>User Story：用户的外在业务需求。拿银行系统来举例的话，一个 Story 可以是用户的存款行为，或者是查询余额等等。也就是所谓的小目标本身。</li>
+<li>Task：由 User Story 拆分成的具体开发任务。</li>
+<li>Backlog：需求列表，可以看成是小目标的清单。分为 Sprint Backlog 和 Product Backlog。</li>
+<li>Daily meeting：每天的站会，用于监控项目进度。有些公司直接称其为 Scrum。</li>
+<li>Sprint Review meeting: 冲刺评审会议，让团队成员们演示成果。</li>
+<li>Sprint burn down：冲刺燃尽图，说白了就是记录当前周期的需求完成情况。</li>
+<li>Release：开发周期完成，项目发布新的可用版本。<br><img src="https://www.funtl.com/assets/23bbf940df9a190a229362809d735018.jpeg" alt="pic"><br>如上图所示，在项目启动之前，会由团队的产品负责人（Product owner）按照需求优先级来明确出一份 Product Backlog，为项目做出整体排期。<br>随后在每一个小的迭代周期里，团队会根据计划（Sprint Plan Meeting）确定本周期的 Sprint Backlog，再细化成一个个 Task，分配给团队成员，进行具体开发工作。每一天，团队成员都会进行 Daily meeting，根据情况更新自己的 Task 状态，整个团队更新 Sprint burn down chart。<br>当这一周期的 Sprint backlog 全部完成，团队会进行 Spring review meeting，也就是评审会议。一切顺利的话，会发布出这一版本的 Release，并且进行 Sprint 回顾会议（Sprint Retrospective Meeting）。</li>
+</ul>
+<h2 id="XP-极限编程"><a href="#XP-极限编程" class="headerlink" title="XP 极限编程"></a>XP 极限编程</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>敏捷方法论有一个共同的特点，那就是都将矛头指向了“文档”，它们认为传统的软件工程方法文档量太“重”了，称为“重量级”方法，而相应的敏捷方法则是“轻量级”方法。正是因为“轻量级”感觉没有什么力量，不但不能够有效体现灵活性，反而显得是不解决问题的方法论似的。因此，就有了一次划时代的会议，创建了敏捷联盟。<br>在敏捷方法论领域中，比较知名的、有影响力的，是拥有与 Microsoft 的操作系统相同缩写语——XP的极限编程（eXtreme Programming）。极限编程方法论可以说是敏捷联盟中最鲜艳的一面旗帜，也是被研究、尝试、应用、赞扬、批判最多的一种方法论，也是相对来说最成熟的一种。<br>这一被誉为“黑客文化”的方法论的雏形最初形成于1996—1999年间，Kent Beck、Ward Cunninggham、Ron Jeffrey 在开发 C3 项目（Chrysler Comprehensive Compensation）的实践中总结出了 XP 的基本元素。在此之后，Kent Beck 和他的一些好朋友们一起在实践中完善提高，终于形成了极限编程方法论。</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>XP 是一种轻量（敏捷）、高效、低风险、柔性、可预测、科学而且充满乐趣的软件开发方式。与其他方法论相比，其最大的不同在于：</p>
+<ul>
+<li>在更短的周期内，更早地提供具体、持续的反馈信息。</li>
+<li>在迭代的进行计划编制，首先在最开始迅速生成一个总体计划，然后在整个项目开发过程中不断的发展它。</li>
+<li>依赖于自动测试程序来监控开发进度，并及早地捕获缺陷。</li>
+<li>依赖于口头交流、测试和源程序进行沟通。</li>
+<li>倡导持续的演化式设计。</li>
+<li>依赖于开发团队内部的紧密协作。</li>
+<li>尽可能达到程序员短期利益和项目长期利益的平衡。</li>
+</ul>
+<p>Kent Beck 曾经说过“开车”就是一个 XP 的范例，即使看上去进行得很顺利，也不要把视线从公路上移开，因为路况的变化，将使得你必须随时做出一些这样那样的调整。而在软件项目中，客户就是司机，他们也没有办法确切地知道软件应该做什么，因此程序员就需要向客户提供方向盘，并且告知我们现在的位置。<br>XP 由价值观、原则、实践和行为四个部分组成，它们彼此相互依赖、关联， 并通过行为贯穿于整个生命期。<br><img src="https://www.funtl.com/assets/20150924172800834" alt="pic2"></p>
+<h3 id="四大价值"><a href="#四大价值" class="headerlink" title="四大价值"></a>四大价值</h3><p>XP 的核心是其总结的沟通（Communication）、简单（Simplicity）、反馈（Feedback）、勇气（Courage）四大价值观，它们是XP的基础，也是XP的灵魂。</p>
+<p><strong>沟通</strong><br>通常程序员给人留下的印象就是“内向、不善言谈”，然后项目中的许多问题就出在这些缺乏沟通的开发人员身上。经常由于某个程序员做出了一个设计决定，但是却不能及时地通知大家，结果使得大家在协作与配合上出现了很多的麻烦，而在传统的方法论中，并不在意这种口头沟通不畅的问题，而是希望借助于完善的流程和面面俱到的文档、报表、计划来替代，但是这同时又引入了效率不高的新问题。<br>XP 方法论认为，如果小组成员之间无法做到持续的、无间断的交流，那么协作就无从谈起，从这个角度能够发现，通过文档、报表等人工制品进行交流面临巨大的局限性。因此，XP 组合了诸如对编程这样的最佳实践，鼓励大家进行口头交流，通过交流解决问题，提高效率。</p>
+<p><strong>简单</strong><br>XP 方法论提倡在工作中秉承“够用就好”的思路，也就是尽量地简单化，只要今天够用就行，不考虑明天会发现的新问题。这一点看上去十分容易，但是要真正做到保持简单的工作其实很难的。因为在传统的开发方法中，都要求大家对未来做一些预先规划，以便对今后可能发生的变化预留一些扩展的空间。<br>正如对传统开发方法的认识一样，许多开发人员也会质疑 XP，保持系统的扩展性很重要，如果都保持简单，那么如何使得系统能够有良好的扩展性呢？其实不然，保持简单的理由有两个</p>
+<ul>
+<li>开发小组在开发时所做的规划，并无法保证其符合客户需要的，因此做的大部分工作都将落空，使得开发过程中重复的、没有必要的工作增加，导致整体效率降低。</li>
+<li>在 XP 中提倡时刻对代码进行重构，一直保持其良好的结构与可扩展性。也就是说，可扩展性和为明天设计并不是同一个概念，XP 是反对为明天考虑而工作，并不是说代码要失去扩展性<br>而且简单和沟通之间还有一种相对微妙的相互支持关系。当一个团队之间，沟通的越多，那么就越容易明白哪些工作需要做，哪些工作不需要做。另一方面，系统越简单，需要沟通的内容也就越少，沟通也将更加全面。</li>
+</ul>
+<p><strong>反馈</strong><br>是什么原因使得我们的客户、管理层这么不理解开发团队？为什么客户、管理层总是喜欢给我们一个死亡之旅？究其症结，就是开发的过程中缺乏必要的反馈。在许许多多项目中，当开发团队经历过了需求分析阶段之后，在相当长的一段时间内，是没有任何反馈信息的。整个开发过程对于客户和管理层而言就像一个黑盒子，进度完全是不可见的。<br>而且在项目的过程中，这样的现象不仅出现在开发团队与客户、管理层之间，还包括在开发团队内部。这一切问题都需要我们更加注重反馈。，反馈对于任何软件项目的成功都是至关重要的，而在 XP 方法论中则更进一步，通过持续、明确的反馈来暴露软件状态的问题。具体而言就是：</p>
+<ul>
+<li>在开发团队内部，通过提前编写单元测试代码，时时反馈代码的问题与进展。</li>
+<li>在开发过程中，还应该加强集成工作，做到持续集成，使得每一次增量都是一个可执行的工作版本，也就是逐渐是软件长大，整个过程中，应该通过向客户和管理层演示这些可运行的版本，以便及早地反馈，及早地发现问题。<br>同时，我们也会发现反馈与沟通也有着良好的配合，及时和良好的反馈有助于沟通。而简单的系统更有利于测试和反馈。</li>
+</ul>
+<p><strong>勇气</strong><br>在应用 XP 方法论时，我们每时每刻都在应对变化：由于沟通良好，因此会有更多需求变更的机会；由于时刻保持系统的简单，因此新的变化会带来一些重新开发的需要；由于反馈及时，因此会有更多中间打断你的思路的新需求。<br>总之这一切，使得你立刻处于变化之中，因此这时就需要你有勇气来面对快速开发，面对可能的重新开发。也许你会觉得，为什么要让我们的开发变得如此零乱，但是其实这些变化若你不让它早暴露，那么它就会迟一些出现，并不会因此消亡，因此，XP 方法论让它们早出现、早解决，是实现“小步快走”开发节奏的好办法。<br>也就是 XP 方法论要求开发人员穿上强大、自动测试的盔甲，勇往直前，在重构、编码规范的支持下，有目的地快速开发。<br>勇气可以来源于沟通，因为它使得高风险、高回报的试验成为可能；勇气可以来源于简单，因为面对简单的系统，更容易鼓起勇气；勇气可以来源于反馈，因为你可以及时获得每一步前进的状态（自动测试），会使得你更勇于重构代码。</p>
+<h3 id="五个原则"><a href="#五个原则" class="headerlink" title="五个原则"></a>五个原则</h3><p><strong>快速反馈</strong><br>及时地、快速地获取反馈，并将所学到的知识尽快地投入到系统中去。也就是指开发人员应该通过较短的反馈循环迅速地了解现在的产品是否满足了客户的需求。这也是对反馈这一价值观的进一步补充。</p>
+<p><strong>简单性假设</strong><br>类似地，简单性假设原则是对简单这一价值观的进一步补充。这一原则要求开发人员将每个问题都看得十分容易解决，也就是说只为本次迭代考虑，不去想未来可能需要什么，相信具有将来必要时增加系统复杂性的能力，也就是号召大家出色地完成今天的任务。</p>
+<p><strong>逐步修改</strong><br>就像开车打方向盘一样，不要一次做出很大的改变，那样将会使得可控性变差，更适合的方法是进行微调。而在软件开发中，这样的道理同样适用，任何问题都应该通过一系列能够带来差异的微小改动来解决。</p>
+<p><strong>提倡更改</strong><br>在软件开发过程中，最好的办法是在解决最重要问题时，保留最多选项的那个。也就是说，尽量为下一次修改做好准备。</p>
+<p><strong>优质工作</strong><br>在实践中，经常看到许多开发人员喜欢将一些细小的问题留待后面解决。例如，界面的按钮有一些不平整，由于不影响使用就先不管；某一两个成员函数暂时没用就不先写等。这就是一种工作拖泥带水的现象，这样的坏习惯一旦养成，必然使得代码质量大打折扣。<br>而在 XP 方法论中，贯彻的是“小步快走”的开发原则，因此工作质量决不可打折扣，通常采用测试先行的编码方式来提供支持。</p>
+<h2 id="淘宝的敏捷历程"><a href="#淘宝的敏捷历程" class="headerlink" title="淘宝的敏捷历程"></a>淘宝的敏捷历程</h2><p>在业务方向明确的情况下，按照业务单元组建特性团队是最理想的选择。在业务方向不明朗的情况下，可以先组建无限制特性团队，再逐步过渡到业务单元特性团队。无论采用何种组织设计，目的都是快速跑通业务闭环：持续地交付业务价值，并在真正的市场环境中检验假设，通过快速试错找到在一定的利润水平上为企业或终端用户提供产品和服务的可行方法。</p>
+<div style="text-align: right"> ———— 问菊（阿里巴巴敏捷教练） </div>
+
+<h2 id="敏捷开发与-DevOps"><a href="#敏捷开发与-DevOps" class="headerlink" title="敏捷开发与 DevOps"></a>敏捷开发与 DevOps</h2><p>DevOps 是 Development 和 Operations 的合成词，其目标是要加强开发人员、测试人员、运维人员之间的沟通协调。需要我们的项目做到持续集成、持续交付、持续部署。<br>时下流行的 Jenkins、Bamboo，就是两款优秀的持续集成工具。而 Docker 容器则为 DevOps 提供了强大而有效的统一环境。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/" rel="tag"><i class="fa fa-tag"></i> 敏捷开发</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/archives/f5f9fa9b.html" rel="next" title="Docker">
+                  <i class="fa fa-chevron-left"></i> Docker
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/archives/ecbf82d9.html" rel="prev" title="Nexus">
+                  Nexus <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#敏捷开发宣言"><span class="nav-number">1.</span> <span class="nav-text">敏捷开发宣言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#敏捷软件的十二条原则"><span class="nav-number">2.</span> <span class="nav-text">敏捷软件的十二条原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#敏捷开发模式的分类"><span class="nav-number">3.</span> <span class="nav-text">敏捷开发模式的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCRUM-的工作流程"><span class="nav-number">4.</span> <span class="nav-text">SCRUM 的工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XP-极限编程"><span class="nav-number">5.</span> <span class="nav-text">XP 极限编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">5.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">5.2.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四大价值"><span class="nav-number">5.3.</span> <span class="nav-text">四大价值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五个原则"><span class="nav-number">5.4.</span> <span class="nav-text">五个原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#淘宝的敏捷历程"><span class="nav-number">6.</span> <span class="nav-text">淘宝的敏捷历程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#敏捷开发与-DevOps"><span class="nav-number">7.</span> <span class="nav-text">敏捷开发与 DevOps</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tallon"
+      src="https://mrtallon.gitee.io/img/avatar.png">
+  <p class="site-author-name" itemprop="name">Tallon</p>
+  <div class="site-description" itemprop="description">知易行难</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MrTallon" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;MrTallon" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailto:mrtallon@qq.com" title="E-Mail &amp;rarr; mailto:mrtallon@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      作品链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tallon.ink/MyShop/" title="https:&#x2F;&#x2F;tallon.ink&#x2F;MyShop&#x2F;">Spring Alibaba</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tallon</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  <!-- 动态背景 -->
+<!-- <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+</body>
+</html>

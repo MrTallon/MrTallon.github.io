@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Tallon" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="练习项目：Spring Cloud Alibaba For MyShop下文不是一篇教学文章，几乎没有任何操作步骤。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud Alibaba">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;archives&#x2F;647d39c3.html">
+<meta property="og:site_name" content="Tallon">
+<meta property="og:description" content="练习项目：Spring Cloud Alibaba For MyShop下文不是一篇教学文章，几乎没有任何操作步骤。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;javasite.oss-cn-shenzhen.aliyuncs.com&#x2F;blog&#x2F;assets&#x2F;Lusifer201805292246007.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.funtl.com&#x2F;assets1&#x2F;3f25fcd95769a54eb391931449d5298f.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.funtl.com&#x2F;assets1&#x2F;22e4eccf2cbe09332678c04b8de98ebe.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;javasite.oss-cn-shenzhen.aliyuncs.com&#x2F;blog&#x2F;assets&#x2F;2279594-dd72907e82f89fd6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;javasite.oss-cn-shenzhen.aliyuncs.com&#x2F;blog&#x2F;assets&#x2F;2279594-4b7d1b6abe595390.png">
+<meta property="og:updated_time" content="2019-11-17T11:01:32.742Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;javasite.oss-cn-shenzhen.aliyuncs.com&#x2F;blog&#x2F;assets&#x2F;Lusifer201805292246007.png">
+
+<link rel="canonical" href="https://tallon.ink/archives/647d39c3.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Spring Cloud Alibaba | Tallon</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tallon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Hello World</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/archives/647d39c3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
+      <meta itemprop="name" content="Tallon">
+      <meta itemprop="description" content="知易行难">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tallon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Cloud Alibaba
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-14 08:53:00" itemprop="dateCreated datePublished" datetime="2019-02-14T08:53:00+08:00">2019-02-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-17 19:01:32" itemprop="dateModified" datetime="2019-11-17T19:01:32+08:00">2019-11-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="note default">
+            <p>练习项目：<a href="https://mrtallon.github.io/MyShop" target="_blank" rel="noopener">Spring Cloud Alibaba For MyShop</a><br>下文不是一篇教学文章，几乎没有任何操作步骤。</p>
+          </div>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案。此项目包含开发分布式应用微服务的必需组件，方便开发者通过 Spring Cloud 编程模型轻松使用这些组件来开发分布式应用服务。</p>
+<p>依托 Spring Cloud Alibaba，您只需要添加一些注解和少量配置，就可以将 Spring Cloud 应用接入阿里微服务解决方案，通过阿里中间件来迅速搭建分布式应用系统。</p>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><ul>
+<li><strong>服务限流降级</strong>：默认支持 Servlet、Feign、RestTemplate、Dubbo 和 RocketMQ 限流降级功能的接入，可以在运行时通过控制台实时修改限流降级规则，还支持查看限流降级 Metrics 监控。</li>
+<li><strong>服务注册与发现</strong>：适配 Spring Cloud 服务注册与发现标准，默认集成了 Ribbon 的支持。</li>
+<li><strong>分布式配置管理</strong>：支持分布式系统中的外部化配置，配置更改时自动刷新。</li>
+<li><strong>消息驱动能力</strong>：基于 Spring Cloud Stream 为微服务应用构建消息驱动能力。</li>
+<li><strong>阿里云对象存储</strong>：阿里云提供的海量、安全、低成本、高可靠的云存储服务。支持在任何应用、任何时间、任何地点存储和访问任意类型的数据。</li>
+<li><strong>分布式任务调度</strong>：提供秒级、精准、高可靠、高可用的定时（基于 Cron 表达式）任务调度服务。同时提供分布式的任务执行模型，如网格任务。网格任务支持海量子任务均匀分配到所有 Worker（schedulerx-client）上执行。</li>
+</ul>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ul>
+<li><strong>Sentinel</strong>：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。<br>Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。</li>
+<li><strong>RocketMQ</strong>：一款开源的分布式消息系统，基于高可用分布式集群技术，提供低延时的、高可靠的消息发布与订阅服务。</li>
+<li><strong>Alibaba Cloud ACM</strong>：一款在分布式架构环境中对应用配置进行集中管理和推送的应用配置中心产品。</li>
+<li><strong>Alibaba Cloud OSS</strong>: 阿里云对象存储服务（Object Storage Service，简称 OSS），是阿里云提供的海量、安全、低成本、高可靠的云存储服务。您可以在任何应用、任何时间、任何地点存储和访问任意类型的数据。</li>
+<li><strong>Alibaba Cloud SchedulerX</strong>: 阿里中间件团队开发的一款分布式任务调度产品，提供秒级、精准、高可靠、高可用的定时（基于 Cron 表达式）任务调度服务。</li>
+</ul>
+<h2 id="开发配置"><a href="#开发配置" class="headerlink" title="开发配置"></a>开发配置</h2><h3 id="统一的依赖管理"><a href="#统一的依赖管理" class="headerlink" title="统一的依赖管理"></a>统一的依赖管理</h3><blockquote>
+<p>当前 Spring Cloud Alibaba 的 0.2.1.RELEASE 版本基于 Spring Cloud Finchley（F）开发，故在选择 Spring Boot 版本时<strong>不要</strong>使用 2.1.0 及以上版本（因为 2.1.x 版本必须使用 Spring Cloud Greenwich，俗称 G 版），请使用官方 Demo 中使用的 2.0.6.RELEASE，以免发生意想不到的问题（比如服务无法注册到服务器）</p>
+</blockquote>
+<p>Spring Cloud Alibaba 项目都是基于 Spring Cloud，而 Spring Cloud 项目又是基于 Spring Boot 进行开发，并且都是使用 Maven 做项目管理工具。在实际开发中，我们一般都会创建一个依赖管理项目作为 Maven 的 Parent 项目使用，这样做可以极大的方便我们对 Jar 包版本的统一管理。</p>
+<blockquote>
+<p>项目的最新版本是 0.2.1.RELEASE 和 0.1.1.RELEASE，版本 0.2.1.RELEASE 对应的是 Spring Cloud Finchley 版本，版本 0.1.1.RELEASE 对应的是 Spring Cloud Edgware 版本。</p>
+</blockquote>
+<h3 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h3><p>在 Spring Cloud Netflix 阶段采用 Eureka 做作为我们的服务注册与发现服务器，现利用 Spring Cloud Alibaba 提供的 <a href="https://nacos.io/zh-cn/" target="_blank" rel="noopener">Nacos</a> 组件替代该方案。</p>
+<h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一组简单易用的特性集，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。</p>
+<p>Nacos 帮助您更敏捷和容易地构建、交付和管理微服务平台。 Nacos 是构建以“服务”为中心的现代应用架构 (例如微服务范式、云原生范式) 的服务基础设施。</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><ul>
+<li><p><strong>服务</strong> (Service)<br>服务是指一个或一组软件功能（例如特定信息的检索或一组操作的执行），其目的是不同的客户端可以为不同的目的重用（例如通过跨进程的网络调用）。Nacos 支持主流的服务生态，如 Kubernetes Service、gRPC|Dubbo RPC Service 或者 Spring Cloud RESTful Service.</p>
+</li>
+<li><p><strong>服务注册中心</strong> (Service Registry)<br>服务注册中心，它是服务，其实例及元数据的数据库。服务实例在启动时注册到服务注册表，并在关闭时注销。服务和路由器的客户端查询服务注册表以查找服务的可用实例。服务注册中心可能会调用服务实例的健康检查 API 来验证它是否能够处理请求。</p>
+</li>
+<li><p><strong>服务元数据</strong> (Service Metadata)<br>服务元数据是指包括服务端点(endpoints)、服务标签、服务版本号、服务实例权重、路由规则、安全策略等描述服务的数据</p>
+</li>
+<li><p><strong>服务提供方</strong> (Service Provider)<br>是指提供可复用和可调用服务的应用方</p>
+</li>
+<li><p><strong>服务消费方</strong> (Service Consumer)<br>是指会发起对某个服务调用的应用方</p>
+</li>
+<li><p><strong>配置</strong> (Configuration)<br>在系统开发过程中通常会将一些需要变更的参数、变量等从代码中分离出来独立管理，以独立的配置文件的形式存在。目的是让静态的系统工件或者交付物（如 WAR，JAR 包等）更好地和实际的物理运行环境进行适配。配置管理一般包含在系统部署的过程中，由系统管理员或者运维人员完成这个步骤。配置变更是调整系统运行时的行为的有效手段之一。</p>
+</li>
+<li><p><strong>配置管理</strong> (Configuration Management)<br>在数据中心中，系统中所有配置的编辑、存储、分发、变更管理、历史版本管理、变更审计等所有与配置相关的活动统称为配置管理。</p>
+</li>
+<li><p><strong>名字服务</strong> (Naming Service)<br>提供分布式系统中所有对象(Object)、实体(Entity)的“名字”到关联的元数据之间的映射管理服务，例如 ServiceName -&gt; Endpoints Info, Distributed Lock Name -&gt; Lock Owner/Status Info, DNS Domain Name -&gt; IP List, 服务发现和 DNS 就是名字服务的2大场景。</p>
+</li>
+<li><p><strong>配置服务</strong> (Configuration Service)<br>在服务或者应用运行过程中，提供动态配置或者元数据以及配置管理的服务提供者。</p>
+</li>
+</ul>
+<h3 id="服务提供者"><a href="#服务提供者" class="headerlink" title="服务提供者"></a>服务提供者</h3><p>Nacos Starter 配置项信息</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>Key</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>服务端地址</td>
+<td>spring.cloud.nacos.discovery.server-addr</td>
+<td>无</td>
+<td>Nacos Server 启动监听的ip地址和端口</td>
+</tr>
+<tr>
+<td>服务名</td>
+<td>spring.cloud.nacos.discovery.service</td>
+<td>${spring.application.name}</td>
+<td>给当前的服务命名</td>
+</tr>
+<tr>
+<td>权重</td>
+<td>spring.cloud.nacos.discovery.weight</td>
+<td>1</td>
+<td>取值范围 1 到 100，数值越大，权重越大</td>
+</tr>
+<tr>
+<td>网卡名</td>
+<td>spring.cloud.nacos.discovery.network-interface</td>
+<td>无</td>
+<td>当IP未配置时，注册的IP为此网卡所对应的IP地址，如果此项也未配置，则默认取第一块网卡的地址</td>
+</tr>
+<tr>
+<td>注册的IP地址</td>
+<td>spring.cloud.nacos.discovery.ip</td>
+<td>无</td>
+<td>优先级最高</td>
+</tr>
+<tr>
+<td>注册的端口</td>
+<td>spring.cloud.nacos.discovery.port</td>
+<td>-1</td>
+<td>默认情况下不用配置，会自动探测</td>
+</tr>
+<tr>
+<td>命名空间</td>
+<td>spring.cloud.nacos.discovery.namespace</td>
+<td>无</td>
+<td>常用场景之一是不同环境的注册的区分隔离，例如开发测试环境和生产环境的资源（如配置、服务）隔离等。</td>
+</tr>
+<tr>
+<td>AccessKey</td>
+<td>spring.cloud.nacos.discovery.access-key</td>
+<td>无</td>
+<td>当要上阿里云时，阿里云上面的一个云账号名</td>
+</tr>
+<tr>
+<td>SecretKey</td>
+<td>spring.cloud.nacos.discovery.secret-key</td>
+<td>无</td>
+<td>当要上阿里云时，阿里云上面的一个云账号密码</td>
+</tr>
+<tr>
+<td>Metadata</td>
+<td>spring.cloud.nacos.discovery.metadata</td>
+<td>无</td>
+<td>使用 Map 格式配置，用户可以根据自己的需要自定义一些和服务相关的元数据信息</td>
+</tr>
+<tr>
+<td>日志文件名</td>
+<td>spring.cloud.nacos.discovery.log-name</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>接入点</td>
+<td>spring.cloud.nacos.discovery.enpoint</td>
+<td>UTF-8</td>
+<td>地域的某个服务的入口域名，通过此域名可以动态地拿到服务端地址</td>
+</tr>
+<tr>
+<td>是否集成 Ribbon</td>
+<td>ribbon.nacos.enabled</td>
+<td>true</td>
+<td>一般都设置成 true 即可</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="服务消费者（Feign）"><a href="#服务消费者（Feign）" class="headerlink" title="服务消费者（Feign）"></a>服务消费者（Feign）</h3><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>Feign 是一个声明式的伪 Http 客户端，它使得写 Http 客户端变得更简单。使用 Feign，只需要创建一个接口并注解。它具有可插拔的注解特性，可使用 Feign 注解和 JAX-RS 注解。Feign 支持可插拔的编码器和解码器。Feign 默认集成了 Ribbon，Nacos 也很好的兼容了 Feign，默认实现了负载均衡的效果</p>
+<ul>
+<li>Feign 采用的是基于接口的注解</li>
+<li>Feign 整合了 ribbon</li>
+</ul>
+<h3 id="熔断器防止雪崩-Sentinel"><a href="#熔断器防止雪崩-Sentinel" class="headerlink" title="熔断器防止雪崩(Sentinel)"></a>熔断器防止雪崩(Sentinel)</h3><p>在微服务架构中，根据业务来拆分成一个个的服务，服务与服务之间可以通过 RPC 相互调用，在 Spring Cloud 中可以用 RestTemplate + LoadBalanceClient 和 Feign 来调用。为了保证其高可用，单个服务通常会集群部署。由于网络原因或者自身的原因，服务并不能保证 100% 可用，如果单个服务出现问题，调用这个服务就会出现线程阻塞，此时若有大量的请求涌入，Servlet 容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的 “雪崩” 效应。</p>
+<p>为了解决这个问题，业界提出了熔断器模型。</p>
+<p>阿里巴巴开源了 Sentinel 组件，实现了熔断器模式，Spring Cloud 对这一组件进行了整合。在微服务架构中，一个请求需要调用多个服务是非常常见的，如下图：</p>
+<p><img src="https://javasite.oss-cn-shenzhen.aliyuncs.com/blog/assets/Lusifer201805292246007.png" alt="熔断图"></p>
+<p>熔断器打开后，为了避免连锁故障，通过 fallback 方法可以直接返回一个固定值。</p>
+<h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><p>Sentinel 是阿里中间件团队研发的面向分布式服务架构的轻量级高可用流量控制组件，主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度来帮助用户保护服务的稳定性。</p>
+<p><a href="https://yq.aliyun.com/articles/623424" target="_blank" rel="noopener">Sentinel 与 Hystrix 的对比</a></p>
+<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><ul>
+<li>丰富的应用场景： Sentinel 承接了阿里巴巴近 10 年的 双十一大促流量 的核心场景，例如秒杀（即突发流量控制在系统容量可以承受的范围）、消息削峰填谷、实时熔断下游不可用应用等。</li>
+<li>完备的实时监控： Sentinel 同时提供实时的监控功能。您可以在控制台中看到接入应用的单台机器秒级数据，甚至 500 台以下规模的集群的汇总运行情况。</li>
+<li>广泛的开源生态： Sentinel 提供开箱即用的与其它开源框架/库的整合模块，例如与 Spring Cloud、Dubbo、gRPC 的整合。您只需要引入相应的依赖并进行简单的配置即可快速地接入 Sentinel。</li>
+<li>完善的 SPI 扩展点： Sentinel 提供简单易用、完善的 SPI 扩展点。您可以通过实现扩展点，快速的定制逻辑。例如定制规则管理、适配数据源等。</li>
+</ul>
+<h4 id="仪表盘监控"><a href="#仪表盘监控" class="headerlink" title="仪表盘监控"></a>仪表盘监控</h4><p>Sentinel 控制台提供一个轻量级的控制台，它提供机器发现、单机资源实时监控、集群资源汇总，以及规则管理的功能。您只需要对应用进行简单的配置，就可以使用这些功能。</p>
+<blockquote>
+<p>集群资源汇总仅支持 500 台以下的应用集群，有大概 1 - 2 秒的延时。</p>
+</blockquote>
+<h3 id="路由网关统一访问接口-Spring-Cloud-Gateway"><a href="#路由网关统一访问接口-Spring-Cloud-Gateway" class="headerlink" title="路由网关统一访问接口(Spring Cloud Gateway)"></a>路由网关统一访问接口(Spring Cloud Gateway)</h3><h4 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h4><p>Spring Cloud Gateway 是 Spring 官方基于 Spring 5.0，Spring Boot 2.0 和 Project Reactor 等技术开发的网关，Spring Cloud Gateway 旨在为微服务架构提供一种简单而有效的统一的 API 路由管理方式。Spring Cloud Gateway 作为 Spring Cloud 生态系中的网关，目标是替代 Netflix ZUUL，其不仅提供统一的路由方式，并且基于 Filter 链的方式提供了网关基本的功能，例如：安全，监控/埋点，和限流等。</p>
+<p><img src="http://www.funtl.com/assets1/3f25fcd95769a54eb391931449d5298f.jpg" alt="网关图"></p>
+<h4 id="功能特征"><a href="#功能特征" class="headerlink" title="功能特征"></a>功能特征</h4><ul>
+<li>基于 Spring Framework 5，Project Reactor 和 Spring Boot 2.0</li>
+<li>动态路由</li>
+<li>Predicates 和 Filters 作用于特定路由</li>
+<li>集成 Hystrix 断路器</li>
+<li>集成 Spring Cloud DiscoveryClient</li>
+<li>易于编写的 Predicates 和 Filters</li>
+<li>限流</li>
+<li>路径重写</li>
+</ul>
+<h4 id="工程流程"><a href="#工程流程" class="headerlink" title="工程流程"></a>工程流程</h4><p><img src="http://www.funtl.com/assets1/22e4eccf2cbe09332678c04b8de98ebe.jpg" alt="网关图"></p>
+<p>客户端向 Spring Cloud Gateway 发出请求。然后在 Gateway Handler Mapping 中找到与请求相匹配的路由，将其发送到 Gateway Web Handler。Handler 再通过指定的过滤器链来将请求发送到我们实际的服务执行业务逻辑，然后返回。</p>
+<p>过滤器之间用虚线分开是因为过滤器可能会在发送代理请求之前（pre）或之后（post）执行业务逻辑。</p>
+<h4 id="全局过滤功能"><a href="#全局过滤功能" class="headerlink" title="全局过滤功能"></a>全局过滤功能</h4><p>全局过滤器作用于所有的路由，不需要单独配置，我们可以用它来实现很多统一化处理的业务需求，比如权限认证，IP 访问限制等等。</p>
+<p>暂时未实现，随缘补充</p>
+<h2 id="服务配置"><a href="#服务配置" class="headerlink" title="服务配置"></a>服务配置</h2><p>在分布式系统中，由于服务数量巨多，为了方便服务配置文件统一管理，实时更新，所以需要分布式配置中心组件。</p>
+<h3 id="Nacos-Config"><a href="#Nacos-Config" class="headerlink" title="Nacos Config"></a>Nacos Config</h3><p>Nacos 提供用于存储配置和其他元数据的 key/value 存储，为分布式系统中的外部化配置提供服务器端和客户端支持。使用 Spring Cloud Alibaba Nacos Config，您可以在 Nacos Server 集中管理你 Spring Cloud 应用的外部属性配置。</p>
+<p>Spring Cloud Alibaba Nacos Config 是 Spring Cloud Config Server 和 Client 的替代方案，客户端和服务器上的概念与 Spring Environment 和 PropertySource 有着一致的抽象，在特殊的 bootstrap 阶段，配置被加载到 Spring 环境中。当应用程序通过部署管道从开发到测试再到生产时，您可以管理这些环境之间的配置，并确保应用程序具有迁移时需要运行的所有内容</p>
+<h3 id="Nacos-Config-多环境的配置"><a href="#Nacos-Config-多环境的配置" class="headerlink" title="Nacos Config 多环境的配置"></a>Nacos Config 多环境的配置</h3><p>我们在做项目开发的时候，生产环境和测试环境的一些配置可能会不一样，有时候一些功能也可能会不一样，所以我们可能会在上线的时候手工修改这些配置信息。但是 Spring 中为我们提供了 Profile 这个功能。我们只需要在启动的时候添加一个虚拟机参数，激活自己环境所要用的 Profile 就可以了。</p>
+<p>操作起来很简单，只需要为不同的环境编写专门的配置文件，如：application-dev.yml、application-prod.yml， 启动项目时只需要增加一个命令参数 —spring.profiles.active=环境配置 即可。</p>
+<h2 id="链路追踪-SkyWalking"><a href="#链路追踪-SkyWalking" class="headerlink" title="链路追踪(SkyWalking)"></a>链路追踪(SkyWalking)</h2><p>微服务架构是通过业务来划分服务的，使用 REST 调用。对外暴露的一个接口，可能需要很多个服务协同才能完成这个接口功能，如果链路上任何一个服务出现问题或者网络超时，都会形成导致接口调用失败。随着业务的不断扩张，服务之间互相调用会越来越复杂。</p>
+<p><img src="https://javasite.oss-cn-shenzhen.aliyuncs.com/blog/assets/2279594-dd72907e82f89fd6.png" alt="链路追踪1"></p>
+<p><img src="https://javasite.oss-cn-shenzhen.aliyuncs.com/blog/assets/2279594-4b7d1b6abe595390.png" alt="链路追踪2"></p>
+<h3 id="简介-5"><a href="#简介-5" class="headerlink" title="简介"></a>简介</h3><p>目前主要的一些 APM 工具有: Cat、Zipkin、Pinpoint、SkyWalking；Apache SkyWalking 是观察性分析平台和应用性能管理系统。提供分布式追踪、服务网格遥测分析、度量聚合和可视化一体化解决方案。</p>
+<ul>
+<li>Skywalking Agent： 使用 JavaAgent 做字节码植入，无侵入式的收集，并通过 HTTP 或者 gRPC 方式发送数据到 SkyWalking Collector。</li>
+<li>SkyWalking Collector： 链路数据收集器，对 agent 传过来的数据进行整合分析处理并落入相关的数据存储中。</li>
+<li>Storage： SkyWalking 的存储，时间更迭，SW 已经开发迭代到了 6.x 版本，在 6.x 版本中支持以 ElasticSearch(支持 6.x)、Mysql、TiDB、H2、作为存储介质进行数据存储。</li>
+<li>UI： Web 可视化平台，用来展示落地的数据。</li>
+</ul>
+<h3 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h3><ul>
+<li>多种监控手段，语言探针和服务网格(Service Mesh)</li>
+<li>多语言自动探针，Java，.NET Core 和 Node.JS</li>
+<li>轻量高效，不需要大数据</li>
+<li>模块化，UI、存储、集群管理多种机制可选</li>
+<li>支持告警</li>
+<li>优秀的可视化方案</li>
+</ul>
+<h2 id="异步通信（RocketMQ）"><a href="#异步通信（RocketMQ）" class="headerlink" title="异步通信（RocketMQ）"></a>异步通信（RocketMQ）</h2><p>消息队列作为高并发系统的核心组件之一，能够帮助业务系统解构提升开发效率和系统稳定性。主要具有以下优势：</p>
+<ul>
+<li>削峰填谷： 主要解决瞬时写压力大于应用服务能力导致消息丢失、系统奔溃等问题</li>
+<li>系统解耦： 解决不同重要程度、不同能力级别系统之间依赖导致一死全死</li>
+<li>提升性能： 当存在一对多调用时，可以发一条消息给消息系统，让消息系统通知相关系统</li>
+<li>蓄流压测： 线上有些链路不好压测，可以通过堆积一定量消息再放开来压测</li>
+</ul>
+<h3 id="简介-6"><a href="#简介-6" class="headerlink" title="简介"></a>简介</h3><p>Apache Alibaba RocketMQ 是一个消息中间件。消息中间件中有两个角色：消息生产者和消息消费者。RocketMQ 里同样有这两个概念，消息生产者负责创建消息并发送到 RocketMQ 服务器，RocketMQ 服务器会将消息持久化到磁盘，消息消费者从 RocketMQ 服务器拉取消息并提交给应用消费。</p>
+<ul>
+<li>支持严格的消息顺序</li>
+<li>支持 Topic 与 Queue 两种模式</li>
+<li>亿级消息堆积能力</li>
+<li>比较友好的分布式特性</li>
+<li>同时支持 Push 与 Pull 方式消费消息</li>
+<li>历经多次天猫双十一海量消息考验</li>
+</ul>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li>支持事务型消息（消息发送和 DB 操作保持两方的最终一致性，RabbitMQ 和 Kafka 不支持）</li>
+<li>支持结合 RocketMQ 的多个系统之间数据最终一致性（多方事务，二方事务是前提）</li>
+<li>支持 18 个级别的延迟消息（RabbitMQ 和 Kafka 不支持）</li>
+<li>支持指定次数和时间间隔的失败消息重发（Kafka 不支持，RabbitMQ 需要手动确认）</li>
+<li>支持 Consumer 端 Tag 过滤，减少不必要的网络传输（RabbitMQ 和 Kafka 不支持）</li>
+<li>支持重复消费（RabbitMQ 不支持，Kafka 支持)</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/archives/afe93d88.html" rel="next" title="MySQL 深度历险">
+                  <i class="fa fa-chevron-left"></i> MySQL 深度历险
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/archives/9a7f448e.html" rel="prev" title="Jenkins">
+                  Jenkins <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要功能"><span class="nav-number">1.1.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-number">1.2.</span> <span class="nav-text">组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发配置"><span class="nav-number">2.</span> <span class="nav-text">开发配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#统一的依赖管理"><span class="nav-number">2.1.</span> <span class="nav-text">统一的依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务注册与发现"><span class="nav-number">2.2.</span> <span class="nav-text">服务注册与发现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">2.2.2.</span> <span class="nav-text">基本概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务提供者"><span class="nav-number">2.3.</span> <span class="nav-text">服务提供者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务消费者（Feign）"><span class="nav-number">2.4.</span> <span class="nav-text">服务消费者（Feign）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介-2"><span class="nav-number">2.4.1.</span> <span class="nav-text">简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#熔断器防止雪崩-Sentinel"><span class="nav-number">2.5.</span> <span class="nav-text">熔断器防止雪崩(Sentinel)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介-3"><span class="nav-number">2.5.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特征"><span class="nav-number">2.5.2.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#仪表盘监控"><span class="nav-number">2.5.3.</span> <span class="nav-text">仪表盘监控</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由网关统一访问接口-Spring-Cloud-Gateway"><span class="nav-number">2.6.</span> <span class="nav-text">路由网关统一访问接口(Spring Cloud Gateway)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介-4"><span class="nav-number">2.6.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能特征"><span class="nav-number">2.6.2.</span> <span class="nav-text">功能特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工程流程"><span class="nav-number">2.6.3.</span> <span class="nav-text">工程流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局过滤功能"><span class="nav-number">2.6.4.</span> <span class="nav-text">全局过滤功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务配置"><span class="nav-number">3.</span> <span class="nav-text">服务配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos-Config"><span class="nav-number">3.1.</span> <span class="nav-text">Nacos Config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos-Config-多环境的配置"><span class="nav-number">3.2.</span> <span class="nav-text">Nacos Config 多环境的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链路追踪-SkyWalking"><span class="nav-number">4.</span> <span class="nav-text">链路追踪(SkyWalking)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-5"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能特性"><span class="nav-number">4.2.</span> <span class="nav-text">功能特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步通信（RocketMQ）"><span class="nav-number">5.</span> <span class="nav-text">异步通信（RocketMQ）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-6"><span class="nav-number">5.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优势"><span class="nav-number">5.2.</span> <span class="nav-text">优势</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tallon"
+      src="https://mrtallon.gitee.io/img/avatar.png">
+  <p class="site-author-name" itemprop="name">Tallon</p>
+  <div class="site-description" itemprop="description">知易行难</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MrTallon" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;MrTallon" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailto:mrtallon@qq.com" title="E-Mail &amp;rarr; mailto:mrtallon@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      作品链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tallon.ink/MyShop/" title="https:&#x2F;&#x2F;tallon.ink&#x2F;MyShop&#x2F;">Spring Alibaba</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tallon</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  <!-- 动态背景 -->
+<!-- <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+</body>
+</html>
