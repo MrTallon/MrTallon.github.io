@@ -25,7 +25,7 @@
     version: '7.5.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
+    copycode: {"enable":true,"show_result":true,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -51,18 +51,16 @@
   };
 </script>
 
-  <meta name="description" content="嗯，Day1 先 GG 了，前两题暴力，最后一题骗分流氓打法，明天肯定更加恶心，今天先来总结一个玄学算法——模拟退火">
-<meta name="keywords" content="玄学">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[浅浅浅谈] 模拟退火">
-<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;2018&#x2F;11&#x2F;10&#x2F;test&#x2F;index.html">
+  <meta name="description" content="知易行难">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tallon">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;tags&#x2F;%E5%B7%A5%E4%BD%9C%E6%B5%81&#x2F;index.html">
 <meta property="og:site_name" content="Tallon">
-<meta property="og:description" content="嗯，Day1 先 GG 了，前两题暴力，最后一题骗分流氓打法，明天肯定更加恶心，今天先来总结一个玄学算法——模拟退火">
+<meta property="og:description" content="知易行难">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-14T07:17:03.849Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://tallon.ink/2018/11/10/test/">
+<link rel="canonical" href="https://tallon.ink/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/">
 
 
 <script id="page-configurations">
@@ -70,13 +68,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
+    isPost: false,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>[浅浅浅谈] 模拟退火 | Tallon</title>
+  <title>标签: 工作流 | Tallon</title>
   
 
 
@@ -206,116 +204,50 @@
           <div class="content">
             
 
-  <div class="posts-expand">
-      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tallon.ink/2018/11/10/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
-      <meta itemprop="name" content="Tallon">
-      <meta itemprop="description" content="知易行难">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tallon">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          [浅浅浅谈] 模拟退火
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h1 class="collection-header">工作流
+          <small>标签</small>
         </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-10 15:46:42" itemprop="dateCreated datePublished" datetime="2018-11-10T15:46:42+08:00">2018-11-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-14 15:17:03" itemprop="dateModified" datetime="2019-11-14T15:17:03+08:00">2019-11-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+      </div>
 
       
-        <div class="note default">
-            <p>嗯，Day1 先 GG 了，前两题暴力，最后一题骗分流氓打法，明天肯定更加恶心，今天先来总结一个玄学算法——模拟退火</p>
-          </div>
-<a id="more"></a>
-<h3 id="模拟退火简介"><a href="#模拟退火简介" class="headerlink" title="模拟退火简介"></a>模拟退火简介</h3><p>不多说，就一个热力学公式：</p>
-<script type="math/tex; mode=display">
-\operatorname{P}(dE) = \exp(\frac{dE}{kT})</script><p>其中 $k$ 是一个常数，$\exp$ 表示自然指数，且 $dE&lt;0$。这条公式说白了就是：温度越高，出现一次能量差为 $dE$ 的降温的概率就越大；温度越低，则出现降温的概率就越小。又由于 $dE$ 总是小于 $0$（否则就不叫退火了），因此 $\frac{dE}{kT} &lt; 0$ ，所以 $\operatorname{P}(dE)$ 的函数取值范围是 $(0,1)$ 。<br>随着温度 $T$ 的降低，$\operatorname{P}(dE)$会逐渐降低。<br>我们将一次向较差解的移动看做一次温度跳变过程，我们以概率 $\operatorname{P}(dE)$ 来接受这样的移动。</p>
-<p>所以模拟退火中对答案的更新就是：</p>
-<ol>
-<li>如果新解更优，接受</li>
-<li>否则以一定概率接受</li>
-</ol>
-<p>那么， 退火呢？？</p>
-
+    <div class="collection-year">
+      <h1 class="collection-header">2019</h1>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E7%8E%84%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 玄学</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2019-11-15T10:34:27+08:00"
+              content="2019-11-15">
+          11-15
+        </time>
+      </div>
 
-        
+      <h2 class="post-title">
+          <a class="post-title-link" href="/archives/undefined.html" itemprop="url">
+            <span itemprop="name">工作流</span>
+          </a>
+      </h2>
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2018/09/24/Nexus/" rel="next" title="Nexus">
-                  <i class="fa fa-chevron-left"></i> Nexus
-                </a>
-            </div>
-
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2018/11/16/Git/" rel="prev" title="从 Git 到 CI/CD">
-                  从 Git 到 CI/CD <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
   
 
-  </div>
+  
+
 
 
           </div>
@@ -344,7 +276,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟退火简介"><span class="nav-number">1.</span> <span class="nav-text">模拟退火简介</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -360,20 +291,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -486,54 +417,6 @@
   
 
   
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
