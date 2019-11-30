@@ -62,7 +62,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;static001.geekbang.org&#x2F;resource&#x2F;image&#x2F;0d&#x2F;d9&#x2F;0d2070e8f84c4801adbfa03bda1f98d9.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;mysql03.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;mysql02.png">
-<meta property="og:updated_time" content="2019-11-17T11:01:32.741Z">
+<meta property="og:updated_time" content="2019-11-20T02:14:14.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;static001.geekbang.org&#x2F;resource&#x2F;image&#x2F;0d&#x2F;d9&#x2F;0d2070e8f84c4801adbfa03bda1f98d9.png">
 
@@ -245,7 +245,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 19:01:32" itemprop="dateModified" datetime="2019-11-17T19:01:32+08:00">2019-11-17</time>
+                <time title="修改时间：2019-11-20 10:14:14" itemprop="dateModified" datetime="2019-11-20T10:14:14+08:00">2019-11-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -386,17 +386,18 @@
 <p><strong>用于查询持续时间超过60秒的事务</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_schema.innodb_trx <span class="keyword">where</span> TIME_TO_SEC(<span class="keyword">timediff</span>(<span class="keyword">now</span>(),trx_started))&gt;<span class="number">60</span></span><br></pre></td></tr></table></figure>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引是数据库最重要的概念之一。<br>他的出现就是为提高查询效率，类似书的目录。</p>
-<h3 id="索引的常见模型"><a href="#索引的常见模型" class="headerlink" title="索引的常见模型"></a>索引的常见模型</h3><p>索引的实现方式有多种，引入索引模型的概念。<br>用于提高读写效率的数据结构很多，包括哈希表，有序数组和搜索树等。</p>
+<h3 id="常见模型"><a href="#常见模型" class="headerlink" title="常见模型"></a>常见模型</h3><p>索引的实现方式有多种，引入索引模型的概念。<br>用于提高读写效率的数据结构很多，包括哈希表，有序数组和搜索树等。</p>
 <p>哈希表是一种以键-值（key-value）存储的数据结构，<br>哈希的思路很简单，把值放入数组，用一个哈希函数把key换算成一个确定位置，然后value放入数组的这个位置。</p>
 <p>当多个key值经过哈希换算，会出现同一个值的情况（哈希碰撞），<br>处理这种情况的一种方法就是拉出一个链表。</p>
 <p><strong>哈希表这种数据结构适用于只有等值查询的场景</strong>，比如 Memcached 及其他 NoSQL 引擎。</p>
 <p>有序数组在等值查询和范围查询场景中性能更优秀。<br>它的查询效率高，但是更新的话需要挪动后面所有数据，成本太高。</p>
 <p><strong>有序数组只适用于静态存储引擎</strong></p>
 <p>二叉搜索树的特点：每个节点的左儿子小于父节点，父节点又小于右儿子。<br>二叉树是搜索效率最高的，但实际上大多数数据库存储并不使用二叉树。<br>因为索引不止存在内存中，还要写到磁盘上。<br>为了使查询尽量少的读磁盘，就必须让查询尽量少的访问数据块。<br>因此不应该使用二叉树，而用“N叉树”，“N”取决于数据块的大小。</p>
-<p>以 InnoDB 的一个整数字段索引为例，这个N差不多是1200。<br>当树高是4的时候，可以存储1200的3次方个值，17亿。<br>考虑到树根数据块总是在内存中，一个十亿行的表上的整数索引最多只需要访问3次磁盘。</p>
+<p>以 InnoDB 的一个整数字段索引为例，这个N差不多是1200。<br>当树高是4的时候，可以存储$1200^3$个值，17亿。<br>考虑到树根数据块总是在内存中，一个十亿行的表上的整数索引最多只需要访问3次磁盘。</p>
 <p>其实，树的第二层也有很大概率在内存中，那么访问磁盘的次数就更少了。</p>
 <p>N叉树由于读写上性能的优点以及适配磁盘的访问模式，被广泛应用在数据库引擎中。</p>
 <p>数据库底层存储的核心就是基于数据模型的。<br>当遇到新数据库时需要先关注它的数据模型，才能从理论上分析它的适用场景。</p>
+<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><p>InnoDB 中，如果没有定义主键，它会选择一个唯一的非空索引代替。如果没有这样的索引，那么它会隐式的定义一个主键来作为聚簇索引。</p>
 <p>索引笔记未做完，后期随缘补充</p>
 <h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>数据库锁设计的初衷是处理并发问题。</p>
 <p>……</p>
@@ -466,7 +467,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础架构：查询语句的执行过程"><span class="nav-number">1.</span> <span class="nav-text">基础架构：查询语句的执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接器"><span class="nav-number">1.1.</span> <span class="nav-text">连接器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询缓存"><span class="nav-number">1.2.</span> <span class="nav-text">查询缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析器"><span class="nav-number">1.3.</span> <span class="nav-text">分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化器"><span class="nav-number">1.4.</span> <span class="nav-text">优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行器"><span class="nav-number">1.5.</span> <span class="nav-text">执行器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志系统：更新语句是如何执行的"><span class="nav-number">2.</span> <span class="nav-text">日志系统：更新语句是如何执行的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redo-log："><span class="nav-number">2.1.</span> <span class="nav-text">redo log：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#binlog："><span class="nav-number">2.2.</span> <span class="nav-text">binlog：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种日志的区别"><span class="nav-number">2.3.</span> <span class="nav-text">两种日志的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新操作内部执行流程"><span class="nav-number">2.4.</span> <span class="nav-text">更新操作内部执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两阶段提交"><span class="nav-number">2.5.</span> <span class="nav-text">两阶段提交</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离"><span class="nav-number">3.</span> <span class="nav-text">事务隔离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离性与隔离级别"><span class="nav-number">3.1.</span> <span class="nav-text">隔离性与隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离的实现"><span class="nav-number">3.2.</span> <span class="nav-text">事务隔离的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务启动方式"><span class="nav-number">3.3.</span> <span class="nav-text">事务启动方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">4.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的常见模型"><span class="nav-number">4.1.</span> <span class="nav-text">索引的常见模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁"><span class="nav-number">5.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实操中感受SQL优化"><span class="nav-number">6.</span> <span class="nav-text">实操中感受SQL优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事例1"><span class="nav-number">6.1.</span> <span class="nav-text">事例1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续"><span class="nav-number">7.</span> <span class="nav-text">未完待续</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础架构：查询语句的执行过程"><span class="nav-number">1.</span> <span class="nav-text">基础架构：查询语句的执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接器"><span class="nav-number">1.1.</span> <span class="nav-text">连接器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询缓存"><span class="nav-number">1.2.</span> <span class="nav-text">查询缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析器"><span class="nav-number">1.3.</span> <span class="nav-text">分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化器"><span class="nav-number">1.4.</span> <span class="nav-text">优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行器"><span class="nav-number">1.5.</span> <span class="nav-text">执行器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志系统：更新语句是如何执行的"><span class="nav-number">2.</span> <span class="nav-text">日志系统：更新语句是如何执行的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redo-log："><span class="nav-number">2.1.</span> <span class="nav-text">redo log：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#binlog："><span class="nav-number">2.2.</span> <span class="nav-text">binlog：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种日志的区别"><span class="nav-number">2.3.</span> <span class="nav-text">两种日志的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新操作内部执行流程"><span class="nav-number">2.4.</span> <span class="nav-text">更新操作内部执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两阶段提交"><span class="nav-number">2.5.</span> <span class="nav-text">两阶段提交</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离"><span class="nav-number">3.</span> <span class="nav-text">事务隔离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离性与隔离级别"><span class="nav-number">3.1.</span> <span class="nav-text">隔离性与隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离的实现"><span class="nav-number">3.2.</span> <span class="nav-text">事务隔离的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务启动方式"><span class="nav-number">3.3.</span> <span class="nav-text">事务启动方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">4.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见模型"><span class="nav-number">4.1.</span> <span class="nav-text">常见模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊情况"><span class="nav-number">4.2.</span> <span class="nav-text">特殊情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁"><span class="nav-number">5.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实操中感受SQL优化"><span class="nav-number">6.</span> <span class="nav-text">实操中感受SQL优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事例1"><span class="nav-number">6.1.</span> <span class="nav-text">事例1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续"><span class="nav-number">7.</span> <span class="nav-text">未完待续</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -608,6 +609,54 @@
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 

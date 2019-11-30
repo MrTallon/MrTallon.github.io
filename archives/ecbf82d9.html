@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="Tallon">
 <meta property="og:description" content="Nexus 是一个强大的仓库管理器，极大地简化了内部仓库的维护和外部仓库的访问。本文先且简单的介绍Nexus信息，主要以上手操作为主，以便日后随时查阅。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-17T11:01:32.736Z">
+<meta property="og:updated_time" content="2019-11-30T15:43:39.700Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://tallon.ink/archives/ecbf82d9.html">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 19:01:32" itemprop="dateModified" datetime="2019-11-17T19:01:32+08:00">2019-11-17</time>
+                <time title="修改时间：2019-11-30 23:43:39" itemprop="dateModified" datetime="2019-11-30T23:43:39+08:00">2019-11-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,6 +274,9 @@
 <p>为数据卷添加权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /usr/local/docker/nexus/data</span><br></pre></td></tr></table></figure></p>
 <p>登录验证</p>
 <p>ip:8084<br>用户名：admin<br>密码：admin123</p>
+<blockquote>
+<p>3.1.7版本之后默认密码不再是”admin123”，需自行查看随机密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd data</span><br><span class="line">vi admin.password</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 <p><strong>Snapshots 与 Releases 的区别</strong></p>
 <ul>
 <li>nexus-releases: 用于发布 Release 版本</li>

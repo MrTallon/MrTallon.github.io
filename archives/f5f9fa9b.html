@@ -60,7 +60,7 @@
 <meta property="og:description" content="一次构建，到处运行">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;docker1.jpg">
-<meta property="og:updated_time" content="2019-11-17T11:01:32.740Z">
+<meta property="og:updated_time" content="2019-11-30T15:45:56.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;docker1.jpg">
 
@@ -243,7 +243,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 19:01:32" itemprop="dateModified" datetime="2019-11-17T19:01:32+08:00">2019-11-17</time>
+                <time title="修改时间：2019-11-30 23:45:56" itemprop="dateModified" datetime="2019-11-30T23:45:56+08:00">2019-11-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -327,6 +327,7 @@
 <p>admin<br>Harbor12345</p>
 <p>配置客户端</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&quot;insecure-registries&quot;:[</span><br><span class="line">  &quot;42.56.89.59&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>进入/退出容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it id /bin/bash</span><br><span class="line">exit</span><br></pre></td></tr></table></figure></p>
 <h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>折腾我一天的问题：限制容器启动内存<br>run：<br>-e ES_JAVA_OPTS=”-Xms256m -Xmx256m”</p>
 <p>docker-compose 2.X<br>mem_limit: 256M</p>
 <p>docker-compose 3.X<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">'0.001'</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">50M</span></span><br><span class="line">    <span class="attr">reservations:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">'0.0001'</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">20M</span></span><br></pre></td></tr></table></figure><br>在3.X时总是没有成功限制启动内存，因为不兼容<br>docker-compose —compatibility up -d<br>这样启动即可<br>参考文档<br><a href="https://nickjanetakis.com/blog/docker-tip-78-using-compatibility-mode-to-set-memory-and-cpu-limits" target="_blank" rel="noopener">1</a><br><a href="https://stackoverflow.com/questions/42457889/limit-useable-host-resources-in-docker-compose-without-swarm?r=SearchResults" target="_blank" rel="noopener">2</a></p>
