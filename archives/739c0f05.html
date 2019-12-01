@@ -51,16 +51,20 @@
   };
 </script>
 
-  <meta name="description" content="知易行难">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tallon">
-<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;tags&#x2F;Database&#x2F;index.html">
+  <meta name="description" content="Maven 作为一种强大的项目管理工具，实在不敢说掌握了它的所有知识。以遇到问题的为目录，记录自己对于 Maven 的理解。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven 笔记">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;archives&#x2F;739c0f05.html">
 <meta property="og:site_name" content="Tallon">
-<meta property="og:description" content="知易行难">
+<meta property="og:description" content="Maven 作为一种强大的项目管理工具，实在不敢说掌握了它的所有知识。以遇到问题的为目录，记录自己对于 Maven 的理解。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;ss0.bdstatic.com&#x2F;70cFvHSh_Q1YnxGkpoWK1HF6hhy&#x2F;it&#x2F;u=659920890,2281008162&amp;fm=26&amp;gp=0.jpg">
+<meta property="og:updated_time" content="2019-12-01T09:59:20.942Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;ss0.bdstatic.com&#x2F;70cFvHSh_Q1YnxGkpoWK1HF6hhy&#x2F;it&#x2F;u=659920890,2281008162&amp;fm=26&amp;gp=0.jpg">
 
-<link rel="canonical" href="https://tallon.ink/tags/Database/">
+<link rel="canonical" href="https://tallon.ink/archives/739c0f05.html">
 
 
 <script id="page-configurations">
@@ -68,13 +72,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: Database | Tallon</title>
+  <title>Maven 笔记 | Tallon</title>
   
 
 
@@ -204,50 +208,148 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">Database
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/archives/739c0f05.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
+      <meta itemprop="name" content="Tallon">
+      <meta itemprop="description" content="知易行难">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tallon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Maven 笔记
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-01 01:31:50 / 修改时间：17:59:20" itemprop="dateCreated datePublished" datetime="2019-12-01T01:31:50+08:00">2019-12-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E5%8F%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">后台</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2018</h1>
+        <div class="note default">
+            <p>Maven 作为一种强大的项目管理工具，实在不敢说掌握了它的所有知识。<br>以遇到问题的为目录，记录自己对于 Maven 的理解。</p>
+          </div>
+<a id="more"></a>
+<p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=659920890,2281008162&amp;fm=26&amp;gp=0.jpg" alt="maven"></p>
+<h2 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h2><div style="text-align: right"> 2019.11.30 </div>
+
+<p>周末在做 nexus 私服仓库练习（电商）时，遇到了以下疑问：<br>基础域依赖spring全家桶，<br>仓储域依赖spring全家桶，<br>仓储域又依赖基础域，<br>那仓储域是不是就算有两套spring的jar包？<br>虽然用到了dependencyManagement来统一管理了一份jar包<br>但是代码确实走了两遍依赖过程吗？<br>那会出现套娃的情况吗？</p>
+<p>因此，引出了 maven 的依赖机制.</p>
+<h3 id="传递性依赖"><a href="#传递性依赖" class="headerlink" title="传递性依赖"></a>传递性依赖</h3><p>上述所列出的问题，叫做传递性依赖，它对于嵌套深度没有任何限制，只是出现循环依赖时会报错。<br>因此，导致依赖图增长非常大。为解决这一问题，maven传递依赖提供了以下机制</p>
+<ul>
+<li>依赖调解<ul>
+<li>第一声明优先原则，靠上的依赖包优先进入项目中</li>
+<li>路径近者优先原则</li>
+</ul>
+</li>
+<li>依赖管理<ul>
+<li><dependencyManagement>标签使用</li>
+</ul>
+</li>
+<li>依赖范围<ul>
+<li>指定只在当前编译范围内包含合适的依赖</li>
+</ul>
+</li>
+<li>排除依赖<ul>
+<li>如果项目X依赖于项目Y，项目Y又依赖项目Z，项目X的所有者可以使用”exclusion”元素来显式排除项目Z</li>
+</ul>
+</li>
+<li>可选依赖<ul>
+<li>如果项目Y依赖项目Z，项目Y的所有者可以使用”optional”元素来指定项目Z作为X的可选依赖。那么当项目X依赖项目Y时，X只依赖Y并不依赖Y的可选依赖Z。项目X的所有者也可以根据自己的意愿显式指定X对Z的依赖。（你可以把可选依赖理解为默认排除）</li>
+</ul>
+</li>
+</ul>
+<h3 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h3><p>依赖范围会影响传递性依赖，同时也会影响项目构建任务中使用的classpath。<br>Maven有以下6种依赖范围：</p>
+<p>随后完善</p>
+<h2 id="一键构建"><a href="#一键构建" class="headerlink" title="一键构建"></a>一键构建</h2><div style="text-align: right"> 2019.12.15 </div>
+
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li>clean 对于构建信息清理</li>
+<li>compile 编译正式代码</li>
+<li>test 编译测试代码</li>
+<li>package 将包打在 target 目录下</li>
+<li>install 安装到本地仓库</li>
+<li>deploy 将本地做好的 jar 包上传私服</li>
+</ul>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ul>
+<li>清理生命周期</li>
+<li>默认生命周期</li>
+<li>站点生命周期</li>
+</ul>
+<p>参考文献：<a href="https://www.cnblogs.com/tooy/p/7364149.html" target="_blank" rel="noopener">tooy</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-12-17T09:35:19+08:00"
-              content="2018-12-17">
-          12-17
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/archives/afe93d88.html" itemprop="url">
-            <span itemprop="name">MySQL 深度历险</span>
-          </a>
-      </h2>
+        
 
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/archives/93ad49f7.html" rel="next" title="Markdown 语法笔记">
+                  <i class="fa fa-chevron-left"></i> Markdown 语法笔记
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/archives/368c49b5.html" rel="prev" title="多线程">
+                  多线程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -276,6 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.</span> <span class="nav-text">依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传递性依赖"><span class="nav-number">1.1.</span> <span class="nav-text">传递性依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖范围"><span class="nav-number">1.2.</span> <span class="nav-text">依赖范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一键构建"><span class="nav-number">2.</span> <span class="nav-text">一键构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">2.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">2.2.</span> <span class="nav-text">生命周期</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

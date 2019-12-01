@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Tallon" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="整理 Java 多线程知识，用于日后随时翻阅复习">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;archives&#x2F;368c49b5.html">
+<meta property="og:site_name" content="Tallon">
+<meta property="og:description" content="整理 Java 多线程知识，用于日后随时翻阅复习">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;thread01.jpeg">
+<meta property="og:updated_time" content="2019-12-01T09:57:18.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;thread01.jpeg">
+
+<link rel="canonical" href="https://tallon.ink/archives/368c49b5.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>多线程 | Tallon</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tallon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Hello World</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/archives/368c49b5.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
+      <meta itemprop="name" content="Tallon">
+      <meta itemprop="description" content="知易行难">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tallon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多线程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-01 17:48:50 / 修改时间：17:57:18" itemprop="dateCreated datePublished" datetime="2019-12-01T17:48:50+08:00">2019-12-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E5%8F%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">后台</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="note default">
+            <p>整理 Java 多线程知识，用于日后随时翻阅复习</p>
+          </div>
+<a id="more"></a>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><ol>
+<li>继承 Thread 类</li>
+<li>实现 Runnable 接口</li>
+<li>实现 Callable 接口通过 FutureTask 包装器</li>
+<li>使用 ExecutorService、Callable、Future 实现有返回结果的多线程</li>
+</ol>
+<h3 id="停止一个线程"><a href="#停止一个线程" class="headerlink" title="停止一个线程"></a>停止一个线程</h3><ol>
+<li>使用退出标志，run 方法完成后线程终止</li>
+<li>使用 stop 方法强行终止（过期）</li>
+<li>使用 interrupt 方法中断线程</li>
+</ol>
+<h3 id="notify-和-notifyAll-有什么区别？"><a href="#notify-和-notifyAll-有什么区别？" class="headerlink" title="notify() 和 notifyAll() 有什么区别？"></a>notify() 和 notifyAll() 有什么区别？</h3><p>如果线程调用了对象的 wait() 方法，那么线程便会处于该对象的等待池中，等待池中的线程不会去竞争该对象的锁。<br>当有线程调用了对象的 notifyAll() 方法（唤醒所有 wait 线程）或 notify() 方法（只随机唤醒一个 wait 线程），被唤醒的的线程便会进入该对象的锁池中，锁池中的线程会去竞争该对象锁。也就是说，调用了notify后只要一个线程会由等待池进入锁池，而notifyAll会将该对象等待池内的所有线程移动到锁池中，等待锁竞争。<br>优先级高的线程竞争到对象锁的概率大，假若某线程没有竞争到该对象锁，它还会留在锁池中，唯有线程再次调用 wait() 方法，它才会重新回到等待池中。而竞争到对象锁的线程则继续往下执行，直到执行完了 synchronized 代码块，它会释放掉该对象锁，这时锁池中的线程会继续竞争该对象锁。</p>
+<h3 id="sleep-和-wait-有什么区别"><a href="#sleep-和-wait-有什么区别" class="headerlink" title="sleep() 和 wait() 有什么区别?"></a>sleep() 和 wait() 有什么区别?</h3><p>sleep() 方法属于 Thread 类中，wait() 方法属于 Object 类。<br>sleep() 方法导致了程序暂停执行指定的时间，让出cpu该其他线程，但是他的监控状态依然保持者，当指定的时间到了又会自动恢复运行状态。在调用 sleep() 方法的过程中，线程不会释放对象锁。<br>当调用 wait() 方法的时候，线程会放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象调用 notify() 方法后本线程才进入对象锁定池准备，获取对象锁进入运行状态。</p>
+<h3 id="Daemon线程"><a href="#Daemon线程" class="headerlink" title="Daemon线程"></a>Daemon线程</h3><p>Java语言自己可以创建两种线程</p>
+<ul>
+<li>用户线程（我们平时创建的普通线程）</li>
+<li>守护线程（主要是用来服务用户线程）<br>Daemon 是守护线程，他的意义是：<br>只要当前JVM实例中尚存在任何一个非守护线程没有结束，守护线程就全部工作；只有当最后一个非守护线程结束时，守护线程随着JVM一同结束工作。<br>Daemon 的作用是为其他线程的运行提供便利服务，守护线程最典型的应用就是 GC (垃圾回收器)，它就是一个很称职的守护者。</li>
+</ul>
+<h3 id="多线程之间的通讯和协作"><a href="#多线程之间的通讯和协作" class="headerlink" title="多线程之间的通讯和协作"></a>多线程之间的通讯和协作</h3><ol>
+<li>同步（synchronized）</li>
+<li>while 轮询</li>
+<li>wait/notify 机制</li>
+<li>管道通信</li>
+</ol>
+<blockquote>
+<p>分布式系统中说的两种通信机制：共享内存机制和消息通信机制。1 中的 synchronized 关键字和 2 中的 while 轮询 “属于” 共享内存机制，由于是轮询的条件使用了volatile关键字修饰时，这就表示它们通过判断这个“共享的条件变量“是否改变了，来实现进程间的交流。<br>而管道通信，更像消息传递机制，也就是说：通过管道，将一个线程中的消息发送给另一个。</p>
+</blockquote>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><h4 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h4><p>ReentrantLock：线程可以进入任何一个它已经拥有的锁所同步着的代码块。</p>
+<h4 id="Synchronized-和-java-util-concurrent-locks-Lock的异同"><a href="#Synchronized-和-java-util-concurrent-locks-Lock的异同" class="headerlink" title="Synchronized 和 java.util.concurrent.locks.Lock的异同"></a>Synchronized 和 java.util.concurrent.locks.Lock的异同</h4><p>相同点：Lock 能完成 Synchronized 所实现的所有功能。<br>不同点：Lock 有比 Synchronized 更精确的线程予以和更好的性能。Synchronized 会自动释放锁，但是 Lock 一定要求手工释放，并且必须在 finally 从句中释放。</p>
+<h4 id="乐观锁、悲观锁"><a href="#乐观锁、悲观锁" class="headerlink" title="乐观锁、悲观锁"></a>乐观锁、悲观锁</h4><p>乐观锁是假设每次操作都不会冲突，若是遇到冲突失败就重试直到成功；悲观锁是让其他线程都等待，等锁释放完了再竞争锁。<br>乐观锁实现方式：cas，volatile<br>悲观锁实现方式：synchronized，Lock</p>
+<h2 id="并发框架"><a href="#并发框架" class="headerlink" title="并发框架"></a>并发框架</h2><h3 id="SynchronizedMap-和-ConcurrentHashMap-有什么区别？"><a href="#SynchronizedMap-和-ConcurrentHashMap-有什么区别？" class="headerlink" title="SynchronizedMap 和 ConcurrentHashMap 有什么区别？"></a>SynchronizedMap 和 ConcurrentHashMap 有什么区别？</h3><p>SynchronizedMap()和 Hashtable一样，实现上在调用map所有方法时，都对整个map进行同步。而 ConcurrentHashMap 的实现却更加精细，它对map中的所有桶加了锁。所以，只要有一个线程访问map，其他线程就无法进入map，而如果一个线程在访问 ConcurrentHashMap 某个桶时，其他线程，仍然可以对map执行某些操作。<br>所以，ConcurrentHashMap 在性能以及安全性方面，明显比 Collections.synchronizedMap() 更加有优势。同时，同步操作精确控制到桶，这样，即使在遍历map时，如果其他线程试图对map进行数据修改，也不会抛出 ConcurrentModificationException。</p>
+<h3 id="CopyOnWriteArrayList-可以用于什么应用场景？"><a href="#CopyOnWriteArrayList-可以用于什么应用场景？" class="headerlink" title="CopyOnWriteArrayList 可以用于什么应用场景？"></a>CopyOnWriteArrayList 可以用于什么应用场景？</h3><p>CopyOnWriteArrayList 的特性是针对读操作，不做处理，和普通的 ArrayList 性能一样。而在写操作时，会先拷贝一份，实现新旧版本的分离，然后在拷贝的版本上进行修改操作，修改完后，将其更新至就版本中。<br>那么他的使用场景就是：一个需要在多线程中操作，并且频繁遍历。其解决了由于长时间锁定整个数组导致的性能问题，解决方案即写时拷贝。<br>另外需要注意的是 CopyOnWrite 容器只能保证数据的最终一致性，不能保证数据的实时一致性。所以如果你希望写入的的数据，马上能读到，请不要使用 CopyOnWrite容器。</p>
+<h3 id="Exectors-线程池"><a href="#Exectors-线程池" class="headerlink" title="Exectors 线程池"></a>Exectors 线程池</h3><h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
+<li>corePoolSize - 池中所保存的线程数，包括空闲线程。</li>
+<li>maximumPoolSize - 池中允许的最大线程数。</li>
+<li>keepAliveTime - 当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间。</li>
+<li>unit - keepAliveTime 参数的时间单位。</li>
+<li>workQueue - 执行前用于保持任务的队列。此队列仅保持由 execute 方法提交的 Runnable 任务。用BlocingQueue的实现类都可以。</li>
+<li>threadFactory - 执行程序创建新线程时使用的工厂。自定义线程工厂可以做一些额外的操作，比如统计生产的线程数等。</li>
+<li>handler - 饱和策略，即超出线程范围和队列容量而使执行被阻塞时所使用的处理程序。策略有：Abort终止并抛出异常，Discard悄悄抛弃任务，Discard-Oldest抛弃最老的任务策略，Caller-Runs将任务退回给调用者策略。</li>
+</ul>
+<h4 id="线程池设置经验："><a href="#线程池设置经验：" class="headerlink" title="线程池设置经验："></a>线程池设置经验：</h4><ul>
+<li>如果是CPU密集型应用，则线程池大小设置为 N+1</li>
+<li>如果是IO密集型应用，则线程池大小设置为 2N+1</li>
+</ul>
+<h4 id="有界队列、无界队列"><a href="#有界队列、无界队列" class="headerlink" title="有界队列、无界队列"></a>有界队列、无界队列</h4><ol>
+<li>有界队列有助于避免资源耗尽的情况发生。但他带来了新的问题：当队列填满后，新的任务怎么办？所以有界队列适用于执行比较耗资源的任务，同时要设计好相应的饱和策略。</li>
+<li>无界队列和有界队列刚好相反，在资源无限的情况下可以一直接收新任务。适用于小任务，请求和处理速度相对持平的状况。</li>
+<li>其实还有一种同步移交的队列 SynchronousQueue，这种队列不存储任务信息，直接将任务提交给线程池。可以理解为容量只有1的有界队列，在特殊场景下有特殊作用，同样得设计好相应的饱和策略。</li>
+</ol>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>线程安全就是说多线程访问同一代码，不会产生不确定的结果。<br>在多线程环境中，当各线程不共享数据的时候，即都是私有（private）成员，那么一定是线程安全的。但这种情况并不多见，在多数情况下需要共享数据，这时就需要进行适当的同步控制了。<br>线程安全一般都涉及到synchronized，就是一段代码同时只能有一个线程来操作 不然中间过程可能会产生不可预制的结果。<br>如果你的代码所在的进程中有多个线程在同时运行，而这些线程可能会同时运行这段代码。如果每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。</p>
+<p><strong><a href="https://mp.weixin.qq.com/s/8GyPdDocRI0NXbiFKAAWrA" target="_blank" rel="noopener">Servlet不是线程安全的</a></strong></p>
+<h3 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h3><ol>
+<li>synchronized<br> 由该关键字修饰的方法需在调用前获得内置锁</li>
+<li>volatile<ul>
+<li>volatile 关键字为域变量的访问提供了一种免锁机制，</li>
+<li>使用 volatile 修饰域相当于告诉虚拟机该域可能会被其他线程更新</li>
+<li>因此每次使用该域就要重新计算，而不是使用寄存器中的值</li>
+<li>volatile 不会提供任何原子操作，它也不能用来修饰final类型的变量</li>
+</ul>
+</li>
+<li>可重入锁<br> 在JavaSE5.0中新增了一个java.util.concurrent包来支持同步。ReentrantLock 类是可重入、互斥、实现了Lock接口的锁，它与使用 synchronized方法和快具有相同的基本行为和语义，并且扩展了其能力</li>
+<li>使用局部变量</li>
+</ol>
+<h4 id="volatile-补充说明"><a href="#volatile-补充说明" class="headerlink" title="volatile 补充说明"></a>volatile 补充说明</h4><p>作为指令关键字，确保本条指令不会因编译器的优化而省略，且要求每次直接读值，即不是从寄存器里取备份值，而是去该地址内存存储的值。<br>对变量的写操作不依赖于当前值且该变量没有包含在具有其他变量的不变式中。</p>
+<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><p><img src="https://mrtallon.gitee.io/img/thread01.jpeg" alt="thread01"><br>为了保证共享内存的正确性（可见性、有序性、原子性），内存模型定义了共享内存系统中多线程程序读写操作行为的规范。<br>通过这些规则来规范对内存的读写操作，从而保证指令执行的正确性。它与处理器有关、与缓存有关、与并发有关、与编译器也有关。<br>它解决了 CPU 多级缓存、处理器优化、指令重排等导致的内存访问问题，保证了并发场景下的一致性、原子性和有序性。</p>
+<h3 id="内存模型解决并发问题主要采用两种方式"><a href="#内存模型解决并发问题主要采用两种方式" class="headerlink" title="内存模型解决并发问题主要采用两种方式"></a>内存模型解决并发问题主要采用两种方式</h3><ol>
+<li>限制处理器优化</li>
+<li>使用内存屏障</li>
+</ol>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="两线程交替执行（线程间通信）"><a href="#两线程交替执行（线程间通信）" class="headerlink" title="两线程交替执行（线程间通信）"></a>两线程交替执行（线程间通信）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="使用阻塞队列实现一个生产者和消费者模型"><a href="#使用阻塞队列实现一个生产者和消费者模型" class="headerlink" title="使用阻塞队列实现一个生产者和消费者模型"></a>使用阻塞队列实现一个生产者和消费者模型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="实现一个流控程序，用于控制请求的调用次数"><a href="#实现一个流控程序，用于控制请求的调用次数" class="headerlink" title="实现一个流控程序，用于控制请求的调用次数"></a>实现一个流控程序，用于控制请求的调用次数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/archives/739c0f05.html" rel="next" title="Maven 笔记">
+                  <i class="fa fa-chevron-left"></i> Maven 笔记
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建线程的方式"><span class="nav-number">1.1.</span> <span class="nav-text">创建线程的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#停止一个线程"><span class="nav-number">1.2.</span> <span class="nav-text">停止一个线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#notify-和-notifyAll-有什么区别？"><span class="nav-number">1.3.</span> <span class="nav-text">notify() 和 notifyAll() 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep-和-wait-有什么区别"><span class="nav-number">1.4.</span> <span class="nav-text">sleep() 和 wait() 有什么区别?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemon线程"><span class="nav-number">1.5.</span> <span class="nav-text">Daemon线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程之间的通讯和协作"><span class="nav-number">1.6.</span> <span class="nav-text">多线程之间的通讯和协作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁"><span class="nav-number">1.7.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可重入锁"><span class="nav-number">1.7.1.</span> <span class="nav-text">可重入锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Synchronized-和-java-util-concurrent-locks-Lock的异同"><span class="nav-number">1.7.2.</span> <span class="nav-text">Synchronized 和 java.util.concurrent.locks.Lock的异同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乐观锁、悲观锁"><span class="nav-number">1.7.3.</span> <span class="nav-text">乐观锁、悲观锁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发框架"><span class="nav-number">2.</span> <span class="nav-text">并发框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SynchronizedMap-和-ConcurrentHashMap-有什么区别？"><span class="nav-number">2.1.</span> <span class="nav-text">SynchronizedMap 和 ConcurrentHashMap 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CopyOnWriteArrayList-可以用于什么应用场景？"><span class="nav-number">2.2.</span> <span class="nav-text">CopyOnWriteArrayList 可以用于什么应用场景？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exectors-线程池"><span class="nav-number">2.3.</span> <span class="nav-text">Exectors 线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">2.3.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程池设置经验："><span class="nav-number">2.3.2.</span> <span class="nav-text">线程池设置经验：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有界队列、无界队列"><span class="nav-number">2.3.3.</span> <span class="nav-text">有界队列、无界队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全"><span class="nav-number">3.</span> <span class="nav-text">线程安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程同步"><span class="nav-number">3.2.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile-补充说明"><span class="nav-number">3.2.1.</span> <span class="nav-text">volatile 补充说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型"><span class="nav-number">4.</span> <span class="nav-text">内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存模型解决并发问题主要采用两种方式"><span class="nav-number">4.1.</span> <span class="nav-text">内存模型解决并发问题主要采用两种方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战"><span class="nav-number">5.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两线程交替执行（线程间通信）"><span class="nav-number">5.1.</span> <span class="nav-text">两线程交替执行（线程间通信）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用阻塞队列实现一个生产者和消费者模型"><span class="nav-number">5.2.</span> <span class="nav-text">使用阻塞队列实现一个生产者和消费者模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现一个流控程序，用于控制请求的调用次数"><span class="nav-number">5.3.</span> <span class="nav-text">实现一个流控程序，用于控制请求的调用次数</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tallon"
+      src="https://mrtallon.gitee.io/img/avatar.png">
+  <p class="site-author-name" itemprop="name">Tallon</p>
+  <div class="site-description" itemprop="description">知易行难</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MrTallon" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;MrTallon" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/mailto:mrtallon@qq.com" title="E-Mail &amp;rarr; mailto:mrtallon@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      作品链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tallon.ink/MyShop/" title="https:&#x2F;&#x2F;tallon.ink&#x2F;MyShop&#x2F;">Spring Alibaba</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tallon</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  <!-- 动态背景 -->
+<!-- <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+</body>
+</html>
