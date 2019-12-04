@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>如何写出好代码</title>
+    <url>/archives/ab95a53b.html</url>
+    <content><![CDATA[<div class="note default">
+            <p>开发这两年，尤其写多了各种又臭又长的复杂业务代码后，越来越意识到能写出一份让自己再看时满意、同事评审时不骂街的代码，有多难。</p>
+          </div>
+<a id="more"></a>
+<p>为了做好一个在代码上不将就的初级码农，翻看了多遍 <strong>阿里</strong>的《Java开发手册》和 <strong>Martin Fowler</strong> 的 《重构·改善既有代码的设计》等相关书籍，<br>但是还未全面读过设计模式相关的书籍，只是在有限的知识里自以为有用的时候翻出来所认识的模式去参考一下。<br>下一步的计划是认真阅读学习设计模式的思想。</p>
+<p>今天有幸读到了阿里专家对于“如何写复杂业务代码”的方法论，收益颇丰，故以此记录，方便日后时常回忆。</p>
+<p>目前我司的云原生项目全方面向阿里看齐，虽然学的似是而非，但已经是不错的项目设计。主要负责 <strong>S2B2C</strong> 业务的开展，阿里在业内是最好的学习榜样。</p>
+<p>在第一阶段，零售通是给线下小店供货的 B2B 模式，我们希望通过数字化重构传统供应链渠道，提升供应链效率，为新零售助力。阿里在中间是一个平台角色，提供的是 B2b 中的 service 的功能。<br><img src="https://mrtallon.gitee.io/img/code01.jpg" alt="code01"><br>在商品域，运营会操作一个“上架”动作，上架之后，商品就能在零售通上面对小店进行销售了。<strong>是零售通业务非常关键的业务操作之一，因此涉及很多的数据校验和关联操作。</strong><br><img src="https://mrtallon.gitee.io/img/code02.jpg" alt="code02"></p>
+<h3 id="过程分解"><a href="#过程分解" class="headerlink" title="过程分解"></a>过程分解</h3><p>对于如此复杂的业务逻辑，首先想到的是分治。<br>对于业务分解也会遇到一个问题：过度依赖工具或者辅助手段，自制的流程引擎或者数据库配置的流程处理。<br>本质上来讲，这些辅助手段做的都是一个 pipeline 的处理流程，没有其它。因此，建议此处最好保持 KISS（Keep It Simple and Stupid），即最好是什么工具都不要用，次之是用一个极简的 Pipeline 模式，最差是使用像流程引擎这样的重方法。<br>商品上架的核心是如何<strong>分解问题</strong>和<strong>抽象问题</strong>，将业务解构出有层级的金字塔结构：<br><img src="https://mrtallon.gitee.io/img/code03.jpg" alt="code03"><br>因此，该程序的入口是一个上架命令（OnSaleCommand）, 它由三个阶段（Phase）组成。<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Command</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnSaleNormalItemCmdExe</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">execute</span><span class="params">(OnSaleNormalItemCmd cmd)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        OnSaleContext onSaleContext = init(cmd);</span><br><span class="line">        </span><br><span class="line">        checkData(onSaleContext);</span><br><span class="line"></span><br><span class="line">        process(onSaleContext);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response.buildSuccess();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> OnSaleContext <span class="title">init</span><span class="params">(OnSaleNormalItemCmd cmd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> onSaleContextInitPhase.init(cmd);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkData</span><span class="params">(OnSaleContext onSaleContext)</span> </span>&#123;</span><br><span class="line">        onSaleDataCheckPhase.check(onSaleContext);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(OnSaleContext onSaleContext)</span> </span>&#123;</span><br><span class="line">        onSaleProcessPhase.process(onSaleContext);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>每个Phase又可以拆解成多个步骤（Step）<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Phase</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnSaleProcessPhase</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(OnSaleContext onSaleContext)</span></span>&#123;</span><br><span class="line">        SupplierItem supplierItem = onSaleContext.getSupplierItem();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生成OfferGroupNo</span></span><br><span class="line">        generateOfferGroupNo(supplierItem);</span><br><span class="line">       </span><br><span class="line">       <span class="comment">// 发布商品</span></span><br><span class="line">        publishOffer(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前后端库存绑定 backoffer域</span></span><br><span class="line">        bindBackOfferStock(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 同步库存路由 backoffer域</span></span><br><span class="line">        syncStockRoute(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置虚拟商品拓展字段</span></span><br><span class="line">        setVirtualProductExtension(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发货保障打标 offer域</span></span><br><span class="line">        markSendProtection(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 记录变更内容ChangeDetail</span></span><br><span class="line">        recordChangeDetail(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 同步供货价到BackOffer</span></span><br><span class="line">        syncSupplyPriceToBackOffer(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是组合商品打标，写扩展信息</span></span><br><span class="line">        setCombineProductExtension(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 去售罄标</span></span><br><span class="line">        removeSellOutTag(offerId);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送领域事件</span></span><br><span class="line">        fireDomainEvent(supplierItem);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 关闭关联的待办事项</span></span><br><span class="line">        closeIssues(supplierItem);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>经过分析需求，结构化分解，合理的抽象后，上架这个复杂的流程不需要流程引擎，不需要复杂的设计模式，只是通过朴素的组合方法模式（Composed Method）即完整清晰的罗列出所有业务。<br><img src="https://mrtallon.gitee.io/img/code04.jpg" alt="code04"></p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
+<li>知识领域被肢解<ul>
+<li>所有步骤都是过程化拆解，没有一个聚合领域知识的地方，每个 Case 只关心自己的处理流程，，知识没有沉淀</li>
+<li>相同的业务逻辑会在多个 Case 中被重现，导致代码重复度高，复用能力较低，</li>
+<li>代码对业务语义的表达能力很弱，从而影响代码的可读性和可理解性</li>
+</ul>
+</li>
+<li>代码的业务表达能力缺失<ul>
+<li>因为缺失了模型，和模型间的关系，导致很难通过代码显性化的表达业务，缺少代码的韵律和灵魂</li>
+</ul>
+</li>
+</ol>
+<h3 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h3><p><strong>过程分解 + 对象模型</strong><br>有过程分解要好于没有分解，过程分解 + 对象模型要好于仅仅是过程分解。对于商品上架这个case，如果采用过程分解 + 对象模型的方式，最终我们会得到一个如下的系统结构：<br><img src="https://mrtallon.gitee.io/img/code05.jpg" alt="code05"></p>
+<h3 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h3><ul>
+<li>自上而下的结构化分解</li>
+<li>自下而上的面向对象分析</li>
+</ul>
+<h4 id="上下结合"><a href="#上下结合" class="headerlink" title="上下结合"></a>上下结合</h4><p><strong>结合自上而下的过程分解和自下而上的对象建模，螺旋式的构建我们的应用系统。</strong>这是一个动态的过程，两个步骤可以交替进行、也可以同时进行。<br><img src="https://mrtallon.gitee.io/img/code06.jpg" alt="code06"></p>
+<h4 id="能力下沉"><a href="#能力下沉" class="headerlink" title="能力下沉"></a>能力下沉</h4><p>一般来说实践DDD有两个过程：</p>
+<ol>
+<li>套概念阶段了解了一些DDD的概念，然后在代码中“使用”Aggregation Root，Bounded Context，Repository 等等这些概念。更进一步，也会使用一定的分层策略。然而这种做法一般对复杂度的治理并没有多大作用。</li>
+<li>融会贯通阶段术语已经不再重要，理解 DDD 的本质是统一语言、边界划分和面向对象分析的方法。</li>
+</ol>
+<p>目前阶段，不强求一次就能设计出 Domain 的能力，也不需要强制要求把所有的业务功能都放到 Domain 层，而是采用实用主义的态度，即只对那些需要在多个场景中需要被复用的能力进行抽象下沉，而不需要复用的，就暂时放在 App 层的 Use Case 里就好了。<br><strong>模型不是一次性设计出来的，而是迭代演化出来的</strong><br><img src="https://mrtallon.gitee.io/img/code07.jpg" alt="code07"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>身处云原生项目组，当采用 DDD 模式时，即成为了业务技术型开发。<br>业务所面临的复杂性并不亚于底层技术，要想写好业务代码也不是一件容易的事情。业务技术和底层技术人员唯一的区别是他们所面临的问题域不一样。<br>因此，需要培养<strong>分解问题的能力，抽象思维，结构化思维</strong>等等。</p>
+<blockquote>
+<p>参考文章：<a href="https://www.zhihu.com/org/a-li-yun-guan-wang-90/activities" target="_blank" rel="noopener">阿里云官网</a></p>
+</blockquote>
+<p>对自己的代码保持怀疑态度，能够使你发现更本质的逻辑！</p>
+]]></content>
+      <categories>
+        <category>架构</category>
+      </categories>
+      <tags>
+        <tag>Refactoring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>多线程</title>
     <url>/archives/368c49b5.html</url>
     <content><![CDATA[<div class="note default">
