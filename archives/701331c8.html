@@ -54,7 +54,7 @@
   <meta name="description" content="投入公司新开的云原生项目三月有余，如今对于云原生的理解依旧不甚了了，翻出 O&#96;REILLY 的《云原生Java》，系统学习。">
 <meta name="keywords" content="Cloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cloud-Native">
+<meta property="og:title" content="云原生">
 <meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;archives&#x2F;701331c8.html">
 <meta property="og:site_name" content="Tallon">
 <meta property="og:description" content="投入公司新开的云原生项目三月有余，如今对于云原生的理解依旧不甚了了，翻出 O&#96;REILLY 的《云原生Java》，系统学习。">
@@ -63,7 +63,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative2.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative4.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative3.jpg">
-<meta property="og:updated_time" content="2019-12-11T13:36:22.991Z">
+<meta property="og:updated_time" content="2019-12-16T15:50:21.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;cloudNative1.jpeg">
 
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>Cloud-Native | Tallon</title>
+  <title>云原生 | Tallon</title>
   
 
 
@@ -229,7 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Cloud-Native
+          云原生
         </h1>
 
         <div class="post-meta">
@@ -246,7 +246,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-11 21:36:22" itemprop="dateModified" datetime="2019-12-11T21:36:22+08:00">2019-12-11</time>
+                <time title="修改时间：2019-12-16 23:50:21" itemprop="dateModified" datetime="2019-12-16T23:50:21+08:00">2019-12-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,16 +277,35 @@
 <a id="more"></a>
 <p><img src="https://mrtallon.gitee.io/img/cloudNative1.jpeg" alt="cloudNative"></p>
 <p>即使到现在，云原生尚且没有确切的定义，一直处于变化之中，解释权不归某个人或组织所有。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>云原生是一种构建和运行应用程序的方法，是一套技术体系和方法论。</strong><br>云原生（CloudNative）是一个组合词，Cloud + Native。Cloud 表示应用程序位于云中，而不是传统的数据中心；Native 表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上以最佳姿势运行，充分利用和发挥云平台的弹性 + 分布式优势。<br>2013年首次提出云原生（CloudNative）的概念；<br>2015年Matt Stine 在《迁移到云原生架构》一书中定义了符合云原生架构的几个特征：十二要素、微服务、自敏捷架构、基于 API 协作、扛脆弱性；<br>到了2017年，Matt Stine 改了口风，将云原生架构归纳为模块化、可观察、可部署、可测试、可替换、可处理6特质；<br>而 Pivotal 最新官网对云原生概括为4个要点：DevOps + 持续交付 + 微服务 + 容器。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>云原生是一种构建和运行应用程序的方法，是一套技术体系和方法论。</strong><br>云原生是一个组合词，Cloud + Native。Cloud 表示应用程序位于云中，而不是传统的数据中心；Native 表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上以最佳姿势运行，充分利用和发挥云平台的弹性 + 分布式优势。<br>2013年首次提出云原生的概念；<br>2015年 Matt Stine 在《迁移到云原生架构》一书中定义了符合云原生架构的几个特征：</p>
+<ul>
+<li>十二要素</li>
+<li>微服务</li>
+<li>自敏捷架构</li>
+<li>基于 API 协作、扛脆弱性；<br>到了2017年，Matt Stine 改了口风，将云原生架构归纳为模块化、可观察、可部署、可测试、可替换、可处理6特质；<br>而 Pivotal 最新官网对云原生概括为4个要点：DevOps + 持续交付 + 微服务 + 容器。</li>
+</ul>
 <p><img src="https://mrtallon.gitee.io/img/cloudNative2.jpg" alt="cloudstructs"></p>
 <p>总而言之，符合云原生架构的应用程序应该是：采用开源堆栈（K8S + Docker）进行容器化，基于微服务架构提高灵活性和可维护性，借助敏捷方法、DevOps支持持续迭代和运维自动化，利用云平台设施实现弹性伸缩、动态调度、优化资源利用率。<br>云原生构建应用简便快捷，部署应用轻松自如、运行应用按需伸缩。优点不一而足，缺点微乎其微，秒杀传统 Web 框架，吊打祖传 IT 模式，实在是保命或评优晋级的不可多得的终极绝密武器。</p>
-<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><p>微服务理论基础：<a href="https://www.cnblogs.com/gudi/p/6685474.html" target="_blank" rel="noopener">康威定律</a></p>
+<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><p>微服务理论基础：<a href="https://yq.aliyun.com/articles/8611" target="_blank" rel="noopener">康威定律</a></p>
 <h3 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h3><p>Dev + Ops，就是开发、运维和测试的合体，<br>DevOps 是一个敏捷思维，是一个沟通文化，也是组织形式，为云原生提供持续交付能力。</p>
 <h3 id="持续交付"><a href="#持续交付" class="headerlink" title="持续交付"></a>持续交付</h3><p>敏捷开发，小步快跑，快速迭代，持续交付<br><img src="https://mrtallon.gitee.io/img/cloudNative4.jpg" alt="cloudci"></p>
 <h3 id="容器化"><a href="#容器化" class="headerlink" title="容器化"></a>容器化</h3><p><img src="https://mrtallon.gitee.io/img/cloudNative3.jpg" alt="cloudk8s"><br>Docker 是应用最为广泛的容器引擎(目前创始人已经离开团队)<br>K8S 是容器编排系统，用于容器管理，容器间的负载均衡</p>
 <h2 id="茁壮成长"><a href="#茁壮成长" class="headerlink" title="茁壮成长"></a>茁壮成长</h2><p>云原生借了云计算的东风，没有云计算，自然没有云原生，云计算是云原生的基础。<br>随着虚拟化技术的成熟和分布式框架的普及，在容器技术、可持续交付、编排系统等开源社区的推动下，以及微服务等开发理念的带动下，应用上云已经是不可逆转的趋势。<br>云计算的3层划分，即基础设施即服务(IaaS)、平台即服务(PaaS)、软件即服务(SaaS)为云原生提供了技术基础和方向指引，真正的云化不仅仅是基础设施和平台的变化，应用也需要做出改变，摈弃传统的土方法，在架构设计、开发方式、部署维护等各个阶段和方面都基于云的特点，重新设计，从而建设全新的云化的应用，即云原生应用。</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><h3 id="Cloud-Foundry"><a href="#Cloud-Foundry" class="headerlink" title="Cloud Foundry"></a>Cloud Foundry</h3><h3 id="Privotal"><a href="#Privotal" class="headerlink" title="Privotal"></a>Privotal</h3><p>是什么？<br>为什么？<br>怎么用？</p>
+<p>快速开始就不展开介绍了，<a href="https://run.pivotal.io/" target="_blank" rel="noopener">官网</a>有详细的教程步骤。<br>MacOS 克隆下项目记得给文件夹赋权。<br>成功部署后状态图<br><img src="" alt="cloudNative5"></p>
+<p><strong>SpringBoot 云上优化之路</strong><br>本机运行运行项目从未考虑过 SpringBoot 需要优化，一是本地资源较少，即使启动了 cloud 项目，在 32G 内存的 MacBook Pro 面前也是不足为惧，二是过早优化往往是烦恼的开端。<br>但是当项目布置云上环境时，哪怕是为了 10M 的内存也需要优化改造，珍惜每一寸空间。</p>
+<p>对比优化前后启动状态⚠️</p>
+<ol>
+<li>减小 JVM 启动堆内存分配空间，Xms设置为了64M</li>
+<li></li>
+</ol>
+<ol>
+<li>按需修改 Tomcat 启动线程数<br> Tomcat 默认线程是200，个人项目没有这么高的并发量，故修改为10。 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"> 	  <span class="attr">tomcat:</span></span><br><span class="line">       <span class="attr">max-threads:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<a href="https://blog.csdn.net/wy674396380/article/details/80527530" target="_blank" rel="noopener">https://blog.csdn.net/wy674396380/article/details/80527530</a><br><a href="https://blog.csdn.net/qq_35623773/article/details/100529598" target="_blank" rel="noopener">https://blog.csdn.net/qq_35623773/article/details/100529598</a></li>
+</ol>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试是持续交付的一个重要方面。在持续交付中，软件构件会通过一个管道向后移动，最终产生可用于生产环境的构件。随着软件在持续交付管道中不断前进，测试会变的越来越复杂和缓慢。理想情况下，单元测试和集成测试应该在非常短的时间内完成80%～90%的用例，从而确保此条件下的代码（可能）可以被推向生产环境。<br>Spring Cloud 通过消费者驱动契约测试（CDC-T）进一步扩展了原有的测试能力。<br>在云原生系统中，一切都是自动，包括部署。这是有效完成冒烟测试和获得一致性的关键因素。</p>
 <h2 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a>未完待续……</h2><blockquote>
-<p>参考文献：<br><a href="https://mp.weixin.qq.com/s/7-jf3cv0j164igzZDx15Jw" target="_blank" rel="noopener">阿里技术：云原生</a><br><a href="">阿里巴巴云原生实践15讲</a><br><a href="">云原生Java</a></p>
+<p>参考文献：<br><a href="https://mp.weixin.qq.com/s/7-jf3cv0j164igzZDx15Jw" target="_blank" rel="noopener">阿里技术：云原生</a><br><a href="">阿里巴巴云原生实践15讲</a><br><a href="http://cloudnativejava.io/" target="_blank" rel="noopener">云原生Java</a></p>
 </blockquote>
 
     </div>
@@ -353,7 +372,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务"><span class="nav-number">1.1.</span> <span class="nav-text">微服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DevOps"><span class="nav-number">1.2.</span> <span class="nav-text">DevOps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续交付"><span class="nav-number">1.3.</span> <span class="nav-text">持续交付</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器化"><span class="nav-number">1.4.</span> <span class="nav-text">容器化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#茁壮成长"><span class="nav-number">2.</span> <span class="nav-text">茁壮成长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续……"><span class="nav-number">3.</span> <span class="nav-text">未完待续……</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务"><span class="nav-number">1.1.</span> <span class="nav-text">微服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DevOps"><span class="nav-number">1.2.</span> <span class="nav-text">DevOps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续交付"><span class="nav-number">1.3.</span> <span class="nav-text">持续交付</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器化"><span class="nav-number">1.4.</span> <span class="nav-text">容器化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#茁壮成长"><span class="nav-number">2.</span> <span class="nav-text">茁壮成长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践"><span class="nav-number">3.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cloud-Foundry"><span class="nav-number">3.1.</span> <span class="nav-text">Cloud Foundry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Privotal"><span class="nav-number">3.2.</span> <span class="nav-text">Privotal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续……"><span class="nav-number">5.</span> <span class="nav-text">未完待续……</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
