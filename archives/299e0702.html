@@ -61,7 +61,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git0.jpeg">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git02.jpg">
-<meta property="og:updated_time" content="2019-11-17T11:01:32.740Z">
+<meta property="og:updated_time" content="2020-01-14T12:39:53.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git0.jpeg">
 
@@ -244,7 +244,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 19:01:32" itemprop="dateModified" datetime="2019-11-17T19:01:32+08:00">2019-11-17</time>
+                <time title="修改时间：2020-01-14 20:39:53" itemprop="dateModified" datetime="2020-01-14T20:39:53+08:00">2020-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,7 +298,7 @@
 <li>能够创建 Tag (标签)，建立项目里程碑<br><img src="https://mrtallon.gitee.io/img/git02.jpg" alt="git02"><br><strong>Git 应运而生</strong></li>
 </ul>
 <h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><ol>
-<li>只下载GitHub上某个文件夹<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add -f origin https://github.com/funtl/MyShopPlus.git</span><br><span class="line">https://github.com/funtl/MyShopPlus/tree/master/docs/sql</span><br><span class="line">echo docs &gt;&gt; .git/info/sparse-checkout</span><br></pre></td></tr></table></figure></li>
+<li>只下载GitHub上某个文件夹<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="built_in">test</span></span><br><span class="line"><span class="built_in">cd</span> <span class="built_in">test</span></span><br><span class="line">git init</span><br><span class="line">git remote add -f origin https://github.com/funtl/MyShopPlus.git</span><br><span class="line">git config core.sparsecheckout <span class="literal">true</span></span><br><span class="line"><span class="comment"># 将需要下载的文件放入队列</span></span><br><span class="line"><span class="built_in">echo</span> docs &gt;&gt; .git/info/sparse-checkout</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure></li>
 <li>下载后的文件放弃修改，回滚资源库最新代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
