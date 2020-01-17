@@ -60,7 +60,7 @@
 <meta property="og:description" content="Maven 作为一种强大的项目管理工具，实在不敢说掌握了它的所有知识。以遇到问题的为目录，记录自己对于 Maven 的理解。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;ss0.bdstatic.com&#x2F;70cFvHSh_Q1YnxGkpoWK1HF6hhy&#x2F;it&#x2F;u=659920890,2281008162&amp;fm=26&amp;gp=0.jpg">
-<meta property="og:updated_time" content="2019-12-01T09:59:20.942Z">
+<meta property="og:updated_time" content="2020-01-17T01:44:46.539Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;ss0.bdstatic.com&#x2F;70cFvHSh_Q1YnxGkpoWK1HF6hhy&#x2F;it&#x2F;u=659920890,2281008162&amp;fm=26&amp;gp=0.jpg">
 
@@ -235,10 +235,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-01 01:31:50 / 修改时间：17:59:20" itemprop="dateCreated datePublished" datetime="2019-12-01T01:31:50+08:00">2019-12-01</time>
+              <time title="创建时间：2019-12-01 01:31:50" itemprop="dateCreated datePublished" datetime="2019-12-01T01:31:50+08:00">2019-12-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-17 09:44:46" itemprop="dateModified" datetime="2020-01-17T09:44:46+08:00">2020-01-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -267,11 +273,9 @@
           </div>
 <a id="more"></a>
 <p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=659920890,2281008162&amp;fm=26&amp;gp=0.jpg" alt="maven"></p>
-<h2 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h2><div style="text-align: right"> 2019.11.30 </div>
-
-<p>周末在做 nexus 私服仓库练习（电商）时，遇到了以下疑问：<br>基础域依赖spring全家桶，<br>仓储域依赖spring全家桶，<br>仓储域又依赖基础域，<br>那仓储域是不是就算有两套spring的jar包？<br>虽然用到了dependencyManagement来统一管理了一份jar包<br>但是代码确实走了两遍依赖过程吗？<br>那会出现套娃的情况吗？</p>
-<p>因此，引出了 maven 的依赖机制.</p>
-<h3 id="传递性依赖"><a href="#传递性依赖" class="headerlink" title="传递性依赖"></a>传递性依赖</h3><p>上述所列出的问题，叫做传递性依赖，它对于嵌套深度没有任何限制，只是出现循环依赖时会报错。<br>因此，导致依赖图增长非常大。为解决这一问题，maven传递依赖提供了以下机制</p>
+<h2 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h2><p>周末在做 Nexus 私服仓库练习（电商）时，遇到了以下疑问：<br>基础域依赖spring全家桶，<br>仓储域依赖spring全家桶，<br>仓储域又依赖基础域，<br>那仓储域是不是就算有两套 spring 的 jar包？<br>虽然用到了 dependencyManagement 来统一管理了一份jar包<br>但是代码确实走了两遍依赖过程吗？<br>那会出现套娃的情况吗？</p>
+<p>因此，学习了 maven 的依赖机制.</p>
+<h2 id="传递性依赖"><a href="#传递性依赖" class="headerlink" title="传递性依赖"></a>传递性依赖</h2><p>上述所列出的问题，叫做传递性依赖，它对于嵌套深度没有任何限制，只是出现循环依赖时会报错。<br>因此，导致依赖图增长非常大。为解决这一问题，maven传递依赖提供了以下机制</p>
 <ul>
 <li>依赖调解<ul>
 <li>第一声明优先原则，靠上的依赖包优先进入项目中</li>
@@ -279,7 +283,7 @@
 </ul>
 </li>
 <li>依赖管理<ul>
-<li><dependencyManagement>标签使用</li>
+<li><dependencyManagement> 标签使用</li>
 </ul>
 </li>
 <li>依赖范围<ul>
@@ -287,32 +291,54 @@
 </ul>
 </li>
 <li>排除依赖<ul>
-<li>如果项目X依赖于项目Y，项目Y又依赖项目Z，项目X的所有者可以使用”exclusion”元素来显式排除项目Z</li>
+<li>如果项目X 依赖于项目Y，项目Y 又依赖项目Z，项目X 的所有者可以使用 <strong>exclusion</strong> 元素来显式排除项目Z</li>
 </ul>
 </li>
 <li>可选依赖<ul>
-<li>如果项目Y依赖项目Z，项目Y的所有者可以使用”optional”元素来指定项目Z作为X的可选依赖。那么当项目X依赖项目Y时，X只依赖Y并不依赖Y的可选依赖Z。项目X的所有者也可以根据自己的意愿显式指定X对Z的依赖。（你可以把可选依赖理解为默认排除）</li>
+<li>如果项目Y 依赖项目Z，项目Y 的所有者可以使用 <strong>optional</strong> 元素来指定项目Z 作为X 的可选依赖。那么当项目X 依赖项目Y 时，X 只依赖 Y 并不依赖 Y 的可选依赖 Z。项目X 的所有者也可以根据自己的意愿显式指定 X 对 Z 的依赖。（可以把可选依赖理解为默认排除）</li>
 </ul>
 </li>
 </ul>
-<h3 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h3><p>依赖范围会影响传递性依赖，同时也会影响项目构建任务中使用的classpath。<br>Maven有以下6种依赖范围：</p>
-<p>随后完善</p>
-<h2 id="一键构建"><a href="#一键构建" class="headerlink" title="一键构建"></a>一键构建</h2><div style="text-align: right"> 2019.12.15 </div>
-
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<h2 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h2><p>依赖范围会影响传递性依赖，同时也会影响项目构建任务中使用的 classpath。<br>Maven有以下6种依赖范围：</p>
+<ul>
+<li><p>compile: 编译依赖范围<br>  如果没有指定，就会默认使用该依赖范围。使用此依赖范围的Maven依赖，对于编译、测试、运行三种 classpath 都有效</p>
+</li>
+<li><p>system: 系统依赖范围<br>  该依赖与编译、测试、运行三种 classpath 的关系，和 provided 依赖范围完全一致。但是，使用system范围依赖时必须通过 systemPath 元素显式地指定依赖文件的路径。由于此类依赖不是通过 Maven 仓库解析的，而且往往与本机系统绑定，可能造成构建的不可移植，因此应该谨慎使用。</p>
+</li>
+<li><p>provided: 已提供依赖范围<br>  使用此依赖范围的 Maven 依赖，对于编译和测试 classpath 有效，但在运行时无效。典型的例子是 servlet-api，编译和测试项目的时候需要该依赖，但在运行项目的时候，由于容器已经提供，就不需要 Maven 重复地引入一遍</p>
+</li>
+<li><p>runtime: 运行时依赖范围<br>  使用此依赖范围的 Maven 依赖，对于测试和运行 classpath 有效，但在编译主代码时无效。典型的例子是JDBC驱动实现，项目主代码的编译只需要 JDK 提供的 JDBC 接口，只有在执行测试或者运行项目的时候才需要实现上述接口的具体 JDBC驱动</p>
+</li>
+<li><p>test: 测试依赖范围。<br>  使用此依赖范围的 Maven 依赖，只对于测试 classpath 有效，在编译主代码或者运行项目的使用时将无法使用此类依赖。典型的例子就是JUnit<br>，它只有在编译测试代码及运行测试的时候才需要。</p>
+</li>
+<li><p>import：导入依赖范围<br>  使用此依赖范围不会对三种 classpath 产生影响，该依赖范围只能与 dependencyManagement 元素配合使用，其功能为将目标 pom 文件中 dependencyManagement的 配置导入合并到当前 pom 的 dependencyManagement 中。我认为此功能约等于实现了 Maven 的多继承</p>
+</li>
+</ul>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<li>清理生命周期：在进行真正的构建之前进行一些清理工作<ol>
+<li>pre-clean 执行一些需要在clean之前完成的工作</li>
+<li>clean 移除所有上一次构建生成的文件</li>
+<li>post-clean 执行一些需要在clean之后立刻完成的工作</li>
+</ol>
+</li>
+<li>默认生命周期：构建的核心部分，编译，测试，打包，部署等</li>
+<li>站点生命周期：生成项目报告，站点，发布站点，站点的文档<ol>
+<li>pre-site 执行一些需要在生成站点文档之前完成的工作</li>
+<li>site 生成项目的站点文档</li>
+<li>post-site 执行一些需要在生成站点文档之后完成的工作，并且为部署做准备</li>
+<li>site-deploy 将生成的站点文档部署到特定的服务器上</li>
+</ol>
+</li>
+</ul>
+<h2 id="一键构建"><a href="#一键构建" class="headerlink" title="一键构建"></a>一键构建</h2><p><strong>常用命令</strong></p>
+<ul>
 <li>clean 对于构建信息清理</li>
 <li>compile 编译正式代码</li>
 <li>test 编译测试代码</li>
-<li>package 将包打在 target 目录下</li>
-<li>install 安装到本地仓库</li>
-<li>deploy 将本地做好的 jar 包上传私服</li>
+<li>package 将包打在 target 目录下<br>  clean、resources、compile、testResources、testCompile、test、jar(打包)</li>
+<li>install 安装到本地仓库<br>  clean、resources、compile、testResources、testCompile、test、jar(打包)、install</li>
+<li>deploy 将本地做好的 jar 包上传私服<br>  clean、resources、compile、testResources、testCompile、test、jar(打包)、install、deploy</li>
 </ul>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ul>
-<li>清理生命周期</li>
-<li>默认生命周期</li>
-<li>站点生命周期</li>
-</ul>
-<p>参考文献：<a href="https://www.cnblogs.com/tooy/p/7364149.html" target="_blank" rel="noopener">tooy</a></p>
 
     </div>
 
@@ -378,7 +404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.</span> <span class="nav-text">依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传递性依赖"><span class="nav-number">1.1.</span> <span class="nav-text">传递性依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖范围"><span class="nav-number">1.2.</span> <span class="nav-text">依赖范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一键构建"><span class="nav-number">2.</span> <span class="nav-text">一键构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">2.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">2.2.</span> <span class="nav-text">生命周期</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.</span> <span class="nav-text">依赖管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传递性依赖"><span class="nav-number">2.</span> <span class="nav-text">传递性依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖范围"><span class="nav-number">3.</span> <span class="nav-text">依赖范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">4.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一键构建"><span class="nav-number">5.</span> <span class="nav-text">一键构建</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -394,7 +420,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

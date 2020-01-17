@@ -66,7 +66,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git009.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git010.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git005.png">
-<meta property="og:updated_time" content="2019-11-17T11:01:32.737Z">
+<meta property="og:updated_time" content="2020-01-17T01:59:54.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;mrtallon.gitee.io&#x2F;img&#x2F;git003.png">
 
@@ -249,7 +249,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 19:01:32" itemprop="dateModified" datetime="2019-11-17T19:01:32+08:00">2019-11-17</time>
+                <time title="修改时间：2020-01-17 09:59:54" itemprop="dateModified" datetime="2020-01-17T09:59:54+08:00">2020-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,18 +282,18 @@
 <p>工作流（Workflow），指“业务过程的部分或整体在计算机应用环境下的自动化”。是对工作流程及其各操作步骤之间业务规则的抽象、概括描述。在计算机中，工作流属于计算机支持的协同工作（CSCW）的一部分。后者是普遍地研究一个群体如何在计算机的帮助下实现协同工作的。<br>工作流主要解决的主要问题是：为了实现某个业务目标，利用计算机在多个参与者之间按某种预定规则自动传递文档、信息或者任务。<br>——《百度百科》</p>
 </blockquote>
 <p><strong>所有工作流是作为方案指导而不是条例规定</strong></p>
-<h3 id="中央集中式"><a href="#中央集中式" class="headerlink" title="中央集中式"></a>中央集中式</h3><p>所有人向一个公共仓库扔代码，较原始，不利于版本迭代。</p>
+<h2 id="中央集中式"><a href="#中央集中式" class="headerlink" title="中央集中式"></a>中央集中式</h2><p>所有人向一个公共仓库扔代码，较原始，不利于版本迭代。</p>
 <p><img src="https://mrtallon.gitee.io/img/git003.png" alt="git003"></p>
-<h3 id="GitFlow"><a href="#GitFlow" class="headerlink" title="GitFlow"></a>GitFlow</h3><p>通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。<br>严格的分支模型也为大型项目提供了一些非常必要的结构。<br>在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。</p>
+<h2 id="GitFlow"><a href="#GitFlow" class="headerlink" title="GitFlow"></a>GitFlow</h2><p>通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。<br>严格的分支模型也为大型项目提供了一些非常必要的结构。<br>在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。</p>
 <p><img src="https://mrtallon.gitee.io/img/git006.png" alt="git006"></p>
-<h4 id="历史分支"><a href="#历史分支" class="headerlink" title="历史分支"></a>历史分支</h4><p>相对使用仅有的一个 master 分支，GitFlow 工作流使用2个分支来记录项目的历史。master 分支存储了正式发布的历史，而 develop 分支作为功能的集成分支。这样也方便 master 分支上的所有提交分配一个版本号。</p>
+<h3 id="历史分支"><a href="#历史分支" class="headerlink" title="历史分支"></a>历史分支</h3><p>相对使用仅有的一个 master 分支，GitFlow 工作流使用2个分支来记录项目的历史。master 分支存储了正式发布的历史，而 develop 分支作为功能的集成分支。这样也方便 master 分支上的所有提交分配一个版本号。</p>
 <p><img src="https://mrtallon.gitee.io/img/git007.png" alt="git007"></p>
-<h4 id="功能分支"><a href="#功能分支" class="headerlink" title="功能分支"></a>功能分支</h4><p>每个新功能位于一个自己的分支，这样可以 push 到中央仓库以备份和协作。但功能分支不是从 master 分支上拉出新分支，而是使用 develop 分支作为父分支。当新功能完成时，合并回 develop 分支。新功能提交应该从不直接与 master 分支交互。</p>
+<h3 id="功能分支"><a href="#功能分支" class="headerlink" title="功能分支"></a>功能分支</h3><p>每个新功能位于一个自己的分支，这样可以 push 到中央仓库以备份和协作。但功能分支不是从 master 分支上拉出新分支，而是使用 develop 分支作为父分支。当新功能完成时，合并回 develop 分支。新功能提交应该从不直接与 master 分支交互。</p>
 <p><img src="https://mrtallon.gitee.io/img/git008.png" alt="git008"></p>
-<h4 id="发布分支"><a href="#发布分支" class="headerlink" title="发布分支"></a>发布分支</h4><p><img src="https://mrtallon.gitee.io/img/git009.png" alt="git009"></p>
-<h4 id="维护分支"><a href="#维护分支" class="headerlink" title="维护分支"></a>维护分支</h4><p><img src="https://mrtallon.gitee.io/img/git010.png" alt="git010"></p>
-<h4 id="版本号说明"><a href="#版本号说明" class="headerlink" title="版本号说明"></a>版本号说明</h4><p>v1.0.0-&gt;v1.0.1：    热修复<br>v1.0.0-&gt;v1.1.0：    新增功能</p>
-<h4 id="演示事例"><a href="#演示事例" class="headerlink" title="演示事例"></a>演示事例</h4><p><strong>小红</strong><br>基于 master 拉取项目<br>创建 develop 开发分支<br>切换开发分支并推送远程（模块组长）<br>新建文件并上传 develop 分支</p>
+<h3 id="发布分支"><a href="#发布分支" class="headerlink" title="发布分支"></a>发布分支</h3><p><img src="https://mrtallon.gitee.io/img/git009.png" alt="git009"></p>
+<h3 id="维护分支"><a href="#维护分支" class="headerlink" title="维护分支"></a>维护分支</h3><p><img src="https://mrtallon.gitee.io/img/git010.png" alt="git010"></p>
+<h3 id="版本号说明"><a href="#版本号说明" class="headerlink" title="版本号说明"></a>版本号说明</h3><p>v1.0.0-&gt;v1.0.1：    热修复<br>v1.0.0-&gt;v1.1.0：    新增功能</p>
+<h3 id="演示事例"><a href="#演示事例" class="headerlink" title="演示事例"></a>演示事例</h3><p><strong>小红</strong><br>基于 master 拉取项目<br>创建 develop 开发分支<br>切换开发分支并推送远程（模块组长）<br>新建文件并上传 develop 分支</p>
 <blockquote>
 <p>你的开发项目应该是在 feature+模块名的分支，如果人少，实在没必要了，我直接默认每个人都在 develop 开发</p>
 </blockquote>
@@ -305,11 +305,10 @@
 <p>新分支：hotfix_0004（序号）<br>新建文件表示修复（提交到 hotfix 分支）<br>之后 hotfix 直接合并到 master。<br>最后切换分支到 master 拉取最新，<br>发现 master 分支已修复，</p>
 <p>发布新版本，创建标签，<br>1.0.1-RELEASE<br>推送到服务器（包括标签）<br>最后，删除 dep 和 master 的其余分支</p>
 <h3 id="Forking"><a href="#Forking" class="headerlink" title="Forking"></a>Forking</h3><p>特大型项目会用到，暂时不写了</p>
-<p>到了这里，但愿你对集中式工作流、功能分支工作流和 GitFlow 工作流已经感觉很舒适了。你应该也牢固的掌握了本地仓库的潜能，push/pull 模式和 Git 健壮的分支和合并模型。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>到了这里，但愿你对集中式工作流、功能分支工作流和 GitFlow 工作流已经感觉很舒适了。应该牢固的掌握了本地仓库的潜能，push/pull 模式和 Git 健壮的分支和合并模型。</p>
 <p>记住，这里演示的工作流只是可能用法的例子，而不是在实际工作中使用 Git 不可违逆的条例。所以不要畏惧按自己需要对工作流的用法做取舍。不变的目标就是让 Git 为你所用。</p>
 <p><img src="https://mrtallon.gitee.io/img/git005.png" alt="git005"></p>
 <h2 id="个人-Tips"><a href="#个人-Tips" class="headerlink" title="个人 Tips"></a>个人 Tips</h2><p>在写提交日志时，也许只是多加一个<a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">emoji</a>，就能表达很多（前提是大家统一符合规范）</p>
-<hr>
 
     </div>
 
@@ -375,7 +374,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中央集中式"><span class="nav-number">1.</span> <span class="nav-text">中央集中式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitFlow"><span class="nav-number">2.</span> <span class="nav-text">GitFlow</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#历史分支"><span class="nav-number">2.1.</span> <span class="nav-text">历史分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能分支"><span class="nav-number">2.2.</span> <span class="nav-text">功能分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布分支"><span class="nav-number">2.3.</span> <span class="nav-text">发布分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#维护分支"><span class="nav-number">2.4.</span> <span class="nav-text">维护分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#版本号说明"><span class="nav-number">2.5.</span> <span class="nav-text">版本号说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#演示事例"><span class="nav-number">2.6.</span> <span class="nav-text">演示事例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forking"><span class="nav-number">3.</span> <span class="nav-text">Forking</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人-Tips"><span class="nav-number"></span> <span class="nav-text">个人 Tips</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#中央集中式"><span class="nav-number">1.</span> <span class="nav-text">中央集中式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitFlow"><span class="nav-number">2.</span> <span class="nav-text">GitFlow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#历史分支"><span class="nav-number">2.1.</span> <span class="nav-text">历史分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能分支"><span class="nav-number">2.2.</span> <span class="nav-text">功能分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布分支"><span class="nav-number">2.3.</span> <span class="nav-text">发布分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#维护分支"><span class="nav-number">2.4.</span> <span class="nav-text">维护分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本号说明"><span class="nav-number">2.5.</span> <span class="nav-text">版本号说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#演示事例"><span class="nav-number">2.6.</span> <span class="nav-text">演示事例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forking"><span class="nav-number">2.7.</span> <span class="nav-text">Forking</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束"><span class="nav-number">3.</span> <span class="nav-text">结束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人-Tips"><span class="nav-number">4.</span> <span class="nav-text">个人 Tips</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -391,7 +390,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
