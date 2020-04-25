@@ -51,16 +51,18 @@
   };
 </script>
 
-  <meta name="description" content="知易行难">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tallon">
-<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;archives&#x2F;2018&#x2F;07&#x2F;index.html">
+  <meta name="description" content="搭建一套基于 Spring Cloud Alibaba 和 Dubbo 的脚手架，集成 MybatisPlus 等常用中间件，实现对内 RPC、对外 Rest 的能力">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud Alibaba Dubbo">
+<meta property="og:url" content="https:&#x2F;&#x2F;tallon.ink&#x2F;archives&#x2F;6bafcd40.html">
 <meta property="og:site_name" content="Tallon">
-<meta property="og:description" content="知易行难">
+<meta property="og:description" content="搭建一套基于 Spring Cloud Alibaba 和 Dubbo 的脚手架，集成 MybatisPlus 等常用中间件，实现对内 RPC、对外 Rest 的能力">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-25T16:49:51.858Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://tallon.ink/archives/2018/07/">
+<link rel="canonical" href="https://tallon.ink/archives/6bafcd40.html">
 
 
 <script id="page-configurations">
@@ -68,13 +70,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>归档 | Tallon</title>
+  <title>Spring Cloud Alibaba Dubbo | Tallon</title>
   
 
 
@@ -204,69 +206,112 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 19 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tallon.ink/archives/6bafcd40.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://mrtallon.gitee.io/img/avatar.png">
+      <meta itemprop="name" content="Tallon">
+      <meta itemprop="description" content="知易行难">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tallon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Cloud Alibaba Dubbo
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-25 11:02:51" itemprop="dateCreated datePublished" datetime="2020-04-25T11:02:51+08:00">2020-04-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-26 00:49:51" itemprop="dateModified" datetime="2020-04-26T00:49:51+08:00">2020-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2018</h1>
+        <div class="note default">
+            <p>搭建一套基于 Spring Cloud Alibaba 和 Dubbo 的脚手架，<br>集成 MybatisPlus 等常用中间件，<br>实现对内 RPC、对外 Rest 的能力</p>
+          </div>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>将 Dubbo 融入到 Spring Cloud Alibaba 生态中， 使微服务之间的调用同时具备 RESTful 和 Dubbo 调用的能力。 做到对业务代码无侵入，无感知； 引入 JAR 包则微服务间调用使用 Dubbo，去掉 JAR 包则使用默认的 RESTful； 实现参考的是 Spring Cloud 中文社区的 Spring Cloud Dubbo 项目。</p>
+<p>对内 RPC 进行资源调用，速度远比 http 请求快得多，少了一次正反序列化的过程（rpc 1次，http 2次）。</p>
+<p>既然使用 Cloud Alibaba，故使用 nacos 来做 Dubbo 的注册中心。</p>
+<p>当前时间2019.5.10 2:08,nacos 更新 1.0.0发行版。 对应的是 Spring Boot 2.x 版本</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h3><p>基于Docker启动<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/nacos-group/nacos-docker.git</span><br><span class="line">cd nacos-docker</span><br><span class="line">docker-compose -f example/standalone-mysql-8.yaml up -d</span><br></pre></td></tr></table></figure><br>如果mac本地的docker，需要share数据卷example<br>账号：nacos 密码：nacos</p>
+<blockquote>
+<p>目前是单机模式，后期可以改进成高可用集群版 K8S-nacos</p>
+</blockquote>
+<h2 id="未完待续···"><a href="#未完待续···" class="headerlink" title="未完待续···"></a>未完待续···</h2>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-07-25T23:06:45+08:00"
-              content="2018-07-25">
-          07-25
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/archives/ed2e9abb.html" itemprop="url">
-            <span itemprop="name">敏捷开发</span>
-          </a>
-      </h2>
+        
 
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/archives/ab95a53b.html" rel="next" title="写好代码">
+                  <i class="fa fa-chevron-left"></i> 写好代码
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-07-23T02:40:18+08:00"
-              content="2018-07-23">
-          07-23
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/archives/f5f9fa9b.html" itemprop="url">
-            <span itemprop="name">Docker</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -295,6 +340,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos"><span class="nav-number">2.1.</span> <span class="nav-text">Nacos</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续···"><span class="nav-number">3.</span> <span class="nav-text">未完待续···</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
