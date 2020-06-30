@@ -59,8 +59,16 @@
 <meta property="og:site_name" content="Tallon">
 <meta property="og:description" content="Nexus 是一个强大的仓库管理器，极大地简化了内部仓库的维护和外部仓库的访问。本文先且简单的介绍Nexus信息，主要以上手操作为主，以便日后随时查阅。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-01T05:40:51.773Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;Fmns_WRTVJJAhPZ_ppSbTfxzGcjt@.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;FpzfqBajo3rINHbo8WNVa4-vAbUc@.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;FvSDZywnCmXEe9PW8xSV5rtBP6IG@.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;Fg5UNZHL7aIvES9iucc4AmogRf8G@.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;FrORMcv7-DknuOck886m0T2hsC2k@.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;Fpy0W4xP484ojSiAfSNf-GIJoX8m@.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;FqUwXUQVhx-D9yEDgbqNXyG8XMrM@.jpg">
+<meta property="og:updated_time" content="2020-06-30T06:46:05.367Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;images.qfdmy.com&#x2F;Fmns_WRTVJJAhPZ_ppSbTfxzGcjt@.jpg">
 
 <link rel="canonical" href="https://tallon.ink/archives/ecbf82d9.html">
 
@@ -241,7 +249,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-01 13:40:51" itemprop="dateModified" datetime="2019-12-01T13:40:51+08:00">2019-12-01</time>
+                <time title="修改时间：2020-06-30 14:46:05" itemprop="dateModified" datetime="2020-06-30T14:46:05+08:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,29 +278,118 @@
             <p>Nexus 是一个强大的仓库管理器，极大地简化了内部仓库的维护和外部仓库的访问。<br>本文先且简单的介绍Nexus信息，主要以上手操作为主，以便日后随时查阅。</p>
           </div>
 <a id="more"></a>
-<h2 id="基于Docker安装"><a href="#基于Docker安装" class="headerlink" title="基于Docker安装"></a>基于Docker安装</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nexus:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sonatype/nexus3</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nexus</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8084</span><span class="string">:8081</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/usr/local/docker/nexus/data:/nexus-data</span></span><br></pre></td></tr></table></figure>
-<p>为数据卷添加权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /usr/local/docker/nexus/data</span><br></pre></td></tr></table></figure></p>
-<p>登录验证</p>
-<p>ip:8084<br>用户名：admin<br>密码：admin123</p>
+<h2 id="基于Docker安装"><a href="#基于Docker安装" class="headerlink" title="基于Docker安装"></a>基于Docker安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/docker/nexus/data &amp;&amp; chown -R 200 /usr/local/docker/nexus/data</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.5'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nexus:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sonatype/nexus3:3.23.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nexus</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">INSTALL4J_ADD_VM_PARAMS:</span> <span class="string">-XX:ActiveProcessorCount=4</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">80</span><span class="string">:8081</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/nexus-data</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>3.1.7版本之后默认密码不再是”admin123”，需自行查看随机密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd data</span><br><span class="line">vi admin.password</span><br></pre></td></tr></table></figure></p>
+<p>ActiveProcessorCount=4 是根据当前机器的内核数量决定</p>
 </blockquote>
+<ul>
+<li>用户名：admin </li>
+<li>密码：<code>cat /usr/local/docker/nexus/data/admin.password</code></li>
+</ul>
+<h2 id="Maven私服配置"><a href="#Maven私服配置" class="headerlink" title="Maven私服配置"></a>Maven私服配置</h2><h3 id="创建代理仓库"><a href="#创建代理仓库" class="headerlink" title="创建代理仓库"></a>创建代理仓库</h3><ul>
+<li>点击 <code>设置按钮</code> -&gt; <code>Repository</code> -&gt; <code>Repositories</code></li>
+<li>点击 <code>Create Repository</code> -&gt; 选择 <code>maven2 (proxy)</code> 创建 Maven 代理仓库</li>
+<li>配置阿里云仓库代理（版本策略为 <strong>Release</strong>）<ul>
+<li><strong>Name：</strong> <code>aliyun-nexus</code></li>
+<li><strong>Version pollcy：</strong> <code>Release</code></li>
+<li><strong>Remote storate：</strong> <code>http://maven.aliyun.com/nexus/content/groups/public/</code></li>
+</ul>
+</li>
+<li>配置 Spring 仓库代理（版本策略为 <strong>Release</strong>）<ul>
+<li><strong>Name：</strong> <code>spring-milestone</code></li>
+<li><strong>Version pollcy：</strong> <code>Release</code></li>
+<li><strong>Remote storate：</strong> <code>https://repo.spring.io/milestone</code></li>
+</ul>
+</li>
+<li>配置 Spring 仓库代理（版本策略为 <strong>Snapshot</strong>）<ul>
+<li><strong>Name：</strong> <code>spring-snapshot</code></li>
+<li><strong>Version pollcy：</strong> <code>Snapshot</code></li>
+<li><strong>Remote storate：</strong> <code>https://repo.spring.io/snapshot</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="配置代理仓库"><a href="#配置代理仓库" class="headerlink" title="配置代理仓库"></a>配置代理仓库</h3><ul>
+<li>点击 <code>设置按钮</code> -&gt; <code>Repository</code> -&gt; <code>Repositories</code></li>
+<li>选择 <code>maven-public</code>，修改 <code>Group</code>（注意先后顺序）</li>
+</ul>
+<p><img src="http://images.qfdmy.com/Fmns_WRTVJJAhPZ_ppSbTfxzGcjt@.jpg" alt="pic"></p>
+<h3 id="配置计划任务"><a href="#配置计划任务" class="headerlink" title="配置计划任务"></a>配置计划任务</h3><p>实际开发过程中可能每天都会产生大量的快照版本，每个快照都会占用相应的空间，历史快照版本就没有什么意义了应该定时清理以释放多占用的空间资源，我们可以通过 <strong>Tasks</strong> 计划任务选项定期清理旧的快照版本。</p>
+<ul>
+<li>点击 <code>设置按钮</code> -&gt; <code>System</code> -&gt; <code>Tasks</code><ul>
+<li><strong>Task name：</strong> <code>Delete SNAPSHOT</code></li>
+<li><strong>Repository：</strong> <code>(All Repositories)</code></li>
+<li><strong>Minimum snapshot count：</strong> <code>1</code></li>
+<li><strong>Snapshot retention (days)：</strong> <code>0</code></li>
+<li><strong>Task frequency：</strong> <code>Manual</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://images.qfdmy.com/FpzfqBajo3rINHbo8WNVa4-vAbUc@.jpg" alt="pic"></p>
+<h3 id="配置-setting-xml"><a href="#配置-setting-xml" class="headerlink" title="配置 setting.xml"></a>配置 setting.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-public<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">password</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">password</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">password</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servers</span></span></span><br><span class="line"><span class="tag">  </span></span><br><span class="line">&lt;mirrors&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-public<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus Public<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://nexus.funtl.com/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="NPM私服配置"><a href="#NPM私服配置" class="headerlink" title="NPM私服配置"></a>NPM私服配置</h2><ul>
+<li>点击 <code>设置按钮</code> -&gt; <code>Repository</code> -&gt; <code>Repositories</code> -&gt; <code>npm(proxy)</code><ul>
+<li><strong>Name：</strong> npm-taobao</li>
+<li><strong>Remote storage：</strong> <code>https://registry.npm.taobao.org</code></li>
+</ul>
+</li>
+<li>点击 <code>设置按钮</code> -&gt; <code>Repository</code> -&gt; <code>Repositories</code> -&gt; <code>npm(hosted)</code><ul>
+<li><strong>Name：</strong> npm-hosted</li>
+</ul>
+</li>
+<li>点击 <code>设置按钮</code> -&gt; <code>Repository</code> -&gt; <code>Repositories</code> -&gt; <code>npm(group)</code><ul>
+<li><strong>Name：</strong> npm-public</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://images.qfdmy.com/FvSDZywnCmXEe9PW8xSV5rtBP6IG@.jpg" alt="pic"></p>
+<h3 id="安全认证"><a href="#安全认证" class="headerlink" title="安全认证"></a>安全认证</h3><ul>
+<li>点击 <code>设置按钮</code> -&gt; <code>Security</code> -&gt; <code>Realms</code><ul>
+<li>将左侧 <code>npm Bearer Token Realm</code> 添加进 <code>Active</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://images.qfdmy.com/Fg5UNZHL7aIvES9iucc4AmogRf8G@.jpg" alt="pic"></p>
+<h3 id="创建角色"><a href="#创建角色" class="headerlink" title="创建角色"></a>创建角色</h3><ul>
+<li>点击 <code>设置按钮</code> -&gt; <code>Security</code> -&gt; <code>Roles</code> -&gt; <code>Create role</code><ul>
+<li><strong>Role ID：</strong> <code>nx-deploy</code></li>
+<li><strong>Role name：</strong> <code>nx-deploy</code></li>
+<li><strong>Given：</strong> <code>nx-repository-view-*-*-*</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://images.qfdmy.com/FrORMcv7-DknuOck886m0T2hsC2k@.jpg" alt="FrORMcv7-DknuOck886m0T2hsC2k@"></p>
+<p><img src="http://images.qfdmy.com/Fpy0W4xP484ojSiAfSNf-GIJoX8m@.jpg" alt="Fpy0W4xP484ojSiAfSNf-GIJoX8m@"></p>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><ul>
+<li>点击 <code>设置按钮</code> -&gt; <code>Security</code> -&gt; <code>Users</code> -&gt; <code>Create local user</code><ul>
+<li><strong>ID：</strong> <code>deployer</code></li>
+<li><strong>First name：</strong> <code>deployer</code></li>
+<li><strong>Last name：</strong> <code>User</code></li>
+<li><strong>Password：</strong> <code>deployer</code></li>
+<li><strong>Roles Granted：</strong> <code>nx-deploy</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://images.qfdmy.com/FqUwXUQVhx-D9yEDgbqNXyG8XMrM@.jpg" alt="FqUwXUQVhx-D9yEDgbqNXyG8XMrM@"></p>
+<h3 id="配置镜像仓库"><a href="#配置镜像仓库" class="headerlink" title="配置镜像仓库"></a>配置镜像仓库</h3><p>修改默认仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry http://nexus.funtl.com/repository/npm-public/</span><br></pre></td></tr></table></figure>
+<h3 id="修改客户端配置"><a href="#修改客户端配置" class="headerlink" title="修改客户端配置"></a>修改客户端配置</h3><p>镜像仓库配置完成后还不能直接使用，需要配置 NPM 客户端信息，修改 <code>C:\Users\用户名\.npmrc</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">registry=http://nexus.funtl.com/repository/npm-public/</span><br><span class="line">email=topsale@vip.qq.com</span><br><span class="line">always-auth=true</span><br><span class="line">_auth=&quot;ZGVwbG95ZXI6ZGVwbG95ZXI=&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong> <code>_auth</code> 是 <code>username:password</code> 的 base64 值，可以通过 Linux 命令 <code>echo -n &#39;username:password&#39; | openssl base64</code> 生成。比如我们刚才的账号密码都是 <code>deployer</code> 则生成命令为：<code>echo -n &#39;deployer:deployer&#39; | openssl base64</code></p>
+</blockquote>
+<h2 id="将第三方-jar-包上传至-nexus"><a href="#将第三方-jar-包上传至-nexus" class="headerlink" title="将第三方 jar 包上传至 nexus"></a>将第三方 jar 包上传至 nexus</h2><blockquote>
+<p>为方便阅读，以下代码分行展示，正式使用需合并为一行</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如第三方JAR包：aliyun-sdk-oss-2.2.3.jar</span></span><br><span class="line">mvn deploy:deploy-file</span><br><span class="line"> -DgroupId=com.aliyun.oss</span><br><span class="line"> -DartifactId=aliyun-sdk-oss</span><br><span class="line"> -Dversion=2.2.3 -Dpackaging=jar </span><br><span class="line"> -Dfile=D:\aliyun-sdk-oss-2.2.3.jar</span><br><span class="line"> -Durl=http://nexus.funtl.com/repository/maven-releases/ </span><br><span class="line"> -DrepositoryId=nexus-releases</span><br></pre></td></tr></table></figure>
+<h2 id="将第三方-jar-包上传至本地仓库"><a href="#将第三方-jar-包上传至本地仓库" class="headerlink" title="将第三方 jar 包上传至本地仓库"></a>将第三方 jar 包上传至本地仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file</span><br><span class="line"> -DgroupId=com.alibaba</span><br><span class="line"> -DartifactId=fastjson</span><br><span class="line"> -Dversion=1.1.37</span><br><span class="line"> -Dfile=D:\fastjson-2.2.3.jar</span><br><span class="line"> -Dpackageing-jar</span><br></pre></td></tr></table></figure>
 <p><strong>Snapshots 与 Releases 的区别</strong></p>
 <ul>
-<li>nexus-releases: 用于发布 Release 版本</li>
-<li>nexus-snapshots: 用于发布 Snapshot 版本（快照版）</li>
+<li>nexus-releases: 用于发布 Release 版本(发行版)</li>
+<li>nexus-snapshots: 用于发布 Snapshot 版本(快照版)</li>
 <li>在项目 pom.xml 中设置的版本号添加 SNAPSHOT 标识的都会发布为 SNAPSHOT 版本，没有 SNAPSHOT 标识的都会发布为 RELEASE 版本。</li>
 <li>SNAPSHOT 版本会自动加一个时间作为标识，如：1.0.0-SNAPSHOT 发布后为变成 1.0.0-SNAPSHOT-20180522.123456-1.jar</li>
 </ul>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="setting-xml"><a href="#setting-xml" class="headerlink" title="setting.xml"></a>setting.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">password</span>&gt;</span>admin123<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">password</span>&gt;</span>admin123<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3><p>配置代理仓库（部署）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">repository</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus Release Repository<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8081/repository/maven-releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">repository</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus Snapshot Repository<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8084/repository/maven-snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br></pre></td></tr></table></figure><br>配置代理仓库（拉取）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus Repository<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8081/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus Plugin Repository<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8084/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>部署方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn deploy</span><br></pre></td></tr></table></figure>
-<h2 id="上传第三方-jar-包-至-nexus"><a href="#上传第三方-jar-包-至-nexus" class="headerlink" title="上传第三方 jar 包 至 nexus"></a>上传第三方 jar 包 至 nexus</h2><blockquote>
-<p>为方便阅读，以下代码分行展示，正式使用需合并为一行</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如第三方JAR包：aliyun-sdk-oss-2.2.3.jar</span></span><br><span class="line">mvn deploy:deploy-file</span><br><span class="line"> -DgroupId=com.aliyun.oss</span><br><span class="line"> -DartifactId=aliyun-sdk-oss</span><br><span class="line"> -Dversion=2.2.3 -Dpackaging=jar </span><br><span class="line"> -Dfile=D:\aliyun-sdk-oss-2.2.3.jar</span><br><span class="line"> -Durl=http://127.0.0.1:8084/repository/maven-releases/ </span><br><span class="line"> -DrepositoryId=nexus-releases</span><br></pre></td></tr></table></figure>
-<h2 id="将第三方-jar-包-上传至本地仓库"><a href="#将第三方-jar-包-上传至本地仓库" class="headerlink" title="将第三方 jar 包 上传至本地仓库"></a>将第三方 jar 包 上传至本地仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file</span><br><span class="line"> -DgroupId=com.alibaba</span><br><span class="line"> -DartifactId=fastjson</span><br><span class="line"> -Dversion=1.1.37</span><br><span class="line"> -Dfile=D:\fastjson-2.2.3.jar</span><br><span class="line"> -Dpackageing-jar</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -358,7 +455,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Docker安装"><span class="nav-number">1.</span> <span class="nav-text">基于Docker安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setting-xml"><span class="nav-number">2.1.</span> <span class="nav-text">setting.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pom-xml"><span class="nav-number">2.2.</span> <span class="nav-text">pom.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传第三方-jar-包-至-nexus"><span class="nav-number">3.</span> <span class="nav-text">上传第三方 jar 包 至 nexus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将第三方-jar-包-上传至本地仓库"><span class="nav-number">4.</span> <span class="nav-text">将第三方 jar 包 上传至本地仓库</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Docker安装"><span class="nav-number">1.</span> <span class="nav-text">基于Docker安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven私服配置"><span class="nav-number">2.</span> <span class="nav-text">Maven私服配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建代理仓库"><span class="nav-number">2.1.</span> <span class="nav-text">创建代理仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置代理仓库"><span class="nav-number">2.2.</span> <span class="nav-text">配置代理仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置计划任务"><span class="nav-number">2.3.</span> <span class="nav-text">配置计划任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-setting-xml"><span class="nav-number">2.4.</span> <span class="nav-text">配置 setting.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NPM私服配置"><span class="nav-number">3.</span> <span class="nav-text">NPM私服配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全认证"><span class="nav-number">3.1.</span> <span class="nav-text">安全认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建角色"><span class="nav-number">3.2.</span> <span class="nav-text">创建角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户"><span class="nav-number">3.3.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置镜像仓库"><span class="nav-number">3.4.</span> <span class="nav-text">配置镜像仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改客户端配置"><span class="nav-number">3.5.</span> <span class="nav-text">修改客户端配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将第三方-jar-包上传至-nexus"><span class="nav-number">4.</span> <span class="nav-text">将第三方 jar 包上传至 nexus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将第三方-jar-包上传至本地仓库"><span class="nav-number">5.</span> <span class="nav-text">将第三方 jar 包上传至本地仓库</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
