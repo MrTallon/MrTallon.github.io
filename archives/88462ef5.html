@@ -58,10 +58,8 @@
 <meta property="og:site_name" content="Tallon">
 <meta property="og:description" content="分布式环境中分库分表后主键解决方案">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;www.qfdmy.com&#x2F;wp-content&#x2F;uploads&#x2F;2020&#x2F;01&#x2F;5131aa5a5ccd97e.png">
-<meta property="og:updated_time" content="2020-01-19T15:06:09.062Z">
+<meta property="og:updated_time" content="2020-07-17T08:38:28.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;www.qfdmy.com&#x2F;wp-content&#x2F;uploads&#x2F;2020&#x2F;01&#x2F;5131aa5a5ccd97e.png">
 
 <link rel="canonical" href="https://tallon.ink/archives/88462ef5.html">
 
@@ -242,7 +240,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-19 23:06:09" itemprop="dateModified" datetime="2020-01-19T23:06:09+08:00">2020-01-19</time>
+                <time title="修改时间：2020-07-17 16:38:28" itemprop="dateModified" datetime="2020-07-17T16:38:28+08:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,17 +278,42 @@
 <li>高可用</li>
 <li>高QPS</li>
 </ul>
-<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>ID策略 ｜ 优点 ｜ 缺点<br>—- ｜ —- ｜ —-<br>UUID｜性能非常高；本地生成，没有网络消耗 ｜ 26位太长；可能泄露MAC地址；MySQL建议数字最好，越短越好<br>数据库自增 ｜ 简单 ｜ 强依赖DB；单台MySQL性能瓶颈；不够安全<br>Snowflake ｜ 趋势递增；高性能；根据业务灵活分配bit位 ｜ 强依赖机器时钟</p>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ID策略</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">UUID</td>
+<td style="text-align:center">性能非常高；本地生成，没有网络消耗</td>
+<td style="text-align:center">26位太长；可能泄露MAC地址；MySQL建议数字最好，越短越好</td>
+</tr>
+<tr>
+<td style="text-align:center">数据库自增</td>
+<td style="text-align:center">简单</td>
+<td style="text-align:center">强依赖DB；单台MySQL性能瓶颈；不够安全</td>
+</tr>
+<tr>
+<td style="text-align:center">Snowflake</td>
+<td style="text-align:center">趋势递增；高性能；根据业务灵活分配bit位</td>
+<td style="text-align:center">强依赖机器时钟</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>为解决以上问题，使用 <a href="https://github.com/Meituan-Dianping/Leaf" target="_blank" rel="noopener">Leaf</a></p>
 <blockquote>
 <p>Leaf 是美团开源的分布式 ID 生成系统，最早期需求是各个业务线的订单 ID 生成需求。在美团早期，有的业务直接通过 DB 自增的方式生成 ID，有的业务通过 Redis 缓存来生成 ID，也有的业务直接用 UUID 这种方式来生成 ID。以上的方式各自有各自的问题，因此美团决定实现一套分布式 ID 生成服务来满足需求<br>目前 Leaf 覆盖了美团点评公司内部金融、餐饮、外卖、酒店旅游、猫眼电影等众多业务线。在4C8G VM 基础上，通过公司 RPC 方式调用，QPS 压测结果近 5w/s，TP999 1ms（TP=Top Percentile，Top 百分数，是一个统计学里的术语，与平均数、中位数都是一类。TP50、TP90 和 TP99 等指标常用于系统性能监控场景，指高于 50%、90%、99% 等百分线的情况）</p>
 </blockquote>
 <p>项目中使用 Leaf-snowflake 方式生成 ID</p>
-<p><img src="http://www.qfdmy.com/wp-content/uploads/2020/01/5131aa5a5ccd97e.png" alt="snow"></p>
-<p>Leaf-snowflake 方案完全沿用 snowflake 方案的 bit 位设计，即是 “1+41+10+12” 的方式组装 ID 号。对于 workerID 的分配，当服务集群数量较小的情况下，完全可以手动配置。Leaf 服务规模较大，动手配置成本太高。所以使用 Zookeeper 持久顺序节点的特性自动对 snowflake 节点配置 wokerID。</p>
+<p>Leaf-snowflake 方案完全沿用 snowflake 方案的 bit 位设计，即是「1+41+10+12」 的方式组装 ID 号。对于 workerID 的分配，当服务集群数量较小的情况下，完全可以手动配置。Leaf 服务规模较大，动手配置成本太高。所以使用 Zookeeper 持久顺序节点的特性自动对 snowflake 节点配置 wokerID。</p>
 <h3 id="弱依赖-Zookeeper"><a href="#弱依赖-Zookeeper" class="headerlink" title="弱依赖 Zookeeper"></a>弱依赖 Zookeeper</h3><p>除了每次会去 ZK 拿数据以外，也会在本机文件系统上缓存一个 workerID 文件。当 ZooKeeper 出现问题，恰好机器出现问题需要重启时，能保证服务能够正常启动。这样做到了对三方组件的弱依赖。一定程度上提高了 SLA（Service Level Agreement 服务等级协议，是在一定开销下为保障服务的性能和可用性，网站服务可用性 SLA，9 越多代表全年服务可用时间越长服务更可靠，停机时间越短，反之亦然）</p>
-<h3 id="解决时钟问题"><a href="#解决时钟问题" class="headerlink" title="解决时钟问题"></a>解决时钟问题</h3><p>![clock][<a href="http://www.qfdmy.com/wp-content/uploads/2020/01/0789fdd54b272b9.png" target="_blank" rel="noopener">http://www.qfdmy.com/wp-content/uploads/2020/01/0789fdd54b272b9.png</a>]</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><blockquote>
+<h3 id="解决时钟问题"><a href="#解决时钟问题" class="headerlink" title="解决时钟问题"></a>解决时钟问题</h3><h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><blockquote>
 <p>为方便实用，将 Leaf 项目进行二次处理，编写 bash 脚本和 docker-compose，实现一次构建，到处运行</p>
 </blockquote>
 <h3 id="启动步骤"><a href="#启动步骤" class="headerlink" title="启动步骤"></a>启动步骤</h3><ul>
@@ -299,13 +322,13 @@
 <li>如果没有注册过，就在该父节点下面创建一个持久顺序节点，创建成功后取回顺序号当做自己的 workerID 号，启动服务</li>
 </ul>
 <ol>
-<li>cd clone <a href="https://github.com/funtl/Leaf.git" target="_blank" rel="noopener">https://github.com/funtl/Leaf.git</a></li>
-<li>cd Leaf</li>
-<li>mvn clean install -D</li>
-<li>cd leaf-docker</li>
-<li>chomd 777 build.sh</li>
-<li>./build.sh</li>
-<li>docker-compose up -d</li>
+<li><code>cd clone https://github.com/funtl/Leaf.git</code></li>
+<li><code>cd Leaf</code></li>
+<li><code>mvn clean install -D</code></li>
+<li><code>cd leaf-docker</code></li>
+<li><code>chomd 777 build.sh</code></li>
+<li><code>./build.sh</code></li>
+<li><code>docker-compose up -d</code></li>
 </ol>
 <h2 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h2><h3 id="zookeeper-高可用集群"><a href="#zookeeper-高可用集群" class="headerlink" title="zookeeper 高可用集群"></a>zookeeper 高可用集群</h3><h3 id="Leaf-高可用"><a href="#Leaf-高可用" class="headerlink" title="Leaf 高可用"></a>Leaf 高可用</h3><p>leaf-server部署成高可用的负载均衡模式</p>
 <h3 id="高速通信"><a href="#高速通信" class="headerlink" title="高速通信"></a>高速通信</h3><p>最初工具类使用的是 OKHttp的方式获取ID，但生产环境下该效率较低<br>为提高速度，优化为 <strong>对内 RPC，对外 REST</strong>的调用方式</p>
